@@ -31,7 +31,9 @@ class WebAppDocument extends Document {
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <title>Travel Mood</title>
+        </Head>
         <body>
           <Main />
           <NextScript />

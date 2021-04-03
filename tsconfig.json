@@ -17,6 +17,10 @@
     "paths": {
       "~components/*": ["src/components/*"],
       "~components": ["src/components"],
+      "~router/*": ["server/router/*"],
+      "~router": ["server/router"],
+      "~utils/*": ["src/utils/*"],
+      "~utils": ["src/utils"],
       "~definitions/*": ["src/definitions/*"],
       "~definitions": ["src/definitions"],
       "~interfaces": ["src/interfaces"],
