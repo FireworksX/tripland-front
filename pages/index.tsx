@@ -1,12 +1,14 @@
-import { FC, useCallback } from 'react'
+import { NextPage } from 'next'
 import { Link, useRoute } from 'react-router5'
 import { Icon28NewsfeedOutline, Icon28ServicesOutline, Icon28MessageOutline, Icon28ClipOutline } from '@vkontakte/icons'
 import { Epic, Panel, PanelHeader, PanelHeaderBack, Tabbar, TabbarItem, View } from '@vkontakte/vkui'
 import { PANEL_NAMES, STORY_NAMES } from '~router/constants'
 import { buildPath, buildRouteName } from '~utils/buildRouteName'
+import { useStore } from '@mozaikjs/react'
 
-const Index: FC = () => {
+const Index: NextPage = () => {
   const { route, router } = useRoute()
+  const { userStore } = useStore()
 
   const activeStory = route?.name?.split('.')[0] || STORY_NAMES.planner
 
@@ -53,6 +55,8 @@ const Index: FC = () => {
       <View id={STORY_NAMES.planner} activePanel='feed'>
         <Panel id='feed'>
           <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
+          <button onClick={() => userStore.login()}>Login</button>
+          {userStore.isAuth && <h1>Auth user {userStore.name}</h1>}
         </Panel>
       </View>
       <View id={STORY_NAMES.favorites} activePanel='feed'>

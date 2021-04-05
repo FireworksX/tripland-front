@@ -19,6 +19,9 @@
     "build-storybook": "build-storybook -s ./public/static  -c .storybook -o .storybookout"
   },
   "dependencies": {
+    "@mozaikjs/core": "^0.4.3",
+    "@mozaikjs/logger": "^0.0.7",
+    "@mozaikjs/react": "^0.0.5",
     "@next/bundle-analyzer": "^9.4.4",
     "@vkontakte/icons": "^1.89.0",
     "@vkontakte/vk-bridge": "^2.4.1",

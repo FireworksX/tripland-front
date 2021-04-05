@@ -17,6 +17,8 @@
     "paths": {
       "~components/*": ["src/components/*"],
       "~components": ["src/components"],
+      "~store/*": ["src/store/*"],
+      "~store": ["src/store"],
       "~router/*": ["server/router/*"],
       "~router": ["server/router"],
       "~utils/*": ["src/utils/*"],

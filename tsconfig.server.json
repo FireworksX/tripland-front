@@ -5,7 +5,13 @@
     "outDir": "dist",
     "target": "es2017",
     "isolatedModules": false,
-    "noEmit": false
-  },
+    "noEmit": false,
+    "baseUrl": ".",
+    "paths": {
+      "@mozaikjs/react": [
+        "@mozaikjs/react/build/index.umd.js"
+      ]
+    }
+    },
   "include": ["server/**/*.ts"]
 }
