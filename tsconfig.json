@@ -27,6 +27,8 @@
       "~definitions": ["src/definitions"],
       "~interfaces": ["src/interfaces"],
       "~interfaces/*": ["src/interfaces/*"],
+      "~views": ["src/views"],
+      "~views/*": ["src/views/*"],
       "~pages/*": ["pages/*"],
       "~server/*": ["server/*"],
       "~services": ["src/services"],

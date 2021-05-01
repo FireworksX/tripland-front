@@ -19,7 +19,7 @@ export const routes = (): Route[] => [
     path: '/planner',
     children: [
       {
-        name: PANEL_NAMES.plan,
+        name: PANEL_NAMES.plannerIndex,
         path: '/',
       }
     ]
@@ -29,7 +29,7 @@ export const routes = (): Route[] => [
     path: '/favorites',
     children: [
       {
-        name: PANEL_NAMES.plan,
+        name: PANEL_NAMES.plannerIndex,
         path: '/',
       }
     ]
@@ -39,7 +39,7 @@ export const routes = (): Route[] => [
     path: '/notifications',
     children: [
       {
-        name: PANEL_NAMES.plan,
+        name: PANEL_NAMES.plannerIndex,
         path: '/',
       }
     ]
@@ -49,7 +49,7 @@ export const routes = (): Route[] => [
     path: '/profile',
     children: [
       {
-        name: PANEL_NAMES.plan,
+        name: PANEL_NAMES.plannerIndex,
         path: '/',
       }
     ]

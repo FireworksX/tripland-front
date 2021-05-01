@@ -9,6 +9,7 @@
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server/index.js",
     "test": "jest --coverage",
+    "cc": "create-component",
     "lint": "eslint './{src,pages,server}/**/*' --ext .tsx,.ts",
     "pretty": "prettier --write --config .prettierrc.json {src,pages,server}/**/*.{ts,tsx}",
     "format": "npm run lint -- --fix",
@@ -19,7 +20,7 @@
     "build-storybook": "build-storybook -s ./public/static  -c .storybook -o .storybookout"
   },
   "dependencies": {
-    "@mozaikjs/core": "^0.4.3",
+    "@mozaikjs/core": "^0.4.5",
     "@mozaikjs/logger": "^0.0.7",
     "@mozaikjs/react": "^0.0.5",
     "@next/bundle-analyzer": "^9.4.4",
@@ -29,6 +30,7 @@
     "@vkontakte/vkui": "^4.4.0",
     "add": "^2.0.6",
     "autoprefixer": "^9.6.1",
+    "blueprint-templates-cli": "^0.1.13",
     "bootstrap": "^4.5.2",
     "cross-env": "^5.2.1",
     "dotenv": "^8.1.0",

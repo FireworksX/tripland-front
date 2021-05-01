@@ -1,14 +1,15 @@
 import { NextPage } from 'next'
-import { Link, useRoute } from 'react-router5'
-import { Icon28NewsfeedOutline, Icon28ServicesOutline, Icon28MessageOutline, Icon28ClipOutline } from '@vkontakte/icons'
+import { useRoute } from 'react-router5'
+import { Icon28AddCircleOutline, Icon28Notification, Icon28User } from '@vkontakte/icons'
 import { Epic, Panel, PanelHeader, PanelHeaderBack, Tabbar, TabbarItem, View } from '@vkontakte/vkui'
 import { PANEL_NAMES, STORY_NAMES } from '~router/constants'
-import { buildPath, buildRouteName } from '~utils/buildRouteName'
-import { useStore } from '@mozaikjs/react'
+import { buildPath } from '~utils/buildRouteName'
+import ProfileView from '~views/ProfileView'
+import { Icon28Like } from '~components/icons/Icon28Like.tsx'
+import PlannerView from '~views/planner/PlannerView'
 
 const Index: NextPage = () => {
   const { route, router } = useRoute()
-  const { userStore } = useStore()
 
   const activeStory = route?.name?.split('.')[0] || STORY_NAMES.planner
 
@@ -21,44 +22,37 @@ const Index: NextPage = () => {
         <Tabbar>
           <TabbarItem
             selected={activeStory === STORY_NAMES.planner}
-            text='Новости'
-            onClick={() => onSelectStory(STORY_NAMES.planner, PANEL_NAMES.plan)}
+            text='Планнер'
+            onClick={() => onSelectStory(STORY_NAMES.planner, PANEL_NAMES.plannerIndex)}
           >
-            <Icon28NewsfeedOutline />
+            <Icon28AddCircleOutline />
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.favorites}
             text='Избранное'
-            onClick={() => onSelectStory(STORY_NAMES.favorites, PANEL_NAMES.plan)}
+            onClick={() => onSelectStory(STORY_NAMES.favorites, PANEL_NAMES.plannerIndex)}
           >
-            <Icon28ServicesOutline />
+            <Icon28Like />
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.notifications}
-            label='3'
-            text='Оповещения'
-            onClick={() => onSelectStory(STORY_NAMES.notifications, PANEL_NAMES.plan)}
+            text='Уведомления'
+            onClick={() => onSelectStory(STORY_NAMES.notifications, PANEL_NAMES.plannerIndex)}
           >
-            <Icon28MessageOutline />
+            <Icon28Notification />
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.profile}
             data-story='clips'
             text='Профиль'
-            onClick={() => onSelectStory(STORY_NAMES.profile, PANEL_NAMES.plan)}
+            onClick={() => onSelectStory(STORY_NAMES.profile, PANEL_NAMES.plannerIndex)}
           >
-            <Icon28ClipOutline />
+            <Icon28User />
           </TabbarItem>
         </Tabbar>
       }
     >
-      <View id={STORY_NAMES.planner} activePanel='feed'>
-        <Panel id='feed'>
-          <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
-          <button onClick={() => userStore.login()}>Login</button>
-          {userStore.isAuth && <h1>Auth user {userStore.name}</h1>}
-        </Panel>
-      </View>
+      <PlannerView id={STORY_NAMES.planner} />
       <View id={STORY_NAMES.favorites} activePanel='feed'>
         <Panel id='feed'>
           <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
@@ -69,11 +63,7 @@ const Index: NextPage = () => {
           <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
         </Panel>
       </View>
-      <View id={STORY_NAMES.profile} activePanel='feed'>
-        <Panel id='feed'>
-          <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
-        </Panel>
-      </View>
+      <ProfileView id={STORY_NAMES.profile} />
     </Epic>
   )
 }
