@@ -1,12 +1,13 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 import { IconPlacemark } from '~components/icons/IconPlacemark'
-import {IconCalendar} from "~components/icons/IconCalendar";
+import { IconCalendar } from '~components/icons/IconCalendar'
 
 const Root = styled.div`
   background: ${({ theme }) => theme.colors.backgroundWhite};
   border-radius: ${({ theme }) => theme.radius.main};
   padding: ${({ theme }) => theme.paddings.main};
+  box-shadow: 0px 0px 50px rgba(188, 188, 188, 0.25);
 `
 
 const Filter = styled.div`
@@ -47,6 +48,22 @@ const FilterButtonIcon = styled.div`
   margin-right: 7px;
 `
 
+const SubmitButton = styled.button`
+  display: flex;
+  align-items: center;
+  background: linear-gradient(91.43deg, #ffb545 0.82%, #ff9900 100%);
+  border-radius: ${({ theme }) => theme.radius.main};
+  justify-content: center;
+  width: 100%;
+  outline: none;
+  border: none;
+  height: 50px;
+  color: ${({ theme }) => theme.colors.textColorWhite};
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 21px;
+`
+
 export const PlannerBuilder: FC = () => {
   return (
     <Root>
@@ -60,12 +77,17 @@ export const PlannerBuilder: FC = () => {
         <FilterButton>
           <FilterButtonIcon>
             <IconCalendar size={15} />
-          </FilterButtonIcon>Туда</FilterButton>
+          </FilterButtonIcon>
+          Туда
+        </FilterButton>
         <FilterButton>
           <FilterButtonIcon>
             <IconCalendar size={15} />
-          </FilterButtonIcon>Обратно</FilterButton>
+          </FilterButtonIcon>
+          Обратно
+        </FilterButton>
       </Filter>
+      <SubmitButton>Построить маршрут</SubmitButton>
     </Root>
   )
 }

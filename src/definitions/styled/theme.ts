@@ -1,23 +1,22 @@
-// #region Global Imports
 import { DefaultTheme } from 'styled-components'
-// #endregion Global Imports
 
 const theme: DefaultTheme = {
   colors: {
-    primary: '#0A121F',
-    secondary: '#9FA6B6',
-    accent: '#FF9900',
-    border: '#EEEEEE',
-    yellow: '#F4C038',
-    backgroundWhite: '#fff',
-    textColor: '#0A121F',
-    textColorWhite: '#fff'
+    primary: 'var(--primary)',
+    secondary: 'var(--secondary)',
+    accent: 'var(--accent)',
+    border: 'var(--border)',
+    yellow: 'var(--yellow)',
+    background: 'var(--background)',
+    backgroundWhite: 'var(--backgroundWhite)',
+    textColor: 'var(--textColor)',
+    textColorWhite: 'var(--textColorWhite)'
   },
   paddings: {
-    main: '15px'
+    main: 'var(--paddingMain)'
   },
   radius: {
-    main: '10px'
+    main: 'var(--radiusMain)'
   }
 }
 

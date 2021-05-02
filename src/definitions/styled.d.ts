@@ -8,6 +8,7 @@ declare module 'styled-components' {
       accent: string
       border: string
       yellow: string
+      background: string
       backgroundWhite: string
       textColor: string
       textColorWhite: string

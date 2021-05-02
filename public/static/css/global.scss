@@ -1,6 +1,24 @@
 :root {
-  --accent: #FF9900;
   --tabbar_active_icon: #FF9900;
+  --background_content: #FAFAFA;
+
+  --primary: #0A121F;
+  --secondary: #9FA6B6;
+  --accent: #FF9900;
+  --border: #EEEEEE;
+  --yellow: #F4C038;
+  --background: #E5E5E5;
+  --backgroundWhite: #fff;
+  --textColor: #0A121F;
+  --textColorWhite: #fff;
+
+  --paddingMain: 15px;
+
+  --radiusMain: 10px;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
 }
 
 body {
