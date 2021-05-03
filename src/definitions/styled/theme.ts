@@ -16,7 +16,8 @@ const theme: DefaultTheme = {
     main: 'var(--paddingMain)'
   },
   radius: {
-    main: 'var(--radiusMain)'
+    main: 'var(--radiusMain)',
+    second: 'var(--radiusSecond)',
   }
 }
 

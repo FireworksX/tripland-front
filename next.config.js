@@ -1,20 +1,21 @@
-const withPlugins = require("next-compose-plugins");
-const withBundleAnalyzer = require("@next/bundle-analyzer");
+const withPlugins = require('next-compose-plugins')
+const withBundleAnalyzer = require('@next/bundle-analyzer')
+const withImages = require('next-images')
 
-const nextConfig = {
+const nextConfig = withImages({
   useFileSystemPublicRoutes: false,
-  analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-  analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+  analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
+  analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
   bundleAnalyzerConfig: {
     server: {
-      analyzerMode: "static",
-      reportFilename: "../bundles/server.html",
+      analyzerMode: 'static',
+      reportFilename: '../bundles/server.html'
     },
     browser: {
-      analyzerMode: "static",
-      reportFilename: "../bundles/client.html",
-    },
-  },
-};
+      analyzerMode: 'static',
+      reportFilename: '../bundles/client.html'
+    }
+  }
+})
 
-module.exports = withPlugins([[withBundleAnalyzer]], nextConfig);
+module.exports = withPlugins([[withBundleAnalyzer]], nextConfig)

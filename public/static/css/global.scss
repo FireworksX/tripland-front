@@ -1,26 +1,35 @@
 :root {
-  --tabbar_active_icon: #FF9900;
-  --background_content: #FAFAFA;
+  /* Override VKUI */
+  --tabbar_active_icon: #ff9900;
+  --background_content: #fafafa;
+  --tabbar_height: 60px;
 
-  --primary: #0A121F;
-  --secondary: #9FA6B6;
-  --accent: #FF9900;
-  --border: #EEEEEE;
-  --yellow: #F4C038;
-  --background: #E5E5E5;
+  --primary: #0a121f;
+  --secondary: #9fa6b6;
+  --accent: #ff9900;
+  --border: #eeeeee;
+  --yellow: #f4c038;
+  --background: #e5e5e5;
   --backgroundWhite: #fff;
-  --textColor: #0A121F;
+  --textColor: #0a121f;
   --textColorWhite: #fff;
 
   --paddingMain: 15px;
 
   --radiusMain: 10px;
+  --radiusSecond: 5px;
 }
 
-*, :after, :before {
+*,
+:after,
+:before {
   box-sizing: border-box;
 }
 
 body {
   font-family: var(--font-common);
+}
+
+.vkuiPanel__in-after {
+  height: initial;
 }

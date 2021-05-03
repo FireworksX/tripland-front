@@ -14,6 +14,7 @@ const Title = styled.div`
   line-height: 20px;
   font-weight: 600;
   margin-bottom: 5px;
+  padding: 0 ${({ theme }) => theme.paddings.main};
 `
 
 const Description = styled.div`
@@ -21,6 +22,7 @@ const Description = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
   line-height: 20px;
   margin-bottom: 20px;
+  padding: 0 ${({ theme }) => theme.paddings.main};
 `
 
 const Group: FC<GroupProps> = ({ title, description, children }) => {

@@ -1,9 +1,18 @@
 import { FC } from 'react'
 import styled from 'styled-components'
 import { Div } from '~components/Div'
-import { PlannerBuilder } from '~components/PlannerBuilder'
+import PlannerBuilder from '~components/PlannerBuilder'
 import Panel from '~components/Panel'
-import Group, { GroupProps } from '~components/Group'
+import Group from '~components/Group'
+import Image, { ImageProps } from '~components/Image'
+import feature1 from '~static/images/feature1.png'
+import feature2 from '~static/images/feature2.png'
+import feature3 from '~static/images/feature3.png'
+import feature4 from '~static/images/feature4.png'
+import TopCitiesList from '~components/TopCitiesList'
+import TopDirectionsList from '~components/TopDirectionsList'
+import AuthorCompilationsList from '~components/AuthorCompilationsList'
+import CityExcursionsList from '~components/CityExcursionsList'
 
 interface IndexPanel {
   id: string
@@ -32,7 +41,7 @@ const HeaderTitle = styled.h1`
   margin-bottom: 40px;
 `
 
-const Section = styled(Group)<GroupProps>`
+const Section = styled.div`
   margin-bottom: 40px;
 `
 
@@ -40,15 +49,21 @@ const Features = styled.div`
   background: ${({ theme }) => theme.colors.backgroundWhite};
   padding: 35px ${({ theme }) => theme.paddings.main} 55px ${({ theme }) => theme.paddings.main};
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 40px;
-  grid-row-gap: 90px;
+  grid-template-columns: 1fr;
+  grid-gap: 40px;
 `
 
 const Feature = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+`
+
+const FeatureImage = styled(Image)<ImageProps>`
+  width: 100px !important;
+  min-width: 100px;
+  margin-right: 35px;
+  height: 80px;
+  object-fit: contain;
 `
 
 const FeatureTitle = styled.div`
@@ -64,24 +79,27 @@ const FeatureText = styled.div`
   margin-bottom: 5px;
   line-height: 18px;
   color: ${({ theme }) => theme.colors.secondary};
-  text-align: center;
 `
 
 export const IndexPanel: FC<IndexPanel> = ({ id }) => {
   const features = [
     {
+      image: feature1,
       title: 'Легко и удобно',
       text: 'Планер сам рассчитает время на посещение мест, дорогу и составит идеальный маршрут'
     },
     {
+      image: feature2,
       title: 'Всё и все в одном месте',
       text: 'Планер поможет подобрать перелет, проживание и машину в аренду'
     },
     {
+      image: feature3,
       title: 'С заботой о Вас',
       text: 'Планер сам предложит Вам трансфер, такси и мед. страховку'
     },
     {
+      image: feature4,
       title: 'История путешествий',
       text: 'Планер сохранит маршруты, чтобы Вы могли вносить изменения и делиться ими с друзьями'
     }
@@ -106,24 +124,37 @@ export const IndexPanel: FC<IndexPanel> = ({ id }) => {
           <PlannerBuilder />
         </Div>
       </Header>
-      <Div>
-        <Section title='Популярные направления' description='Каталог направлений для путешествий по России'>
-          <h1>test</h1>
-        </Section>
-      </Div>
-      <Div>
-        <Section
+      <Section>
+        <Group title='Популярные направления' description='Каталог направлений для путешествий по России'>
+          <TopDirectionsList />
+        </Group>
+      </Section>
+      <Section>
+        <Group
           title='Популярные города'
           description='Лучшие города России, которые мы советуем посетить. В каждой подборке собраны авторские маршруты'
         >
-          <h1>test2</h1>
-        </Section>
-      </Div>
+          <TopCitiesList />
+        </Group>
+      </Section>
+      <Section>
+        <Group title='Авторские подборки' description='Собраны лучшие подборки для вашего путешествия'>
+          <AuthorCompilationsList />
+        </Group>
+      </Section>
+      <Section>
+        <Group title='Экскурсии с гидами по Москве' description='Каталог маршрутов для путешествий по Москве'>
+          <CityExcursionsList />
+        </Group>
+      </Section>
       <Features>
-        {features.map(({ title, text }) => (
+        {features.map(({ image, title, text }) => (
           <Feature>
-            <FeatureTitle>{title}</FeatureTitle>
-            <FeatureText>{text}</FeatureText>
+            <FeatureImage src={image} />
+            <div>
+              <FeatureTitle>{title}</FeatureTitle>
+              <FeatureText>{text}</FeatureText>
+            </div>
           </Feature>
         ))}
       </Features>

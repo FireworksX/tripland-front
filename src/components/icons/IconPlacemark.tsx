@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-interface IconPlacemarkProps {
+export interface IconPlacemarkProps {
   size?: number
 }
 

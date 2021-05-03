@@ -18,6 +18,7 @@ declare module 'styled-components' {
     }
     radius: {
       main: string
+      second: string
     }
   }
 }

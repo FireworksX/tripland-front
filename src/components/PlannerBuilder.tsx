@@ -64,7 +64,7 @@ const SubmitButton = styled.button`
   line-height: 21px;
 `
 
-export const PlannerBuilder: FC = () => {
+const PlannerBuilder: FC = () => {
   return (
     <Root>
       <Filter>
@@ -91,3 +91,5 @@ export const PlannerBuilder: FC = () => {
     </Root>
   )
 }
+
+export default PlannerBuilder
