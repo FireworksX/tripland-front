@@ -12,7 +12,7 @@ import '~static/css/global.scss'
 import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'
 import { ExtendAppInitialProps } from '~definitions/App'
-import { rootStore } from '~store/rootStore'
+import { rootStoreInstance } from '~store/rootStore'
 
 class WebApp extends App<ExtendAppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext): Promise<ExtendAppInitialProps> {
@@ -33,7 +33,7 @@ class WebApp extends App<ExtendAppInitialProps> {
 
     return (
       <ThemeProvider theme={theme}>
-        <StoreProvider store={rootStore}>
+        <StoreProvider store={rootStoreInstance}>
           <RouterProvider router={routerInstance}>
             <Index {...pageProps} />
           </RouterProvider>
