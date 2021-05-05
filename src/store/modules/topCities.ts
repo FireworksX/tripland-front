@@ -1,14 +1,14 @@
 import { types } from '@mozaikjs/core'
-import { cityModel, cityModelProps } from '~store/models/cityModel'
+import { cityModelProps } from '~store/models/cityModel'
 
-interface topCitiesProps {
+interface topCitiesComputed {
   list: cityModelProps[]
 }
 
-export const topCitiesModel = types.model<topCitiesProps>('topCities', {
-  list: types.array(cityModel)
+export const topCitiesModel = types.model<{}, {}, topCitiesComputed>('topCities', {}).computed({
+  list({ env }) {
+    return env.citiesStore.list.slice(0, 3)
+  }
 })
 
-export const topCitiesInstance = topCitiesModel.create({
-  list: []
-})
+export const topCitiesInstance = topCitiesModel.create({})

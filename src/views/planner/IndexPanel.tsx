@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import styled from 'styled-components'
 import { Div } from '~components/Div'
 import PlannerBuilder from '~components/PlannerBuilder'
@@ -13,6 +13,7 @@ import TopCitiesList from '~components/TopCitiesList'
 import TopDirectionsList from '~components/TopDirectionsList'
 import AuthorCompilationsList from '~components/AuthorCompilationsList'
 import CityExcursionsList from '~components/CityExcursionsList'
+import useStore from '~/hooks/useStore'
 
 interface IndexPanel {
   id: string
@@ -105,6 +106,12 @@ export const IndexPanel: FC<IndexPanel> = ({ id }) => {
     }
   ]
 
+  const store = useStore()
+
+  useEffect(() => {
+    store.citiesStore.loadList()
+  }, [])
+
   return (
     <Panel id={id}>
       <Header>
@@ -121,7 +128,7 @@ export const IndexPanel: FC<IndexPanel> = ({ id }) => {
         </HeaderGradient>
         <Div>
           <HeaderTitle>Удобный планировщик ваших путешествий</HeaderTitle>
-          <PlannerBuilder />
+          <PlannerBuilder onClickCity={() => store.plannerStore.setActiveModal('cities')} />
         </Div>
       </Header>
       <Section>

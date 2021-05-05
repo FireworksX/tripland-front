@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { IconPlacemark } from '~components/icons/IconPlacemark'
 import { IconCalendar } from '~components/icons/IconCalendar'
 
+interface PlannerBuilder {
+  onClickCity(): void
+}
+
 const Root = styled.div`
   background: ${({ theme }) => theme.colors.backgroundWhite};
   border-radius: ${({ theme }) => theme.radius.main};
@@ -64,11 +68,11 @@ const SubmitButton = styled.button`
   line-height: 21px;
 `
 
-const PlannerBuilder: FC = () => {
+const PlannerBuilder: FC<PlannerBuilder> = ({onClickCity}) => {
   return (
     <Root>
       <Filter>
-        <FilterButton isWide>
+        <FilterButton isWide onClick={onClickCity}>
           <FilterButtonIcon>
             <IconPlacemark size={15} />
           </FilterButtonIcon>
