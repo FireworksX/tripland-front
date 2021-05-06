@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import { cityModelProps } from '~store/models/cityModel'
+import { cityModelProps } from '~/store/models/cityModel'
 
 interface topCitiesComputed {
   list: cityModelProps[]

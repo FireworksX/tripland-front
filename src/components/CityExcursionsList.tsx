@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import CityCard from '~components/CityCard'
+import CityCard from '~/components/CityCard'
 import { HorizontalScroll } from '@vkontakte/vkui'
-import ExcursionCard from '~components/ExcursionCard'
+import ExcursionCard from '~/components/ExcursionCard'
 
 interface TopCitiesListProps {}
 

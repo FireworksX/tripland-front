@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import { directionModel, directionModelProps } from '~store/models/directionModel'
+import { directionModel, directionModelProps } from '~/store/models/directionModel'
 
 interface topDirectionsProps {
   list: directionModelProps[]

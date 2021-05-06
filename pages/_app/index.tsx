@@ -5,14 +5,14 @@ import { StoreProvider } from '@mozaikjs/react'
 import { RouterProvider } from 'react-router5'
 import '@vkontakte/vkui/dist/vkui.css'
 
-import { theme } from '~definitions'
+import { theme } from '~/definitions'
 import { appWithTranslation } from '~server/i18n'
 import '~static/css/reset.scss'
 import '~static/css/global.scss'
 import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'
-import { ExtendAppInitialProps } from '~definitions/App'
-import { rootStoreInstance } from '~store/rootStore'
+import { ExtendAppInitialProps } from '~/definitions/App'
+import { rootStoreInstance } from '~/store/rootStore'
 
 class WebApp extends App<ExtendAppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext): Promise<ExtendAppInitialProps> {

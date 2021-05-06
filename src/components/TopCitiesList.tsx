@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import CityCard from '~components/CityCard'
+import CityCard from '~/components/CityCard'
 import { HorizontalScroll } from '@vkontakte/vkui'
 import useStore from '~/hooks/useStore'
 

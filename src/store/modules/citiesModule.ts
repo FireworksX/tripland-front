@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import {cityModel, cityModelProps, cityModelType} from '~store/models/cityModel'
+import { cityModel, cityModelType } from '~/store/models/cityModel'
 
 const cities = [
   {
@@ -67,19 +67,25 @@ const cities = [
   }
 ]
 
-interface citiesModuleProps {
+interface citiesStoreProps {
   list: cityModelType[]
+  selectedCity?: cityModelType
 }
 
-interface citiesModuleActions {
+interface citiesStoreActions {
   loadList(): void
+  selectCity(city: cityModelType): void
 }
 
-export const citiesModuleModel = types
-  .model<citiesModuleProps, citiesModuleActions>('citiesModule', {
+export const citiesStoreModel = types
+  .model<citiesStoreProps, citiesStoreActions>('citiesStore', {
+    selectedCity: types.maybe(cityModel),
     list: types.array(cityModel)
   })
   .actions({
+    selectCity({dispatch}, city: cityModelType) {
+      dispatch({ selectedCity: city })
+    },
     loadList({ dispatch }) {
       setTimeout(() => {
         dispatch({
@@ -89,6 +95,7 @@ export const citiesModuleModel = types
     }
   })
 
-export const citiesModuleInstance = citiesModuleModel.create({
+export const citiesStoreInstance = citiesStoreModel.create({
+  selectedCity: undefined,
   list: []
 })

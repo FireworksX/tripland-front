@@ -16,37 +16,15 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-      "~components/*": ["src/components/*"],
-      "~components": ["src/components"],
-      "~store/*": ["src/store/*"],
-      "~store": ["src/store"],
       "~router/*": ["server/router/*"],
       "~router": ["server/router"],
-      "~utils/*": ["src/utils/*"],
-      "~utils": ["src/utils"],
-      "~definitions/*": ["src/definitions/*"],
-      "~definitions": ["src/definitions"],
-      "~interfaces": ["src/interfaces"],
-      "~interfaces/*": ["src/interfaces/*"],
-      "~views": ["src/views"],
-      "~views/*": ["src/views/*"],
       "~pages/*": ["pages/*"],
+      "~pages": ["pages"],
       "~server/*": ["server/*"],
-      "~services": ["src/services"],
-      "~services/*": ["src/services/*"],
+      "~server": ["server"],
       "~static/*": ["public/static/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".next",
-    "out",
-    "next.config.js",
-    ".babelrc",
-    "bundles",
-    "coverage",
-    "test/*"
-  ],
+  "exclude": ["node_modules", "dist", ".next", "out", "next.config.js", ".babelrc", "bundles", "coverage", "test/*"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

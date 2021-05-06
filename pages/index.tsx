@@ -4,16 +4,23 @@ import { Icon28AddCircleOutline, Icon28Notification, Icon28User } from '@vkontak
 import { Epic, Panel, PanelHeader, PanelHeaderBack, Tabbar, TabbarItem, View } from '@vkontakte/vkui'
 import { PANEL_NAMES, STORY_NAMES } from '~router/constants'
 import { buildPath } from '~utils/buildRouteName'
-import ProfileView from '~views/ProfileView'
-import { Icon28Like } from '~components/icons/Icon28Like.tsx'
-import PlannerView from '~views/planner/PlannerView'
+import ProfileView from '~/views/ProfileView'
+import { Icon28Like } from '~/components/icons/Icon28Like.tsx'
+import PlannerView from '~/views/PlannerView'
+import { useEffect } from 'react'
+import useStore from '~/hooks/useStore'
 
 const Index: NextPage = () => {
   const { route, router } = useRoute()
+  const store = useStore()
 
   const activeStory = route?.name?.split('.')[0] || STORY_NAMES.planner
 
   const onSelectStory = (story: any, panel: any) => router.navigate(buildPath(story, panel))
+
+  useEffect(() => {
+    store.citiesStore.loadList()
+  }, [])
 
   return (
     <Epic

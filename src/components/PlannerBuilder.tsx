@@ -1,8 +1,9 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { IconPlacemark } from '~components/icons/IconPlacemark'
-import { IconCalendar } from '~components/icons/IconCalendar'
+import { IconPlacemark } from '~/components/icons/IconPlacemark'
+import { IconCalendar } from '~/components/icons/IconCalendar'
 import useStore from '~/hooks/useStore'
+import Touchable from '~/components/Touchable'
 
 interface PlannerBuilder {}
 
@@ -59,7 +60,7 @@ const FilterButtonIcon = styled.div`
   margin-right: 7px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled(Touchable)`
   display: flex;
   align-items: center;
   background: linear-gradient(91.43deg, #ffb545 0.82%, #ff9900 100%);
@@ -77,7 +78,6 @@ const SubmitButton = styled.button`
 
 const PlannerBuilder: FC<PlannerBuilder> = ({}) => {
   const { plannerStore } = useStore()
-
   const city = plannerStore.buildRoute.city?.name
 
   return (

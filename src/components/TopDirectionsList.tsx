@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { HorizontalScroll } from '@vkontakte/vkui'
-import DirectionCard from '~components/DirectionCard'
-import SeeMoreCard from '~components/SeeMoreCard'
+import DirectionCard from '~/components/DirectionCard'
+import SeeMoreCard from '~/components/SeeMoreCard'
 
 interface TopDirectionsListProps {}
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Image, { ImageProps } from '~components/Image'
+import Image, { ImageProps } from '~/components/Image'
 
 interface ExcursionCardProps {
   className?: string

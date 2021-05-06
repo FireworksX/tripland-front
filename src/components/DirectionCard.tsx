@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Image, { ImageProps } from '~components/Image'
-import DisplayRating from '~components/DisplayRating'
+import Image, { ImageProps } from '~/components/Image'
+import DisplayRating from '~/components/DisplayRating'
 
 interface DirectionCardProps {
   name: string

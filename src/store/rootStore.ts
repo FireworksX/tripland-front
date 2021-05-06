@@ -1,19 +1,19 @@
 import { types } from '@mozaikjs/core'
 import loggerPlugin from '@mozaikjs/logger'
 import { userStore, userStoreInstance } from './userStore'
-import { plannerStoreInstance, plannerStoreModel } from '~store/substories/plannerStore'
-import { citiesModuleInstance, citiesModuleModel } from '~store/modules/citiesModule'
+import { plannerStoreInstance, plannerStoreModel } from '~/store/substories/plannerStore'
+import { citiesStoreInstance, citiesStoreModel } from '~/store/modules/citiesModule'
 
 export interface rootStoreProps {
   userStore: typeof userStoreInstance
   plannerStore: typeof plannerStoreInstance
-  citiesStore: typeof citiesModuleInstance
+  citiesStore: typeof citiesStoreInstance
 }
 
 const storeSnapshot = {
   userStore: userStoreInstance,
   plannerStore: plannerStoreInstance,
-  citiesStore: citiesModuleInstance
+  citiesStore: citiesStoreInstance
 }
 
 const storeEnv = {
@@ -24,7 +24,7 @@ export const rootStoreInstance = types
   .model<rootStoreProps>('rootStore', {
     userStore,
     plannerStore: plannerStoreModel,
-    citiesStore: citiesModuleModel
+    citiesStore: citiesStoreModel
   })
   // .plugins(loggerPlugin())
   .create(storeSnapshot, storeEnv)

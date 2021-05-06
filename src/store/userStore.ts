@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import { fetchModel } from '~store/models/fetchModel'
+import { fetchModel } from '~/store/models/fetchModel'
 
 export const userStore = types
   .model('userStore', {

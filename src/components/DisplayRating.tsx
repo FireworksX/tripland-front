@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import { IconStar } from '~components/icons/IconStar'
+import { IconStar } from '~/components/icons/IconStar'
 
 interface DisplayRatingProps {
   value: number

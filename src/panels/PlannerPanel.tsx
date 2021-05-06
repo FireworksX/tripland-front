@@ -1,21 +1,21 @@
 import { FC, useEffect } from 'react'
 import styled from 'styled-components'
-import { Div } from '~components/Div'
-import PlannerBuilder from '~components/PlannerBuilder'
-import Panel from '~components/Panel'
-import Group from '~components/Group'
-import Image, { ImageProps } from '~components/Image'
+import { Div } from '~/components/Div'
+import PlannerBuilder from '~/components/PlannerBuilder'
+import Panel from '~/components/Panel'
+import Group from '~/components/Group'
+import Image, { ImageProps } from '~/components/Image'
 import feature1 from '~static/images/feature1.png'
 import feature2 from '~static/images/feature2.png'
 import feature3 from '~static/images/feature3.png'
 import feature4 from '~static/images/feature4.png'
-import TopCitiesList from '~components/TopCitiesList'
-import TopDirectionsList from '~components/TopDirectionsList'
-import AuthorCompilationsList from '~components/AuthorCompilationsList'
-import CityExcursionsList from '~components/CityExcursionsList'
+import TopCitiesList from '~/components/TopCitiesList'
+import TopDirectionsList from '~/components/TopDirectionsList'
+import AuthorTripsList from '~/components/AuthorTripsList.tsx'
+import CityExcursionsList from '~/components/CityExcursionsList'
 import useStore from '~/hooks/useStore'
 
-interface IndexPanel {
+interface PlannerPanel {
   id: string
 }
 
@@ -82,35 +82,34 @@ const FeatureText = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
 `
 
-export const IndexPanel: FC<IndexPanel> = ({ id }) => {
-  const features = [
-    {
-      image: feature1,
-      title: 'Легко и удобно',
-      text: 'Планер сам рассчитает время на посещение мест, дорогу и составит идеальный маршрут'
-    },
-    {
-      image: feature2,
-      title: 'Всё и все в одном месте',
-      text: 'Планер поможет подобрать перелет, проживание и машину в аренду'
-    },
-    {
-      image: feature3,
-      title: 'С заботой о Вас',
-      text: 'Планер сам предложит Вам трансфер, такси и мед. страховку'
-    },
-    {
-      image: feature4,
-      title: 'История путешествий',
-      text: 'Планер сохранит маршруты, чтобы Вы могли вносить изменения и делиться ими с друзьями'
-    }
-  ]
+const features = [
+  {
+    image: feature1,
+    title: 'Легко и удобно',
+    text: 'Планер сам рассчитает время на посещение мест, дорогу и составит идеальный маршрут'
+  },
+  {
+    image: feature2,
+    title: 'Всё и все в одном месте',
+    text: 'Планер поможет подобрать перелет, проживание и машину в аренду'
+  },
+  {
+    image: feature3,
+    title: 'С заботой о Вас',
+    text: 'Планер сам предложит Вам трансфер, такси и мед. страховку'
+  },
+  {
+    image: feature4,
+    title: 'История путешествий',
+    text: 'Планер сохранит маршруты, чтобы Вы могли вносить изменения и делиться ими с друзьями'
+  }
+]
 
-  const store = useStore()
-
-  useEffect(() => {
-    store.citiesStore.loadList()
-  }, [])
+export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
+  const {
+    citiesStore: { selectedCity },
+    plannerStore
+  } = useStore()
 
   return (
     <Panel id={id}>
@@ -131,22 +130,26 @@ export const IndexPanel: FC<IndexPanel> = ({ id }) => {
           <PlannerBuilder />
         </Div>
       </Header>
-      <Section>
-        <Group title='Популярные направления' description='Каталог направлений для путешествий по России'>
-          <TopDirectionsList />
-        </Group>
-      </Section>
-      <Section>
-        <Group
-          title='Популярные города'
-          description='Лучшие города России, которые мы советуем посетить. В каждой подборке собраны авторские маршруты'
-        >
-          <TopCitiesList />
-        </Group>
-      </Section>
+      {!selectedCity && (
+        <Section>
+          <Group title='Популярные направления' description='Каталог направлений для путешествий по России'>
+            <TopDirectionsList />
+          </Group>
+        </Section>
+      )}
+      {!selectedCity && (
+        <Section>
+          <Group
+            title='Популярные города'
+            description='Лучшие города России, которые мы советуем посетить. В каждой подборке собраны авторские маршруты'
+          >
+            <TopCitiesList />
+          </Group>
+        </Section>
+      )}
       <Section>
         <Group title='Авторские подборки' description='Собраны лучшие подборки для вашего путешествия'>
-          <AuthorCompilationsList />
+          <AuthorTripsList list={plannerStore.authorsTrips.list} />
         </Group>
       </Section>
       <Section>

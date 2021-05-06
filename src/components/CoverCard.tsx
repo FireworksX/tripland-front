@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Image, { ImageProps } from '~components/Image'
+import Image, { ImageProps } from '~/components/Image'
 
 interface CoverCardProps {
-  title: string
+  name: string
   cover: string
   badge?: string
 }
@@ -49,11 +49,11 @@ const Badge = styled.span`
   position: relative;
 `
 
-const CoverCard: FC<CoverCardProps> = ({ cover, title, badge }) => {
+const CoverCard: FC<CoverCardProps> = ({ cover, name, badge }) => {
   return (
     <Root>
       <Cover src={cover} />
-      <Name>{title}</Name>
+      <Name>{name}</Name>
       <Badge>{badge}</Badge>
     </Root>
   )

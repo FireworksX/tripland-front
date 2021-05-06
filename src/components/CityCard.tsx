@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import Image from '~components/Image'
-import { IconPlacemark, IconPlacemarkProps } from '~components/icons/IconPlacemark'
+import Image from '~/components/Image'
+import { IconPlacemark, IconPlacemarkProps } from '~/components/icons/IconPlacemark'
 
 interface CityCardProps {
   cover: string
