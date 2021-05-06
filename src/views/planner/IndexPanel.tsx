@@ -128,7 +128,7 @@ export const IndexPanel: FC<IndexPanel> = ({ id }) => {
         </HeaderGradient>
         <Div>
           <HeaderTitle>Удобный планировщик ваших путешествий</HeaderTitle>
-          <PlannerBuilder onClickCity={() => store.plannerStore.setActiveModal('cities')} />
+          <PlannerBuilder />
         </Div>
       </Header>
       <Section>

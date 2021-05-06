@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import { cityModel, cityModelProps } from '~store/models/cityModel'
+import {cityModel, cityModelProps, cityModelType} from '~store/models/cityModel'
 
 const cities = [
   {
@@ -68,7 +68,7 @@ const cities = [
 ]
 
 interface citiesModuleProps {
-  list: cityModelProps[]
+  list: cityModelType[]
 }
 
 interface citiesModuleActions {

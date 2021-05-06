@@ -4,6 +4,7 @@ import { IndexPanel } from '~views/planner/IndexPanel'
 import { PANEL_NAMES } from '~router/constants'
 import useStore from '~/hooks/useStore'
 import CitiesListModal from '~components/modals/CitiesListModal'
+import { cityModelType } from '~store/models/cityModel'
 
 interface ProfileView {
   id: string
@@ -11,9 +12,16 @@ interface ProfileView {
 
 const PlannerView: FC<ProfileView> = () => {
   const { plannerStore } = useStore()
+
+  const onSelectCity = (city: cityModelType) => {
+    plannerStore.setActiveModal(null)
+    plannerStore.buildRoute.setCity(city)
+  }
+
+
   const ModalRootFragment = (
-    <ModalRoot activeModal={plannerStore.activeModal}>
-      <CitiesListModal id='cities' />
+    <ModalRoot activeModal={plannerStore.activeModal} onClose={() => plannerStore.setActiveModal(null)}>
+      <CitiesListModal id='cities' onSelect={onSelectCity} />
     </ModalRoot>
   )
 

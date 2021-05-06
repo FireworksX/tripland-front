@@ -22,7 +22,7 @@
   "dependencies": {
     "@mozaikjs/core": "^0.5.0",
     "@mozaikjs/logger": "^0.0.8",
-    "@mozaikjs/react": "^0.0.6",
+    "@mozaikjs/react": "^0.1.0",
     "@next/bundle-analyzer": "^9.4.4",
     "@vkontakte/icons": "^1.89.0",
     "@vkontakte/vk-bridge": "^2.4.1",

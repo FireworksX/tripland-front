@@ -28,3 +28,5 @@ export const rootStoreInstance = types
   })
   // .plugins(loggerPlugin())
   .create(storeSnapshot, storeEnv)
+
+export type rootStore = typeof rootStoreInstance

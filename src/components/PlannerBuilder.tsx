@@ -2,10 +2,9 @@ import { FC } from 'react'
 import styled from 'styled-components'
 import { IconPlacemark } from '~components/icons/IconPlacemark'
 import { IconCalendar } from '~components/icons/IconCalendar'
+import useStore from '~/hooks/useStore'
 
-interface PlannerBuilder {
-  onClickCity(): void
-}
+interface PlannerBuilder {}
 
 const Root = styled.div`
   background: ${({ theme }) => theme.colors.backgroundWhite};
@@ -33,6 +32,7 @@ const Filter = styled.div`
 `
 
 const FilterButton = styled.button<{ isWide?: boolean }>`
+  position: relative;
   display: flex;
   align-items: center;
   background: transparent;
@@ -45,6 +45,13 @@ const FilterButton = styled.button<{ isWide?: boolean }>`
   font-weight: 500;
   font-size: 14px;
   line-height: 21px;
+`
+
+const FilterButtonLabel = styled.div<{ selected: boolean }>`
+  position: absolute;
+  top: ${({ selected }) => (selected ? 0 : '15px')};
+  left: 37px;
+  font-size: ${({ selected }) => (selected ? '8px' : 'initial')};
 `
 
 const FilterButtonIcon = styled.div`
@@ -68,15 +75,19 @@ const SubmitButton = styled.button`
   line-height: 21px;
 `
 
-const PlannerBuilder: FC<PlannerBuilder> = ({onClickCity}) => {
+const PlannerBuilder: FC<PlannerBuilder> = ({}) => {
+  const { plannerStore } = useStore()
+
+  const city = plannerStore.buildRoute.city?.name
+
   return (
     <Root>
       <Filter>
-        <FilterButton isWide onClick={onClickCity}>
+        <FilterButton isWide onClick={() => plannerStore.setActiveModal('cities')}>
           <FilterButtonIcon>
             <IconPlacemark size={15} />
           </FilterButtonIcon>
-          Город
+          <FilterButtonLabel selected={!!city}>Город</FilterButtonLabel> {plannerStore.buildRoute.city?.name}
         </FilterButton>
         <FilterButton>
           <FilterButtonIcon>
