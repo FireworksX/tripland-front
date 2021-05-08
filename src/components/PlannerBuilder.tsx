@@ -4,6 +4,8 @@ import { IconPlacemark } from '~/components/icons/IconPlacemark'
 import { IconCalendar } from '~/components/icons/IconCalendar'
 import useStore from '~/hooks/useStore'
 import Touchable from '~/components/Touchable'
+import { IconPlus } from '~/components/icons/IconPlus'
+import { IconClose } from '~/components/icons/IconClose'
 
 interface PlannerBuilder {}
 
@@ -48,16 +50,32 @@ const FilterButton = styled.button<{ isWide?: boolean }>`
   line-height: 21px;
 `
 
-const FilterButtonLabel = styled.div<{ selected: boolean }>`
-  position: absolute;
-  top: ${({ selected }) => (selected ? 0 : '15px')};
-  left: 37px;
-  font-size: ${({ selected }) => (selected ? '8px' : 'initial')};
+const FilterResult = styled.div`
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 10px;
+
+  span {
+    color: ${({ theme }) => theme.colors.primary};
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+  }
 `
 
 const FilterButtonIcon = styled.div`
   display: flex;
   margin-right: 7px;
+`
+
+const FilterButtonAfter = styled.div`
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colors.secondary};
 `
 
 const SubmitButton = styled(Touchable)`
@@ -87,7 +105,24 @@ const PlannerBuilder: FC<PlannerBuilder> = ({}) => {
           <FilterButtonIcon>
             <IconPlacemark size={15} />
           </FilterButtonIcon>
-          <FilterButtonLabel selected={!!city}>Город</FilterButtonLabel> {plannerStore.buildRoute.city?.name}
+
+          {city ? (
+            <>
+              <FilterResult>
+                Город <span>{plannerStore.buildRoute.city?.name}</span>
+              </FilterResult>
+              <FilterButtonAfter
+                onClick={e => {
+                  e.stopPropagation()
+                  plannerStore.resetCity()
+                }}
+              >
+                <IconClose size={20} />
+              </FilterButtonAfter>
+            </>
+          ) : (
+            'Город'
+          )}
         </FilterButton>
         <FilterButton>
           <FilterButtonIcon>

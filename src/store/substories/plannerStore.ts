@@ -1,39 +1,151 @@
 import { types } from '@mozaikjs/core'
 import { buildRouteModel, buildRouteInstance } from '~/store/modules/builderRoute'
-import { topCitiesInstance, topCitiesModel } from '~/store/modules/topCities.ts'
-import { topDirectionsInstance, topDirectionsModel } from '~/store/modules/topDirections.ts'
 import { cityModelType } from '~/store/models/cityModel'
-import { authorsTripsInstance, authorsTripsModel } from '~/store/modules/authorsTrips'
+import { authorTripModel, authorTripModelType } from '~/store/models/authorTripModel'
+import carCover from '~static/images/carCover.png'
+import { excursionCardModel, excursionCardModelType } from '~/store/models/excursionCardModel'
+import { directionModel, directionModelType } from '~/store/models/directionModel'
+
+const compilations = [
+  {
+    name: 'На машине',
+    badge: '31 место',
+    cover: carCover
+  },
+  {
+    name: 'Романтическое свидание',
+    badge: '31 место',
+    cover: carCover
+  },
+  {
+    name: 'На машине',
+    badge: '31 место',
+    cover: carCover
+  },
+  {
+    name: 'На машине',
+    badge: '31 место',
+    cover: carCover
+  },
+  {
+    name: 'На машине',
+    badge: '31 место',
+    cover: carCover
+  }
+]
+
+const excursions = [
+  {
+    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
+    name: 'Обзорная автобусная экскурсия по Москве ',
+    price: 1200
+  },
+  {
+    cover:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
+    name: 'Сокровища Кремля: Оружейная палата и Алмазный фонд',
+    price: 900
+  }
+]
+
+const directions = [
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
+    duration: 7,
+    rating: 4.9
+  },
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
+    duration: 5,
+    rating: 4.5
+  },
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
+    duration: 7,
+    rating: 4.9
+  },
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
+    duration: 5,
+    rating: 4.5
+  },
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
+    duration: 7,
+    rating: 4.9
+  },
+  {
+    name: 'Алтай',
+    region: 'Россия',
+    cover:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
+    duration: 5,
+    rating: 4.5
+  }
+]
 
 type ActiveModal = null | 'cities'
 
 export interface plannerStoreProps {
   buildRoute: typeof buildRouteInstance
-  topCities: typeof topCitiesInstance
-  topDirections: typeof topDirectionsInstance
-  authorsTrips: typeof authorsTripsInstance
+  authorsTripsList: authorTripModelType[]
+  excursionsList: excursionCardModelType[]
+  topDirectionsList: directionModelType[]
   activeModal?: ActiveModal
 }
 
 export interface plannerStoreActions {
   selectCity(city: cityModelType): void
+  resetCity(): void
   setActiveModal(modal: ActiveModal): void
 }
 
+export interface plannerStoreComputed {
+  topCitiesList: cityModelType[]
+}
+
 export const plannerStoreModel = types
-  .model<plannerStoreProps, plannerStoreActions>('plannerStore', {
+  .model<plannerStoreProps, plannerStoreActions, plannerStoreComputed>('plannerStore', {
     activeModal: types.maybe(types.enumeration('cities')),
     buildRoute: buildRouteModel,
-    topCities: topCitiesModel,
-    topDirections: topDirectionsModel,
-    authorsTrips: authorsTripsModel
+    topDirectionsList: types.array(directionModel),
+    authorsTripsList: types.array(authorTripModel),
+    excursionsList: types.array(excursionCardModel)
+  })
+  .computed({
+    topCitiesList({ env }) {
+      return env.citiesStore.list.slice(0, 3)
+    }
   })
   .actions({
     selectCity({ dispatch, state, env }, city: cityModelType) {
-      state().setActiveModal(null)
       env.citiesStore.selectCity(city)
-      state().authorsTrips.fetchList()
+      dispatch({
+        authorsTripsList: compilations,
+        excursionsList: excursions
+      })
     },
+
+    resetCity({ dispatch, state, env }) {
+      env.citiesStore.selectCity(undefined)
+      dispatch({
+        authorsTripsList: [],
+        excursionsList: []
+      })
+    },
+
     setActiveModal({ dispatch, state }, modal) {
       dispatch({ activeModal: modal })
     }
@@ -42,7 +154,7 @@ export const plannerStoreModel = types
 export const plannerStoreInstance = plannerStoreModel.create({
   activeModal: null,
   buildRoute: buildRouteInstance,
-  topCities: topCitiesInstance,
-  topDirections: topDirectionsInstance,
-  authorsTrips: authorsTripsInstance
+  authorsTripsList: [],
+  topDirectionsList: directions.map(el => directionModel.create(el)),
+  excursionsList: []
 })

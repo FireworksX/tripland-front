@@ -9,10 +9,12 @@ import { theme } from '~/definitions'
 import { appWithTranslation } from '~server/i18n'
 import '~static/css/reset.scss'
 import '~static/css/global.scss'
+// import '~static/fonts/fonts.css'
 import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'
 import { ExtendAppInitialProps } from '~/definitions/App'
 import { rootStoreInstance } from '~/store/rootStore'
+import Head from 'next/head'
 
 class WebApp extends App<ExtendAppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext): Promise<ExtendAppInitialProps> {
@@ -35,6 +37,13 @@ class WebApp extends App<ExtendAppInitialProps> {
       <ThemeProvider theme={theme}>
         <StoreProvider store={rootStoreInstance}>
           <RouterProvider router={routerInstance}>
+            <Head>
+              <link rel='preconnect' href='https://fonts.gstatic.com' />
+              <link
+                href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap'
+                rel='stylesheet'
+              />
+            </Head>
             <Index {...pageProps} />
           </RouterProvider>
         </StoreProvider>

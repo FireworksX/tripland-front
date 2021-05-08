@@ -74,7 +74,7 @@ interface citiesStoreProps {
 
 interface citiesStoreActions {
   loadList(): void
-  selectCity(city: cityModelType): void
+  selectCity(city: cityModelType | undefined | null): void
 }
 
 export const citiesStoreModel = types
@@ -83,7 +83,7 @@ export const citiesStoreModel = types
     list: types.array(cityModel)
   })
   .actions({
-    selectCity({dispatch}, city: cityModelType) {
+    selectCity({dispatch}, city: cityModelType | undefined | null) {
       dispatch({ selectedCity: city })
     },
     loadList({ dispatch }) {

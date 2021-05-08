@@ -9,7 +9,7 @@ import feature1 from '~static/images/feature1.png'
 import feature2 from '~static/images/feature2.png'
 import feature3 from '~static/images/feature3.png'
 import feature4 from '~static/images/feature4.png'
-import TopCitiesList from '~/components/TopCitiesList'
+import CitiesList from '~/components/CitiesList.tsx'
 import TopDirectionsList from '~/components/TopDirectionsList'
 import AuthorTripsList from '~/components/AuthorTripsList.tsx'
 import CityExcursionsList from '~/components/CityExcursionsList'
@@ -133,7 +133,7 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
       {!selectedCity && (
         <Section>
           <Group title='Популярные направления' description='Каталог направлений для путешествий по России'>
-            <TopDirectionsList />
+            <TopDirectionsList list={plannerStore.topDirectionsList} />
           </Group>
         </Section>
       )}
@@ -143,20 +143,24 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
             title='Популярные города'
             description='Лучшие города России, которые мы советуем посетить. В каждой подборке собраны авторские маршруты'
           >
-            <TopCitiesList />
+            <CitiesList list={plannerStore.topCitiesList} />
           </Group>
         </Section>
       )}
-      <Section>
-        <Group title='Авторские подборки' description='Собраны лучшие подборки для вашего путешествия'>
-          <AuthorTripsList list={plannerStore.authorsTrips.list} />
-        </Group>
-      </Section>
-      <Section>
-        <Group title='Экскурсии с гидами по Москве' description='Каталог маршрутов для путешествий по Москве'>
-          <CityExcursionsList />
-        </Group>
-      </Section>
+      {plannerStore.authorsTripsList.length > 0 && (
+        <Section>
+          <Group title='Авторские подборки' description='Собраны лучшие подборки для вашего путешествия'>
+            <AuthorTripsList list={plannerStore.authorsTripsList} />
+          </Group>
+        </Section>
+      )}
+      {plannerStore.excursionsList.length > 0 && (
+        <Section>
+          <Group title='Экскурсии с гидами по Москве' description='Каталог маршрутов для путешествий по Москве'>
+            <CityExcursionsList list={plannerStore.excursionsList} />
+          </Group>
+        </Section>
+      )}
       <Features>
         {features.map(({ image, title, text }) => (
           <Feature>

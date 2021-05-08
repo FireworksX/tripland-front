@@ -2,9 +2,11 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import CityCard from '~/components/CityCard'
 import { HorizontalScroll } from '@vkontakte/vkui'
-import useStore from '~/hooks/useStore'
+import { cityModelType } from '~/store/models/cityModel'
 
-interface TopCitiesListProps {}
+interface CitiesListProps {
+  list: cityModelType[]
+}
 
 const Root = styled.div``
 
@@ -15,10 +17,7 @@ const Wrapper = styled.div<{ length: number }>`
   padding: 0 ${({ theme }) => theme.paddings.main};
 `
 
-const TopCitiesList: FC<TopCitiesListProps> = () => {
-  const store = useStore()
-  const list = store.plannerStore.topCities.list
-
+const CitiesList: FC<CitiesListProps> = ({ list }) => {
   return (
     <Root>
       <HorizontalScroll>
@@ -32,4 +31,4 @@ const TopCitiesList: FC<TopCitiesListProps> = () => {
   )
 }
 
-export default TopCitiesList
+export default CitiesList

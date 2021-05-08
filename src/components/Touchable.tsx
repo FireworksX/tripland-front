@@ -1,5 +1,5 @@
 import React, { FC, SyntheticEvent } from 'react'
-import styled  from 'styled-components'
+import styled from 'styled-components'
 
 interface TouchableProps {
   className?: string
@@ -7,8 +7,14 @@ interface TouchableProps {
 }
 
 const Root = styled.button`
-  display: block;
+  display: flex;
+  flex-direction: column;
   transition: 0.15s;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-family: var(--font-common);
   &:active {
     transform: scale(0.95);
   }

@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
 import { NextPage } from 'next'
 import { useRoute } from 'react-router5'
-import { Icon28AddCircleOutline, Icon28Notification, Icon28User } from '@vkontakte/icons'
+import { Icon28Notification, Icon28User } from '@vkontakte/icons'
 import { Epic, Panel, PanelHeader, PanelHeaderBack, Tabbar, TabbarItem, View } from '@vkontakte/vkui'
 import { PANEL_NAMES, STORY_NAMES } from '~router/constants'
-import { buildPath } from '~utils/buildRouteName'
+import { buildPath } from '~/utils/buildRouteName'
 import ProfileView from '~/views/ProfileView'
 import { Icon28Like } from '~/components/icons/Icon28Like.tsx'
 import PlannerView from '~/views/PlannerView'
-import { useEffect } from 'react'
 import useStore from '~/hooks/useStore'
+import { IconPlusCircleFill } from '~/components/icons/IconPlusCircleFill'
 
 const Index: NextPage = () => {
   const { route, router } = useRoute()
@@ -32,7 +33,7 @@ const Index: NextPage = () => {
             text='Планнер'
             onClick={() => onSelectStory(STORY_NAMES.planner, PANEL_NAMES.plannerIndex)}
           >
-            <Icon28AddCircleOutline />
+            <IconPlusCircleFill />
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.favorites}

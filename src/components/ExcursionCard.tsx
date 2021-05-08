@@ -1,15 +1,16 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
+import Touchable from '~/components/Touchable'
 
 interface ExcursionCardProps {
   className?: string
-  title: string
+  name: string
   cover: string
   price?: number
 }
 
-const Root = styled.div``
+const Root = styled(Touchable)``
 
 const Cover = styled(Image)<ImageProps>`
   object-fit: cover;
@@ -35,11 +36,11 @@ const Description = styled.div`
   }
 `
 
-const ExcursionCard: FC<ExcursionCardProps> = ({ cover, title, price, className }) => {
+const ExcursionCard: FC<ExcursionCardProps> = ({ cover, name, price, className }) => {
   return (
     <Root className={className}>
       <Cover src={cover} />
-      <Title>{title}</Title>
+      <Title>{name}</Title>
       <Description>
         {price}
         <span> / за человека</span>
