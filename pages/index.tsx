@@ -1,21 +1,28 @@
 import { useEffect } from 'react'
 import { NextPage } from 'next'
+import styled from 'styled-components'
 import { useRoute } from 'react-router5'
-import { Icon28Notification, Icon28User } from '@vkontakte/icons'
-import { Epic, Panel, PanelHeader, PanelHeaderBack, Tabbar, TabbarItem, View } from '@vkontakte/vkui'
-import { PANEL_NAMES, STORY_NAMES } from '~router/constants'
+import { Epic, Tabbar, TabbarItem } from '@vkontakte/vkui'
+import { PANEL_NAMES, STORY_NAMES, VIEW_NAMES } from '~router/constants'
 import { buildPath } from '~/utils/buildRouteName'
-import ProfileView from '~/views/ProfileView'
-import { Icon28Like } from '~/components/icons/Icon28Like.tsx'
 import PlannerView from '~/views/PlannerView'
 import useStore from '~/hooks/useStore'
 import { IconPlusCircleFill } from '~/components/icons/IconPlusCircleFill'
+import { TabbarProps } from '@vkontakte/vkui/dist/components/Tabbar/Tabbar'
+import RouteView from '~/views/RouteView'
+
+const TabbarStyled = styled(Tabbar)<TabbarProps & { isVisible: boolean }>`
+  transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
+  transition: 0.2s;
+`
 
 const Index: NextPage = () => {
   const { route, router } = useRoute()
   const store = useStore()
 
-  const activeStory = route?.name?.split('.')[0] || STORY_NAMES.planner
+  const isVisibleTabbar = store.uiStore.visibleTabbar
+  const activeStory = route?.meta?.route?.storyName?.split('.')[0] || STORY_NAMES.planner
+  const activeView = route?.name?.split('.')[0] || VIEW_NAMES.planner
 
   const onSelectStory = (story: any, panel: any) => router.navigate(buildPath(story, panel))
 
@@ -25,53 +32,21 @@ const Index: NextPage = () => {
 
   return (
     <Epic
-      activeStory={activeStory}
+      activeStory={activeView}
       tabbar={
-        <Tabbar>
+        <TabbarStyled isVisible={isVisibleTabbar}>
           <TabbarItem
             selected={activeStory === STORY_NAMES.planner}
             text='Планнер'
-            onClick={() => onSelectStory(STORY_NAMES.planner, PANEL_NAMES.plannerIndex)}
+            onClick={() => onSelectStory(VIEW_NAMES.planner, PANEL_NAMES.plannerIndex)}
           >
             <IconPlusCircleFill />
           </TabbarItem>
-          <TabbarItem
-            selected={activeStory === STORY_NAMES.favorites}
-            text='Избранное'
-            onClick={() => onSelectStory(STORY_NAMES.favorites, PANEL_NAMES.plannerIndex)}
-          >
-            <Icon28Like />
-          </TabbarItem>
-          <TabbarItem
-            selected={activeStory === STORY_NAMES.notifications}
-            text='Уведомления'
-            onClick={() => onSelectStory(STORY_NAMES.notifications, PANEL_NAMES.plannerIndex)}
-          >
-            <Icon28Notification />
-          </TabbarItem>
-          <TabbarItem
-            selected={activeStory === STORY_NAMES.profile}
-            data-story='clips'
-            text='Профиль'
-            onClick={() => onSelectStory(STORY_NAMES.profile, PANEL_NAMES.plannerIndex)}
-          >
-            <Icon28User />
-          </TabbarItem>
-        </Tabbar>
+        </TabbarStyled>
       }
     >
-      <PlannerView id={STORY_NAMES.planner} />
-      <View id={STORY_NAMES.favorites} activePanel='feed'>
-        <Panel id='feed'>
-          <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
-        </Panel>
-      </View>
-      <View id={STORY_NAMES.notifications} activePanel='feed'>
-        <Panel id='feed'>
-          <PanelHeader left={<PanelHeaderBack />}>Новости</PanelHeader>
-        </Panel>
-      </View>
-      <ProfileView id={STORY_NAMES.profile} />
+      <PlannerView id={VIEW_NAMES.planner} />
+      <RouteView id={VIEW_NAMES.route} />
     </Epic>
   )
 }

@@ -5,6 +5,9 @@ import { PANEL_NAMES } from '~router/constants'
 import useStore from '~/hooks/useStore'
 import CitiesListModal from '~/components/modals/CitiesListModal'
 import { cityModelType } from '~/store/models/cityModel'
+import PlannerCalendarModal from '~/components/modals/PlannerCalendarModal'
+import PlannerSelectGenresPanel from '~/panels/PlannerSelectGenresPanel'
+import PlannerSelectPeoplesPanel from "~/panels/PlannerSelectPeoplesPanel";
 
 interface ProfileView {
   id: string
@@ -21,12 +24,15 @@ const PlannerView: FC<ProfileView> = () => {
   const ModalRootFragment = (
     <ModalRoot activeModal={plannerStore.activeModal} onClose={() => plannerStore.setActiveModal(null)}>
       <CitiesListModal id='cities' onSelect={onSelectCity} />
+      <PlannerCalendarModal id='calendar' />
     </ModalRoot>
   )
 
   return (
-    <View activePanel={PANEL_NAMES.plannerIndex} modal={ModalRootFragment}>
+    <View activePanel={plannerStore.activePanel} modal={ModalRootFragment}>
       <PlannerPanel id={PANEL_NAMES.plannerIndex} />
+      <PlannerSelectGenresPanel id={PANEL_NAMES.plannerSelectGenres} />
+      <PlannerSelectPeoplesPanel id={PANEL_NAMES.plannerSelectPeople}/>
     </View>
   )
 }

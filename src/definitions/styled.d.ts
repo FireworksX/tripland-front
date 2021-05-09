@@ -6,6 +6,7 @@ declare module 'styled-components' {
       primary: string
       secondary: string
       accent: string
+      accentBlue: string
       border: string
       yellow: string
       background: string

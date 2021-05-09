@@ -8,7 +8,6 @@ interface TouchableProps {
 
 const Root = styled.button`
   display: flex;
-  flex-direction: column;
   transition: 0.15s;
   background: transparent;
   border: none;

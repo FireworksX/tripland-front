@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Panel as VKPanel } from '@vkontakte/vkui'
 
@@ -6,15 +6,13 @@ interface PanelProps {
   id: string
 }
 
-const Root = styled(VKPanel)<{ id: string }>`
-  min-height: 100vh;
-`
+const Root = styled.div``
 
-const Panel: React.FunctionComponent<PanelProps> = ({ children, id }) => {
+const Panel: FC<PanelProps> = ({ children, id }) => {
   return (
-    <Root id={id}>
-      <div>{children}</div>
-    </Root>
+    <VKPanel id={id}>
+      <Root>{children}</Root>
+    </VKPanel>
   )
 }
 

@@ -6,18 +6,36 @@ interface builderRouteProps {
   dateTo?: string
 }
 
+interface builderRouteActions {
+  setDate(mode: 'dateFrom' | 'dateTo', date: string): void
+  resetDates(): void
+}
+
 interface builderRouteComputed {
   city?: cityModelType
 }
 
 export const buildRouteModel = types
-  .model<builderRouteProps, {}, builderRouteComputed>('builderRoute', {
+  .model<builderRouteProps, builderRouteActions, builderRouteComputed>('builderRoute', {
     dateFrom: types.maybe(types.string),
     dateTo: types.maybe(types.string)
   })
   .computed({
     city({ env }) {
       return env.citiesStore.selectedCity
+    }
+  })
+  .actions({
+    resetDates({ dispatch }) {
+      dispatch({
+        dateFrom: undefined,
+        dateTo: undefined
+      })
+    },
+    setDate({ dispatch }, mode, date) {
+      dispatch({
+        [mode]: date
+      })
     }
   })
 

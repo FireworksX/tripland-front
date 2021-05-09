@@ -49,6 +49,7 @@ const InformationName = styled.span`
   span {
     font-weight: 500;
     font-size: 9px;
+    margin-left: 3px;
     color: ${({ theme }) => theme.colors.secondary};
   }
 `

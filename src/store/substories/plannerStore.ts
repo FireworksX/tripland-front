@@ -5,6 +5,7 @@ import { authorTripModel, authorTripModelType } from '~/store/models/authorTripM
 import carCover from '~static/images/carCover.png'
 import { excursionCardModel, excursionCardModelType } from '~/store/models/excursionCardModel'
 import { directionModel, directionModelType } from '~/store/models/directionModel'
+import { PANEL_NAMES } from '~router/constants'
 
 const compilations = [
   {
@@ -96,9 +97,11 @@ const directions = [
   }
 ]
 
-type ActiveModal = null | 'cities'
+type ActiveModal = null | 'cities' | 'calendar'
+type ActivePanel = 'plannerIndex' | 'plannerGenres' | 'plannerSelectPeople' | 'plannerSelectGenres'
 
 export interface plannerStoreProps {
+  activePanel: 'plannerIndex' | 'plannerSelectGenres'
   buildRoute: typeof buildRouteInstance
   authorsTripsList: authorTripModelType[]
   excursionsList: excursionCardModelType[]
@@ -110,6 +113,7 @@ export interface plannerStoreActions {
   selectCity(city: cityModelType): void
   resetCity(): void
   setActiveModal(modal: ActiveModal): void
+  setActivePanel(panel: ActivePanel): void
 }
 
 export interface plannerStoreComputed {
@@ -118,7 +122,10 @@ export interface plannerStoreComputed {
 
 export const plannerStoreModel = types
   .model<plannerStoreProps, plannerStoreActions, plannerStoreComputed>('plannerStore', {
-    activeModal: types.maybe(types.enumeration('cities')),
+    activePanel: types.maybe(
+      types.enumeration(PANEL_NAMES.plannerIndex, PANEL_NAMES.plannerSelectGenres, PANEL_NAMES.plannerSelectPeople)
+    ),
+    activeModal: types.maybe(types.enumeration('cities', 'calendar')),
     buildRoute: buildRouteModel,
     topDirectionsList: types.array(directionModel),
     authorsTripsList: types.array(authorTripModel),
@@ -138,7 +145,7 @@ export const plannerStoreModel = types
       })
     },
 
-    resetCity({ dispatch, state, env }) {
+    resetCity({ dispatch, env }) {
       env.citiesStore.selectCity(undefined)
       dispatch({
         authorsTripsList: [],
@@ -148,10 +155,15 @@ export const plannerStoreModel = types
 
     setActiveModal({ dispatch, state }, modal) {
       dispatch({ activeModal: modal })
+    },
+
+    setActivePanel({ dispatch }, panel) {
+      dispatch({ activePanel: panel })
     }
   })
 
 export const plannerStoreInstance = plannerStoreModel.create({
+  activePanel: PANEL_NAMES.plannerIndex,
   activeModal: null,
   buildRoute: buildRouteInstance,
   authorsTripsList: [],

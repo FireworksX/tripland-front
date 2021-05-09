@@ -1,11 +1,13 @@
 import { Route } from 'router5'
-import { PANEL_NAMES, STORY_NAMES } from './constants'
+import { PANEL_NAMES, STORY_NAMES, VIEW_NAMES } from './constants'
 
-type ValueOf<T> = T[keyof T]
+export type ValueOf<T> = T[keyof T]
 
 declare module 'router5' {
   interface Route {
+    storyName?: ValueOf<typeof STORY_NAMES>
     panelName?: ValueOf<typeof PANEL_NAMES>
+    withoutTabbar?: boolean
   }
 
   interface StateMeta {
@@ -15,42 +17,28 @@ declare module 'router5' {
 
 export const routes = (): Route[] => [
   {
-    name: STORY_NAMES.planner,
+    name: VIEW_NAMES.planner,
+    storyName: STORY_NAMES.planner,
     path: '/planner',
     children: [
       {
-        name: PANEL_NAMES.plannerIndex,
-        path: '/',
+        name: VIEW_NAMES.planner,
+        panelName: PANEL_NAMES.plannerIndex,
+        storyName: STORY_NAMES.planner,
+        path: '/'
       }
     ]
   },
   {
-    name: STORY_NAMES.favorites,
-    path: '/favorites',
+    name: VIEW_NAMES.route,
+    storyName: STORY_NAMES.planner,
+    path: '/route',
     children: [
       {
         name: PANEL_NAMES.plannerIndex,
-        path: '/',
-      }
-    ]
-  },
-  {
-    name: STORY_NAMES.notifications,
-    path: '/notifications',
-    children: [
-      {
-        name: PANEL_NAMES.plannerIndex,
-        path: '/',
-      }
-    ]
-  },
-  {
-    name: STORY_NAMES.profile,
-    path: '/profile',
-    children: [
-      {
-        name: PANEL_NAMES.plannerIndex,
-        path: '/',
+        panelName: PANEL_NAMES.plannerIndex,
+        storyName: STORY_NAMES.planner,
+        path: '/'
       }
     ]
   }

@@ -5,6 +5,7 @@ const theme: DefaultTheme = {
     primary: 'var(--primary)',
     secondary: 'var(--secondary)',
     accent: 'var(--accent)',
+    accentBlue: 'var(--accent-blue)',
     border: 'var(--border)',
     yellow: 'var(--yellow)',
     background: 'var(--background)',

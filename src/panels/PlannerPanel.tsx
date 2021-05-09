@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 import { Div } from '~/components/Div'
 import PlannerBuilder from '~/components/PlannerBuilder'
@@ -14,6 +14,7 @@ import TopDirectionsList from '~/components/TopDirectionsList'
 import AuthorTripsList from '~/components/AuthorTripsList.tsx'
 import CityExcursionsList from '~/components/CityExcursionsList'
 import useStore from '~/hooks/useStore'
+import { PANEL_NAMES } from '~router/constants'
 
 interface PlannerPanel {
   id: string
@@ -108,8 +109,14 @@ const features = [
 export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
   const {
     citiesStore: { selectedCity },
-    plannerStore
+    plannerStore,
+    uiStore
   } = useStore()
+
+  const onSubmitPlanner = () => {
+    plannerStore.setActivePanel(PANEL_NAMES.plannerSelectGenres)
+    uiStore.setVisibleTabbar(false)
+  }
 
   return (
     <Panel id={id}>
@@ -127,7 +134,7 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
         </HeaderGradient>
         <Div>
           <HeaderTitle>Удобный планировщик ваших путешествий</HeaderTitle>
-          <PlannerBuilder />
+          <PlannerBuilder onSubmit={onSubmitPlanner} />
         </Div>
       </Header>
       {!selectedCity && (

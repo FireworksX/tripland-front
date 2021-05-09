@@ -16,7 +16,7 @@ const Cover = styled(Image)`
 
 const Icon = styled.div`
   margin-right: 5px;
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.accentBlue};
 `
 
 const Name = styled.div`

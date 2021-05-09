@@ -7,7 +7,9 @@ import Touchable from '~/components/Touchable'
 import { IconPlus } from '~/components/icons/IconPlus'
 import { IconClose } from '~/components/icons/IconClose'
 
-interface PlannerBuilder {}
+interface PlannerBuilder {
+  onSubmit: () => any
+}
 
 const Root = styled.div`
   background: ${({ theme }) => theme.colors.backgroundWhite};
@@ -94,9 +96,11 @@ const SubmitButton = styled(Touchable)`
   line-height: 21px;
 `
 
-const PlannerBuilder: FC<PlannerBuilder> = ({}) => {
+const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
   const { plannerStore } = useStore()
   const city = plannerStore.buildRoute.city?.name
+  const dateFrom = plannerStore.buildRoute.dateFrom
+  const dateTo = plannerStore.buildRoute.dateTo
 
   return (
     <Root>
@@ -124,20 +128,32 @@ const PlannerBuilder: FC<PlannerBuilder> = ({}) => {
             'Город'
           )}
         </FilterButton>
-        <FilterButton>
+        <FilterButton onClick={() => plannerStore.setActiveModal('calendar')}>
           <FilterButtonIcon>
             <IconCalendar size={15} />
           </FilterButtonIcon>
-          Туда
+          {dateFrom ? (
+            <FilterResult>
+              Туда <span>{dateFrom}</span>
+            </FilterResult>
+          ) : (
+            'Туда'
+          )}
         </FilterButton>
-        <FilterButton>
+        <FilterButton onClick={() => plannerStore.setActiveModal('calendar')}>
           <FilterButtonIcon>
             <IconCalendar size={15} />
           </FilterButtonIcon>
-          Обратно
+          {dateTo ? (
+            <FilterResult>
+              Обратно <span>{dateTo}</span>
+            </FilterResult>
+          ) : (
+            'Обратно'
+          )}
         </FilterButton>
       </Filter>
-      <SubmitButton>Построить маршрут</SubmitButton>
+      <SubmitButton onClick={onSubmit}>Построить маршрут</SubmitButton>
     </Root>
   )
 }
