@@ -8,6 +8,7 @@ declare module 'styled-components' {
       accent: string
       accentBlue: string
       border: string
+      gray: string
       yellow: string
       background: string
       backgroundWhite: string
@@ -20,6 +21,9 @@ declare module 'styled-components' {
     radius: {
       main: string
       second: string
+    }
+    shadow: {
+      main: string
     }
   }
 }

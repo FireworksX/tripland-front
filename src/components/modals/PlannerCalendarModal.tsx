@@ -1,8 +1,7 @@
 import React, { FC, useMemo } from 'react'
 import styled from 'styled-components'
 import { ModalPage, ModalPageHeader } from '@vkontakte/vkui'
-import useStore from '~/hooks/useStore'
-import { cityModelType } from '~/store/models/cityModel'
+import { useStore } from '~/hooks/useStore'
 import DatePicker from '~/components/DatePicker'
 import { formatDate, phpFormat } from '~/utils/dateUtils'
 

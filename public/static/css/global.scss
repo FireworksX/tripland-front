@@ -8,8 +8,9 @@
   --primary: #0a121f;
   --secondary: #9fa6b6;
   --accent: #ff9900;
-  --accent-blue: #428AF7;
-  --border: #eeeeee;
+  --accent-blue: #428af7;
+  --border: #E7E7E7;
+  --gray: #D2D2D2;
   --yellow: #f4c038;
   --background: #e5e5e5;
   --backgroundWhite: #fff;
@@ -20,6 +21,8 @@
 
   --radiusMain: 10px;
   --radiusSecond: 5px;
+
+  --boxShadow: 0 0 50px rgba(188, 188, 188, 0.25);
 }
 
 *,
@@ -28,8 +31,10 @@
   box-sizing: border-box;
 }
 
-body, button {
+body,
+button {
   font-family: var(--font-common);
+  color: var(--textColor);
 }
 
 .vkuiPanel__in-after {

@@ -1,8 +1,6 @@
 import { useStore as useGlobalStore } from '@mozaikjs/react'
-import { rootStoreInstance } from '~/store/rootStore'
+import { rootStore } from '~/store/rootStore'
 
-const useStore = () => {
-  return useGlobalStore<typeof rootStoreInstance>()
+export const useStore = (): rootStore => {
+  return useGlobalStore<rootStore>()
 }
-
-export default useStore

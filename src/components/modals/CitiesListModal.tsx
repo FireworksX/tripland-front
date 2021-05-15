@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { ModalPage, ModalPageHeader, SimpleCell } from '@vkontakte/vkui'
-import useStore from '~/hooks/useStore'
-import {cityModelType} from "~/store/models/cityModel";
+import { useStore } from '~/hooks/useStore'
+import { cityModelType } from '~/store/models/cityModel'
 
 interface CitiesListModalProps {
   id: string

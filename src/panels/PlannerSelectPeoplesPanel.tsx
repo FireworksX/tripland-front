@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import GenericPageBubbles from '~/components/GenericPageBubbles'
 import Panel from '~/components/Panel'
-import { buildPath } from '~/utils/buildRouteName'
 import { useRoute } from 'react-router5'
-import { PANEL_NAMES, STORY_NAMES, VIEW_NAMES } from '~router/constants'
-import useStore from '~/hooks/useStore'
+import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
+import { buildRouteName } from '~/utils/buildRouteName'
+import { useRouter } from '~/hooks/useRouter'
 
 interface PlannerSelectPeoplesPanelProps {
   id: string
@@ -16,8 +16,7 @@ const Root = styled.div`
 `
 
 const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) => {
-  const { uiStore } = useStore()
-  const { route, router } = useRoute()
+  const { replace } = useRouter()
 
   return (
     <Panel id={id}>
@@ -26,10 +25,9 @@ const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) =
           title='Количество человек'
           description='Укажите количество человек, которое поедет с вами в путешествие'
           steps='2 из 2'
-          onSubmit={() => {
-            uiStore.setVisibleTabbar(true)
-            router.navigate(buildPath(VIEW_NAMES.route, PANEL_NAMES.plannerIndex))
-          }}
+          onSubmit={() =>
+            replace(buildRouteName(ROUTE_NAMES.routeDetailRoot), { [ROUTE_PARAMS.routeSlug]: 'testRouteSlug' })
+          }
         />
       </Root>
     </Panel>

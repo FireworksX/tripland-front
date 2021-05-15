@@ -56,7 +56,7 @@ const FooterSteps = styled.div`
 
 const FooterSecondButton = styled(Touchable)`
   color: ${({ theme }) => theme.colors.secondary};
-  justify-content: center;
+  text-align: center;
 `
 
 const FooterSubmitButton = styled(Touchable)`

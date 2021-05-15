@@ -13,8 +13,10 @@ import CitiesList from '~/components/CitiesList.tsx'
 import TopDirectionsList from '~/components/TopDirectionsList'
 import AuthorTripsList from '~/components/AuthorTripsList.tsx'
 import CityExcursionsList from '~/components/CityExcursionsList'
-import useStore from '~/hooks/useStore'
-import { PANEL_NAMES } from '~router/constants'
+import { useStore } from '~/hooks/useStore'
+import { ROUTE_NAMES } from '~router/constants'
+import { buildRouteName } from '~/utils/buildRouteName'
+import { useRouter } from '~/hooks/useRouter'
 
 interface PlannerPanel {
   id: string
@@ -107,15 +109,14 @@ const features = [
 ]
 
 export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
+  const { push } = useRouter()
   const {
     citiesStore: { selectedCity },
-    plannerStore,
-    uiStore
+    plannerStore
   } = useStore()
 
   const onSubmitPlanner = () => {
-    plannerStore.setActivePanel(PANEL_NAMES.plannerSelectGenres)
-    uiStore.setVisibleTabbar(false)
+    push(buildRouteName(ROUTE_NAMES.plannerRoot, ROUTE_NAMES.plannerSelectGenres))
   }
 
   return (

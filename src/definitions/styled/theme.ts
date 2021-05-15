@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
     accent: 'var(--accent)',
     accentBlue: 'var(--accent-blue)',
     border: 'var(--border)',
+    gray: 'var(--gray)',
     yellow: 'var(--yellow)',
     background: 'var(--background)',
     backgroundWhite: 'var(--backgroundWhite)',
@@ -18,7 +19,10 @@ const theme: DefaultTheme = {
   },
   radius: {
     main: 'var(--radiusMain)',
-    second: 'var(--radiusSecond)',
+    second: 'var(--radiusSecond)'
+  },
+  shadow: {
+    main: 'var(--boxShadow)'
   }
 }
 

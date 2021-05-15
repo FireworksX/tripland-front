@@ -98,7 +98,7 @@ const directions = [
 ]
 
 type ActiveModal = null | 'cities' | 'calendar'
-type ActivePanel = 'plannerIndex' | 'plannerGenres' | 'plannerSelectPeople' | 'plannerSelectGenres'
+type ActivePanel = 'plannerIndex' | 'plannerGenres' | 'plannerSelectPeople' | 'plannerSelectGenres' | 'routeDetail'
 
 export interface plannerStoreProps {
   activePanel: 'plannerIndex' | 'plannerSelectGenres'
@@ -123,7 +123,12 @@ export interface plannerStoreComputed {
 export const plannerStoreModel = types
   .model<plannerStoreProps, plannerStoreActions, plannerStoreComputed>('plannerStore', {
     activePanel: types.maybe(
-      types.enumeration(PANEL_NAMES.plannerIndex, PANEL_NAMES.plannerSelectGenres, PANEL_NAMES.plannerSelectPeople)
+      types.enumeration(
+        PANEL_NAMES.plannerIndex,
+        PANEL_NAMES.plannerSelectGenres,
+        PANEL_NAMES.plannerSelectPeople,
+        PANEL_NAMES.routeDetail
+      )
     ),
     activeModal: types.maybe(types.enumeration('cities', 'calendar')),
     buildRoute: buildRouteModel,
