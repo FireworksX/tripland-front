@@ -3,10 +3,13 @@ import styled from 'styled-components'
 import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGeneric'
 import DisplayRating from '~/components/DisplayRating'
 import { IconClock } from '~/components/icons/IconClock'
+import { IconPlacemark } from '~/components/icons/IconPlacemark'
 
-interface RouteIterateCardProps extends WideCardGenericProps {}
+interface FavoritesPlaceCardProps extends WideCardGenericProps {}
 
-const Root = styled(WideCardGeneric)<WideCardGenericProps>``
+const Root = styled(WideCardGeneric)<WideCardGenericProps>`
+  min-height: 90px;
+`
 
 const Rating = styled.div`
   display: flex;
@@ -38,26 +41,14 @@ const Rating = styled.div`
   }
 `
 
-const Time = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.secondary};
-`
-
-const TimeIcon = styled.div`
-  margin-right: 5px;
-`
-
-const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickOptions }) => {
+const FavoritesPlaceCard: FC<FavoritesPlaceCardProps> = ({ name, className, onClickOptions }) => {
   return (
     <Root
       name={name}
       className={className}
       badge={{
         value: 'от 1200 руб.',
-        color: 'red'
+        color: 'green'
       }}
       onClickOptions={onClickOptions}
     >
@@ -65,14 +56,8 @@ const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickO
         <DisplayRating value={4.6} />
         <div>98 отзывов</div>
       </Rating>
-      <Time>
-        <TimeIcon>
-          <IconClock size={18} />
-        </TimeIcon>
-        17:00 – 19:00
-      </Time>
     </Root>
   )
 }
 
-export default RouteIterateCard
+export default FavoritesPlaceCard

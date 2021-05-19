@@ -1,11 +1,28 @@
 import { createConstants } from '../../src/utils/createConstants'
 
-const ROUTE_NAMES = createConstants('plannerRoot', 'plannerSelectGenres', 'plannerSelectPeople', 'routeDetailRoot')
+const ROUTE_NAMES = createConstants(
+  'plannerRoot',
+  'plannerSelectGenres',
+  'plannerSelectPeople',
+  'routeDetailRoot',
+  'favoritesRoot',
+  'favoritesModes',
+  'notifications',
+  'profile'
+)
 
 const STORY_NAMES = createConstants('planner', 'favorites', 'notifications', 'profile')
 const VIEW_NAMES = createConstants('planner', 'route', 'favorites', 'profile', 'notifications')
-const PANEL_NAMES = createConstants('plannerIndex', 'plannerSelectGenres', 'plannerSelectPeople', 'routeDetail')
+const PANEL_NAMES = createConstants(
+  'plannerIndex',
+  'plannerSelectGenres',
+  'plannerSelectPeople',
+  'routeDetail',
+  'favoritesIndex',
+  'notificationsIndex',
+  'profileIndex'
+)
 
-const ROUTE_PARAMS = createConstants('routeSlug')
+const ROUTE_PARAMS = createConstants('routeSlug', 'favoritesMode')
 
 export { ROUTE_PARAMS, STORY_NAMES, PANEL_NAMES, VIEW_NAMES, ROUTE_NAMES }

@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, FC, ImgHTMLAttributes } from 'react'
+import React, { FC, ImgHTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {}

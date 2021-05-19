@@ -1,7 +1,7 @@
 import React, { FC, SyntheticEvent } from 'react'
 import styled from 'styled-components'
 
-interface TouchableProps {
+export interface TouchableProps {
   className?: string
   onClick?: (e: SyntheticEvent) => any
 }

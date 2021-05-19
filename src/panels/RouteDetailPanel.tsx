@@ -13,6 +13,7 @@ import { useRouter } from '~/hooks/useRouter'
 
 interface RouteDetailPanelProps {
   id: string
+  onClickOptions: any
 }
 
 const Header = styled.div`
@@ -97,7 +98,24 @@ const DelimiterIcon = styled.div`
   margin-right: 5px;
 `
 
-const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id }) => {
+const Footer = styled(Div)`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  margin-top: 40px;
+`
+
+const FooterButton = styled(Touchable)<{ isWide?: boolean; isAccent?: boolean }>`
+  grid-column: ${({ isWide }) => isWide && '1 / 3'};
+  background: ${({ isAccent, theme }) => (isAccent ? theme.colors.accent : theme.colors.border)};
+  text-align: center;
+  font-weight: 500;
+  color: ${({ isAccent, theme }) => (isAccent ? theme.colors.textColorWhite : theme.colors.secondary)};
+  padding: 20px 0;
+  border-radius: ${({ theme }) => theme.radius.main};
+`
+
+const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => {
   const router = useRouter()
 
   const days = [
@@ -207,7 +225,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id }) => {
 
   const getFragment = (item: any) => {
     if (item.type === 'card') {
-      return <RouteIterateCard name={item.name} />
+      return <RouteIterateCard name={item.name} onClickOptions={onClickOptions} />
     } else if (item.type === 'delimiter') {
       return (
         <DayDelimiter>
@@ -249,6 +267,11 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id }) => {
           </Day>
         ))}
       </Div>
+      <Footer>
+        <FooterButton isAccent>Сохранить</FooterButton>
+        <FooterButton isAccent>Скачать PDF</FooterButton>
+        <FooterButton isWide>Поделиться</FooterButton>
+      </Footer>
     </Panel>
   )
 }

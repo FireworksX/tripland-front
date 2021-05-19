@@ -16,6 +16,7 @@ interface routerStoreActions {
 
 interface routerStoreComputed {
   state: State
+  params: Params
   withoutTabbar: boolean
   path: string
 }
@@ -24,11 +25,15 @@ export const routerStoreModel = types
   .model<routerStoreProps, routerStoreActions, routerStoreComputed>('routerStore', {})
   .computed({
     path({ state }) {
-      return state().path
+      return state().state.path
     },
 
     state({ env }) {
       return env.router.getState()
+    },
+
+    params({ state }) {
+      return state().state.params
     },
 
     withoutTabbar({ state }) {

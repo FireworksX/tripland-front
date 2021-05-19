@@ -12,7 +12,8 @@ const theme: DefaultTheme = {
     background: 'var(--background)',
     backgroundWhite: 'var(--backgroundWhite)',
     textColor: 'var(--textColor)',
-    textColorWhite: 'var(--textColorWhite)'
+    textColorWhite: 'var(--textColorWhite)',
+    red: 'var(--colorRed)',
   },
   paddings: {
     main: 'var(--paddingMain)'
