@@ -2,11 +2,19 @@ import React, { FC } from 'react'
 
 export interface IconPlacemarkProps {
   size?: number
+  className?: string
 }
 
-export const IconPlacemark: FC<IconPlacemarkProps> = ({ size = 28 }) => {
+export const IconPlacemark: FC<IconPlacemarkProps> = ({ className, size = 28 }) => {
   return (
-    <svg width={size} height={size} viewBox='0 0 12 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox='0 0 12 16'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         fill-rule='evenodd'
         clip-rule='evenodd'

@@ -9,6 +9,7 @@ import { theme } from '~/definitions'
 import { appWithTranslation } from '~server/i18n'
 import '~static/css/reset.scss'
 import '~static/css/global.scss'
+import 'swiper/swiper.scss';
 // import '~static/fonts/fonts.css'
 import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'

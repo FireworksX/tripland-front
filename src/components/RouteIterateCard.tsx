@@ -50,7 +50,7 @@ const TimeIcon = styled.div`
   margin-right: 5px;
 `
 
-const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickOptions }) => {
+const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickOptions, onClick }) => {
   return (
     <Root
       name={name}
@@ -60,6 +60,7 @@ const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickO
         color: 'red'
       }}
       onClickOptions={onClickOptions}
+      onClick={onClick}
     >
       <Rating>
         <DisplayRating value={4.6} />

@@ -16,6 +16,7 @@ import { useRouter } from '~/hooks/useRouter'
 import { Icon28Like } from '~/components/icons/Icon28Like'
 import NotificationsView from '~/views/NotificationsView'
 import ProfileView from '~/views/ProfileView'
+import DetailView from '~/views/DetailView'
 
 const TabbarStyled = styled(Tabbar)<TabbarProps & { isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
@@ -77,6 +78,7 @@ const Index: NextPage = () => {
       <FavoritesView id={VIEW_NAMES.favorites} />
       <NotificationsView id={VIEW_NAMES.notifications} />
       <ProfileView id={VIEW_NAMES.profile} />
+      <DetailView id={VIEW_NAMES.detail} />
     </Epic>
   )
 }

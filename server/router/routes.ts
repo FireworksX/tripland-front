@@ -85,5 +85,13 @@ export const routes = (): Route[] => [
     storyName: STORY_NAMES.profile,
     panelName: PANEL_NAMES.profileIndex,
     path: `/profile`
+  },
+  {
+    name: ROUTE_NAMES.detail,
+    viewName: VIEW_NAMES.detail,
+    storyName: STORY_NAMES.planner,
+    panelName: PANEL_NAMES.detailIndex,
+    withoutTabbar: true,
+    path: `/detail`
   }
 ]

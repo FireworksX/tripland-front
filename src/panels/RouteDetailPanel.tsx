@@ -10,6 +10,8 @@ import { IconCaretDown } from '~/components/icons/IconCaretDown'
 import RouteTimeLine from '~/components/RouteTimeLine'
 import { IconFunnelFill } from '~/components/icons/IconFunnelFill'
 import { useRouter } from '~/hooks/useRouter'
+import { buildRouteName } from '~/utils/buildRouteName'
+import { ROUTE_NAMES } from '~router/constants'
 
 interface RouteDetailPanelProps {
   id: string
@@ -225,7 +227,13 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
 
   const getFragment = (item: any) => {
     if (item.type === 'card') {
-      return <RouteIterateCard name={item.name} onClickOptions={onClickOptions} />
+      return (
+        <RouteIterateCard
+          name={item.name}
+          onClickOptions={onClickOptions}
+          onClick={() => router.push(buildRouteName(ROUTE_NAMES.detail))}
+        />
+      )
     } else if (item.type === 'delimiter') {
       return (
         <DayDelimiter>

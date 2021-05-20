@@ -8,11 +8,12 @@ const ROUTE_NAMES = createConstants(
   'favoritesRoot',
   'favoritesModes',
   'notifications',
-  'profile'
+  'profile',
+  'detail'
 )
 
 const STORY_NAMES = createConstants('planner', 'favorites', 'notifications', 'profile')
-const VIEW_NAMES = createConstants('planner', 'route', 'favorites', 'profile', 'notifications')
+const VIEW_NAMES = createConstants('planner', 'route', 'favorites', 'profile', 'notifications', 'detail')
 const PANEL_NAMES = createConstants(
   'plannerIndex',
   'plannerSelectGenres',
@@ -20,7 +21,8 @@ const PANEL_NAMES = createConstants(
   'routeDetail',
   'favoritesIndex',
   'notificationsIndex',
-  'profileIndex'
+  'profileIndex',
+  'detailIndex'
 )
 
 const ROUTE_PARAMS = createConstants('routeSlug', 'favoritesMode')

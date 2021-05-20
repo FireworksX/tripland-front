@@ -9,7 +9,7 @@ interface PanelProps {
 
 const Root = styled.div`
   padding-bottom: 20px;
-  height: calc(100vh - var(--safe-area-inset-bottom) - var(--tabbar_height));
+  min-height: calc(100vh - var(--safe-area-inset-bottom) - var(--tabbar_height));
 `
 
 const Panel: FC<PanelProps> = ({ children, className, id }) => {

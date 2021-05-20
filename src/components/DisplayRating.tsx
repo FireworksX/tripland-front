@@ -4,6 +4,7 @@ import { IconStar } from '~/components/icons/IconStar'
 
 interface DisplayRatingProps {
   value: number
+  className?: string
 }
 
 const Root = styled.div`
@@ -14,9 +15,9 @@ const Root = styled.div`
   font-weight: 700;
 `
 
-const DisplayRating: FC<DisplayRatingProps> = ({ value }) => {
+const DisplayRating: FC<DisplayRatingProps> = ({ value, className }) => {
   return (
-    <Root>
+    <Root className={className}>
       <IconStar size={10} />
       {value}
     </Root>

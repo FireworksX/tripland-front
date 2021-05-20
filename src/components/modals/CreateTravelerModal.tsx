@@ -6,6 +6,8 @@ import Separator from '~/components/Separator'
 import { buildFont } from '~/utils/styledBuilder'
 import Image, { ImageProps } from '~/components/Image'
 import cards from '~static/images/cards.png'
+import Input from '~/components/Input'
+import Touchable from '~/components/Touchable'
 
 interface CreateTravelerModalProps {
   id: string
@@ -39,6 +41,14 @@ const Form = styled.form`
   grid-gap: 10px;
 `
 
+const Submit = styled(Touchable)`
+  text-align: center;
+  border-radius: ${({ theme }) => theme.radius.main};
+  background: ${({ theme }) => theme.colors.accent};
+  padding: 15px;
+  ${({ theme }) => buildFont({ size: '14-20', weight: 'semi', color: theme.colors.textColorWhite })}
+`
+
 const CreateTravelerModal: FC<CreateTravelerModalProps> = ({ id, className }) => {
   return (
     <ModalPage id={id} className={className}>
@@ -55,7 +65,11 @@ const CreateTravelerModal: FC<CreateTravelerModalProps> = ({ id, className }) =>
       </Info>
       <Separator />
       <Div>
-        <Form></Form>
+        <Form>
+          <Input placeholder='Имя' />
+          <Input placeholder='Фамилия' />
+          <Submit>Сохранить</Submit>
+        </Form>
       </Div>
     </ModalPage>
   )

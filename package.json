@@ -52,6 +52,7 @@
     "router5-plugin-logger": "^8.0.1",
     "sass": "^1.26.11",
     "styled-components": "^4.3.2",
+    "swiper": "^6.6.2",
     "yarn": "^1.22.10"
   },
   "devDependencies": {

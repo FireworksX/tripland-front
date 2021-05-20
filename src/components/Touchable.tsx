@@ -1,9 +1,8 @@
-import React, { FC, SyntheticEvent } from 'react'
+import React, { ButtonHTMLAttributes, FC } from 'react'
 import styled from 'styled-components'
 
-export interface TouchableProps {
+export interface TouchableProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
-  onClick?: (e: SyntheticEvent) => any
 }
 
 const Root = styled.button`
@@ -21,9 +20,9 @@ const Root = styled.button`
   }
 `
 
-const Touchable: FC<TouchableProps> = ({ className, children, onClick }) => {
+const Touchable: FC<TouchableProps> = ({ className, children, ...rest }) => {
   return (
-    <Root className={className} onClick={onClick}>
+    <Root className={className} {...rest}>
       {children}
     </Root>
   )
