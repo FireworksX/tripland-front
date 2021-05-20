@@ -25,6 +25,17 @@
       "~static/*": ["public/static/*"]
     }
   },
-  "exclude": ["node_modules", "dist", ".next", "out", "next.config.js", ".babelrc", "bundles", "coverage", "test/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    "out",
+    "next.config.js",
+    ".babelrc",
+    "bundles",
+    "coverage",
+    "test/*",
+    "blueprint-templates"
+  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

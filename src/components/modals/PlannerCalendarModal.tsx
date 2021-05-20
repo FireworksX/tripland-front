@@ -12,7 +12,7 @@ interface PlannerCalendarModalProps {
 
 const Root = styled.div``
 
-const PlannerCalendarModal: FC<PlannerCalendarModalProps> = ({ className, id, onChange }) => {
+const PlannerCalendarModal: FC<PlannerCalendarModalProps> = ({ className, id }) => {
   const { plannerStore } = useStore()
 
   const dates = useMemo(
