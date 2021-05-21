@@ -6,6 +6,7 @@ import { useStore } from '~/hooks/useStore'
 import Touchable from '~/components/Touchable'
 import { IconPlus } from '~/components/icons/IconPlus'
 import { IconClose } from '~/components/icons/IconClose'
+import DateFormatter from '~/components/DateFormatter'
 
 interface PlannerBuilder {
   onSubmit: () => any
@@ -134,7 +135,10 @@ const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
           </FilterButtonIcon>
           {dateFrom ? (
             <FilterResult>
-              Туда <span>{dateFrom}</span>
+              Туда{' '}
+              <span>
+                <DateFormatter value={dateFrom} format='DD MMMM' />
+              </span>
             </FilterResult>
           ) : (
             'Туда'
@@ -146,7 +150,10 @@ const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
           </FilterButtonIcon>
           {dateTo ? (
             <FilterResult>
-              Обратно <span>{dateTo}</span>
+              Обратно{' '}
+              <span>
+                <DateFormatter value={dateTo} format='DD MMMM' />
+              </span>
             </FilterResult>
           ) : (
             'Обратно'

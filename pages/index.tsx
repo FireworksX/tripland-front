@@ -21,6 +21,7 @@ import DetailView from '~/views/DetailView'
 const TabbarStyled = styled(Tabbar)<TabbarProps & { isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: 0.2s;
+  border-top: 1px solid ${({theme}) => theme.colors.border};
 `
 
 const Index: NextPage = () => {

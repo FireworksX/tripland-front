@@ -23,7 +23,7 @@ const PlannerCalendarModal: FC<PlannerCalendarModalProps> = ({ className, id }) 
     [plannerStore]
   )
 
-  const minDate = useMemo(() => (dates.length === 1 ? new Date(plannerStore.buildRoute.dateFrom || '') : undefined), [
+  const minDate = useMemo(() => (dates.length === 1 ? new Date(plannerStore.buildRoute.dateFrom || '') : new Date()), [
     plannerStore.buildRoute
   ])
 

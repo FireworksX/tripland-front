@@ -30,16 +30,17 @@ const Root = styled.div`
   box-shadow: ${({ theme }) => theme.shadow.main};
   border-radius: ${({ theme }) => theme.radius.main};
   padding: 5px;
-  display: grid;
-  grid-template-columns: 80px 1fr;
-  grid-gap: 12px;
+  display: flex;
   position: relative;
+  align-items: center;
 `
 
 const Cover = styled(Image)<ImageProps>`
   width: 80px;
   max-width: 80px;
+  align-self: stretch;
   object-fit: cover;
+  margin-right: 10px;
   border-radius: ${({ theme }) => theme.radius.main};
 `
 
@@ -88,7 +89,7 @@ const WideCardGeneric: FC<WideCardGenericProps> = ({
   return (
     <Touchable onClick={onClick}>
       <Root className={className}>
-        <Cover src={cover} />
+        {cover && <Cover src={cover} />}
         <Content>
           <Name>{name}</Name>
           {children}

@@ -73,21 +73,35 @@ const FavoritesPanel: FC<FavoritesPanelProps> = ({ id, className }) => {
           <FilterButton isActive={mode === 'places'} onClick={() => onChange('places')}>
             Места
           </FilterButton>
+          <FilterButton isActive={mode === 'excursions'} onClick={() => onChange('excursions')}>
+            Экскурсии
+          </FilterButton>
+          <FilterButton isActive={mode === 'restaurants'} onClick={() => onChange('restaurants')}>
+            Рестораны
+          </FilterButton>
         </Filters>
       </HorizontalScroll>
-      {mode !== 'routes' && (
+      {mode !== 'routes' && mode !== 'places' && (
         <Placeholder icon={<Image src={lampPlaceholder} />}>
           Вы еще не сохраняли маршруты или места. Сохраняйте их, чтобы не потерять
         </Placeholder>
       )}
       {mode === 'routes' && (
         <Div>
-          <ContentRow>
-            <FavoritesRouteCard name='2 дня в Москве' />
-          </ContentRow>
-          <ContentRow>
-            <FavoritesPlaceCard name='Парк Коломенское' />
-          </ContentRow>
+          {new Array(10).fill(null).map(_ => (
+            <ContentRow>
+              <FavoritesRouteCard name='2 дня в Москве' />
+            </ContentRow>
+          ))}
+        </Div>
+      )}
+      {mode === 'places' && (
+        <Div>
+          {new Array(10).fill(null).map(_ => (
+            <ContentRow>
+              <FavoritesPlaceCard name='Парк Коломенское' />
+            </ContentRow>
+          ))}
         </Div>
       )}
     </Root>

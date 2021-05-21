@@ -17,7 +17,7 @@ declare module 'router5' {
   }
 }
 
-const favoritesModesRegexp = `(places|routes)`
+const favoritesModesRegexp = `(places|routes|excursions|restaurants)`
 
 export const routes = (): Route[] => [
   {

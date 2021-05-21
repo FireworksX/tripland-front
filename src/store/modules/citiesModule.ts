@@ -8,12 +8,8 @@ const cities = [
   },
   {
     cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
-  },
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
+      'https://cdn23.img.ria.ru/images/07e4/05/0d/1571382383_0:95:3072:1823_1920x0_80_0_0_c63e7c9d83d25d0d40b14bf77b358a48.jpg',
+    name: 'Москва'
   },
   {
     cover:
@@ -21,50 +17,10 @@ const cities = [
     name: 'Екатеринбург'
   },
   {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
-  },
-  {
     cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
+      'https://34travel.me/media/posts/5d6fdd38d1f50-kazan-pan940.jpg',
+    name: 'Казань'
   },
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
-  },
-  {
-    cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
-  },
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
-  },
-  {
-    cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
-  },
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
-  },
-  {
-    cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
-  },
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Санкт-Петербург'
-  },
-  {
-    cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Екатеринбург'
-  }
 ]
 
 interface citiesStoreProps {

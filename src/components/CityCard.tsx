@@ -1,12 +1,15 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image from '~/components/Image'
-import { IconPlacemark, IconPlacemarkProps } from '~/components/icons/IconPlacemark'
+import { IconPlacemark } from '~/components/icons/IconPlacemark'
+import Touchable, { TouchableProps } from '~/components/Touchable'
 
-interface CityCardProps {
+interface CityCardProps extends TouchableProps {
   cover: string
   name: string
 }
+
+const Root = styled(Touchable)``
 
 const Cover = styled(Image)`
   margin-bottom: 10px;
@@ -27,9 +30,9 @@ const Name = styled.div`
   font-size: 12px;
 `
 
-const CityCard: FC<CityCardProps> = ({ cover, name }) => {
+const CityCard: FC<CityCardProps> = ({ cover, name, onClick }) => {
   return (
-    <div>
+    <Root onClick={onClick}>
       <Cover src={cover} />
       <Name>
         <Icon>
@@ -37,7 +40,7 @@ const CityCard: FC<CityCardProps> = ({ cover, name }) => {
         </Icon>
         {name}
       </Name>
-    </div>
+    </Root>
   )
 }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/server/index.js",
+    "start": "cross-env NODE_ENV=production pm2 start dist/server/index.js --name tripland-front",
     "test": "jest --coverage",
     "cts": "tsc --project . --noEmit",
     "cc": "create-component",

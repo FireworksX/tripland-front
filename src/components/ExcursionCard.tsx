@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
-import Touchable from '~/components/Touchable'
+import Touchable, { TouchableProps } from '~/components/Touchable'
 
-interface ExcursionCardProps {
+interface ExcursionCardProps extends TouchableProps {
   className?: string
   name: string
   cover: string
@@ -36,9 +36,9 @@ const Description = styled.div`
   }
 `
 
-const ExcursionCard: FC<ExcursionCardProps> = ({ cover, name, price, className }) => {
+const ExcursionCard: FC<ExcursionCardProps> = ({ cover, name, price, className, onClick }) => {
   return (
-    <Root className={className}>
+    <Root className={className} onClick={onClick}>
       <Cover src={cover} />
       <Title>{name}</Title>
       <Description>

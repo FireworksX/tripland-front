@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
 import DisplayRating from '~/components/DisplayRating'
+import Touchable, { TouchableProps } from '~/components/Touchable'
 
-interface DirectionCardProps {
+interface DirectionCardProps extends TouchableProps {
   name: string
   cover?: string
   region?: string
@@ -11,7 +12,7 @@ interface DirectionCardProps {
   rating?: number
 }
 
-const Root = styled.div`
+const Root = styled(Touchable)`
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -70,9 +71,9 @@ const InformationCell = styled.div`
   }
 `
 
-const DirectionCard: FC<DirectionCardProps> = ({ cover, name, duration, region, rating }) => {
+const DirectionCard: FC<DirectionCardProps> = ({ cover, name, duration, region, rating, onClick }) => {
   return (
-    <Root>
+    <Root onClick={onClick}>
       <Cover src={cover} />
       <Information>
         <InformationName>

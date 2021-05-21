@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGeneric'
-import DisplayRating from '~/components/DisplayRating'
 import { IconClock } from '~/components/icons/IconClock'
 import { IconPlacemark } from '~/components/icons/IconPlacemark'
 
@@ -28,7 +27,12 @@ const DetailIcon = styled.div`
 
 const FavoritesRouteCard: FC<FavoritesRouteCardProps> = ({ name, className, onClickOptions }) => {
   return (
-    <Root name={name} className={className} onClickOptions={onClickOptions}>
+    <Root
+      name={name}
+      className={className}
+      cover='https://phototass1.cdnvideo.ru/width/1020_b9261fa1/tass/m2/en/uploads/i/20200316/1257687.jpg'
+      onClickOptions={onClickOptions}
+    >
       <DetailRow>
         <DetailIcon>
           <IconPlacemark size={18} />

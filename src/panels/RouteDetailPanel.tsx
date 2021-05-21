@@ -256,12 +256,14 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
           <IconCaretLeft size={24} />
         </HeaderButton>
         <div>
-          <h1>test1</h1>
+          <h1>Москва</h1>
           <span>24 апреля — 25 апреля</span>
         </div>
-        <HeaderButton>
-          <IconFunnelFill size={24} />
-        </HeaderButton>
+        {false && (
+          <HeaderButton>
+            <IconFunnelFill size={24} />
+          </HeaderButton>
+        )}
       </Header>
       <Div>
         <Map />

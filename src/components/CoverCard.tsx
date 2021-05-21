@@ -1,14 +1,15 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
+import Touchable, { TouchableProps } from '~/components/Touchable'
 
-interface CoverCardProps {
+interface CoverCardProps extends TouchableProps {
   name: string
   cover: string
   badge?: string
 }
 
-const Root = styled.div`
+const Root = styled(Touchable)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,9 +50,9 @@ const Badge = styled.span`
   position: relative;
 `
 
-const CoverCard: FC<CoverCardProps> = ({ cover, name, badge }) => {
+const CoverCard: FC<CoverCardProps> = ({ cover, name, badge, onClick }) => {
   return (
-    <Root>
+    <Root onClick={onClick}>
       <Cover src={cover} />
       <Name>{name}</Name>
       <Badge>{badge}</Badge>

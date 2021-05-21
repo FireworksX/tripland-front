@@ -1,33 +1,24 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
-import { HorizontalScroll } from '@vkontakte/vkui'
 import ExcursionCard from '~/components/ExcursionCard'
 import { excursionCardModelType } from '~/store/models/excursionCardModel'
+import HorizontalCards from '~/components/HorizontalCards'
+import { useRouter } from '~/hooks/useRouter'
+import { buildRouteName } from '~/utils/buildRouteName'
+import { ROUTE_NAMES } from '~router/constants'
 
 interface TopCitiesListProps {
   list: excursionCardModelType[]
 }
 
-const Root = styled.div``
-
-const Wrapper = styled.div<{ length: number }>`
-  display: grid;
-  grid-template-columns: repeat(${({ length }) => length}, 150px);
-  grid-gap: 10px;
-  padding: 0 ${({ theme }) => theme.paddings.main};
-`
-
 const CityExcursionsList: FC<TopCitiesListProps> = ({ list }) => {
+  const { push } = useRouter()
+
   return (
-    <Root>
-      <HorizontalScroll>
-        <Wrapper length={list.length}>
-          {list.map(card => (
-            <ExcursionCard {...card} />
-          ))}
-        </Wrapper>
-      </HorizontalScroll>
-    </Root>
+    <HorizontalCards width={150}>
+      {list.map(card => (
+        <ExcursionCard {...card} onClick={() => push(buildRouteName(ROUTE_NAMES.detail))} />
+      ))}
+    </HorizontalCards>
   )
 }
 

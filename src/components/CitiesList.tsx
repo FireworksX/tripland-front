@@ -1,33 +1,22 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
 import CityCard from '~/components/CityCard'
-import { HorizontalScroll } from '@vkontakte/vkui'
 import { cityModelType } from '~/store/models/cityModel'
+import HorizontalCards from '~/components/HorizontalCards'
+import { useStore } from '~/hooks/useStore'
 
 interface CitiesListProps {
   list: cityModelType[]
 }
 
-const Root = styled.div``
-
-const Wrapper = styled.div<{ length: number }>`
-  display: grid;
-  grid-template-columns: repeat(${({ length }) => length}, 140px);
-  grid-gap: 10px;
-  padding: 0 ${({ theme }) => theme.paddings.main};
-`
-
 const CitiesList: FC<CitiesListProps> = ({ list }) => {
+  const { plannerStore } = useStore()
+
   return (
-    <Root>
-      <HorizontalScroll>
-        <Wrapper length={list.length}>
-          {list.map(({ name, cover }) => (
-            <CityCard cover={cover} name={name} />
-          ))}
-        </Wrapper>
-      </HorizontalScroll>
-    </Root>
+    <HorizontalCards width={140}>
+      {list.map(city => (
+        <CityCard cover={city.cover} name={city.name} onClick={() => plannerStore.selectCity(city)} />
+      ))}
+    </HorizontalCards>
   )
 }
 

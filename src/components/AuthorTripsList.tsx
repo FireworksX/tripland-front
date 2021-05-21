@@ -1,36 +1,31 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
-import { HorizontalScroll } from '@vkontakte/vkui'
 import CoverCard from '~/components/CoverCard'
 import { authorTripModelType } from '~/store/models/authorTripModel'
+import HorizontalCards from '~/components/HorizontalCards'
+import { useRouter } from '~/hooks/useRouter'
+import { buildRouteName } from '~/utils/buildRouteName'
+import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 
 interface AuthorTripsListListProps {
   list: authorTripModelType[]
 }
 
-const Root = styled.div`
-  padding: 20px 0;
-  background: ${({ theme }) => theme.colors.backgroundWhite};
-`
-
-const Wrapper = styled.div<{ length: number }>`
-  display: grid;
-  grid-template-columns: repeat(${({ length }) => length}, 200px);
-  grid-gap: 10px;
-  padding: 0 ${({ theme }) => theme.paddings.main};
-`
-
 const AuthorTripsList: FC<AuthorTripsListListProps> = ({ list }) => {
+  const { push } = useRouter()
+
   return (
-    <Root>
-      <HorizontalScroll>
-        <Wrapper length={list.length}>
-          {list.map(card => (
-            <CoverCard {...card} />
-          ))}
-        </Wrapper>
-      </HorizontalScroll>
-    </Root>
+    <HorizontalCards width={200}>
+      {list.map(card => (
+        <CoverCard
+          {...card}
+          onClick={() =>
+            push(buildRouteName(ROUTE_NAMES.routeDetailRoot), {
+              [ROUTE_PARAMS.routeSlug]: 'test'
+            })
+          }
+        />
+      ))}
+    </HorizontalCards>
   )
 }
 

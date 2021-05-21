@@ -1,12 +1,11 @@
-import React, { ButtonHTMLAttributes, FC } from 'react'
+import React, { ButtonHTMLAttributes, FC, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
-export interface TouchableProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface TouchableProps extends HTMLAttributes<HTMLDivElement> {
   className?: string
 }
 
-const Root = styled.button`
-  display: block;
+const Root = styled.div`
   width: 100%;
   transition: 0.15s;
   background: transparent;
@@ -22,7 +21,7 @@ const Root = styled.button`
 
 const Touchable: FC<TouchableProps> = ({ className, children, ...rest }) => {
   return (
-    <Root className={className} {...rest}>
+    <Root role='button' className={className} {...rest}>
       {children}
     </Root>
   )
