@@ -21,7 +21,7 @@
   "dependencies": {
     "@mozaikjs/core": "^0.5.0",
     "@mozaikjs/logger": "^0.0.8",
-    "@mozaikjs/react": "^0.1.0",
+    "@mozaikjs/react": "^0.1.1",
     "@next/bundle-analyzer": "^9.4.4",
     "@types/react-calendar": "^3.1.4",
     "@types/react-dom": "^17.0.5",
