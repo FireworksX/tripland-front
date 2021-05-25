@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { View } from '@vkontakte/vkui'
 import { PANEL_NAMES } from '~router/constants'
 import NotificationsPanel from '~/panels/NotificationsPanel'
+import View from "~/components/View";
 
 interface NotificationsViewProps {
   id: string

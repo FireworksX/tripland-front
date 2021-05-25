@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { ActionSheet, ActionSheetItem, ModalRoot, View } from '@vkontakte/vkui'
+import { ActionSheet, ActionSheetItem } from '@vkontakte/vkui'
 import { PANEL_NAMES } from '~router/constants'
 import RouteDetailPanel from '~/panels/RouteDetailPanel'
 import {
@@ -9,6 +9,7 @@ import {
   Icon28DeleteOutline,
   Icon28ShareOutline
 } from '@vkontakte/icons'
+import View from '~/components/View'
 
 interface RouteView {
   id: string

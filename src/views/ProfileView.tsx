@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
-import { ModalRoot, View } from '@vkontakte/vkui'
+import { ModalRoot } from '@vkontakte/vkui'
 import ProfilePanel from '~/panels/ProfilePanel'
 import { PANEL_NAMES } from '~router/constants'
 import CreateTravelerModal from '~/components/modals/CreateTravelerModal'
 import { useStore } from '~/hooks/useStore'
+import View from "~/components/View";
 
 interface ProfileView {
   id: string

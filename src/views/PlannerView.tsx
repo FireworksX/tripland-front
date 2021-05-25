@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ModalRoot, View } from '@vkontakte/vkui'
+import { ModalRoot } from '@vkontakte/vkui'
 import { PlannerPanel } from '~/panels/PlannerPanel.tsx'
 import { PANEL_NAMES } from '~router/constants'
 import { useStore } from '~/hooks/useStore'
@@ -9,6 +9,7 @@ import PlannerCalendarModal from '~/components/modals/PlannerCalendarModal'
 import PlannerSelectGenresPanel from '~/panels/PlannerSelectGenresPanel'
 import PlannerSelectPeoplesPanel from '~/panels/PlannerSelectPeoplesPanel'
 import { useRouteViews } from '~/hooks/useRouteViews'
+import View from '~/components/View'
 
 interface ProfileView {
   id: string

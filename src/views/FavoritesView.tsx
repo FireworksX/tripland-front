@@ -1,15 +1,7 @@
-import React, { FC, useState } from 'react'
-import { ActionSheet, ActionSheetItem, ModalRoot, View } from '@vkontakte/vkui'
+import React, { FC } from 'react'
 import { PANEL_NAMES } from '~router/constants'
-import RouteDetailPanel from '~/panels/RouteDetailPanel'
-import {
-  Icon28ErrorCircleOutline,
-  Icon28LikeOutline,
-  Icon28MoneySendOutline,
-  Icon28DeleteOutline,
-  Icon28ShareOutline
-} from '@vkontakte/icons'
 import FavoritesPanel from '~/panels/FavoritesPanel'
+import View from '~/components/View'
 
 interface FavoritesView {
   id: string

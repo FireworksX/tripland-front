@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-interface PanelProps {
+export interface PanelProps {
   id: string
   className?: string
 }
