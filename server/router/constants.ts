@@ -1,6 +1,7 @@
 import { createConstants } from '../../src/utils/createConstants'
 
 const ROUTE_NAMES = createConstants(
+  'rootRoute',
   'plannerRoot',
   'plannerSelectGenres',
   'plannerSelectPeople',

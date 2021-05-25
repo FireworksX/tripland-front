@@ -21,7 +21,7 @@ const Avatar = styled.div`
 const AvatarSource = styled(Image)<ImageProps>``
 
 const Name = styled.div`
-  ${({ theme }) => buildFont({ size: '12-16', weight: 'bold', color: theme.colors.textColorWhite })}
+  ${({ theme }) => buildFont({ size: '14-20', weight: 'bold', color: theme.colors.textColorWhite })}
   margin-bottom: 5px;
   text-transform: uppercase;
 `

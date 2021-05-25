@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
 import { NextPage } from 'next'
 import styled from 'styled-components'
-import { Icon28Notification, Icon28User } from '@vkontakte/icons'
-import { Epic, Tabbar, TabbarItem } from '@vkontakte/vkui'
+import { Icon28Notification } from '@vkontakte/icons'
 import { ROUTE_NAMES, STORY_NAMES, VIEW_NAMES } from '~router/constants'
 import PlannerView from '~/views/PlannerView'
 import { useStore } from '~/hooks/useStore'
 import { IconPlusCircleFill } from '~/components/icons/IconPlusCircleFill'
-import { TabbarProps } from '@vkontakte/vkui/dist/components/Tabbar/Tabbar'
 import RouteView from '~/views/RouteView'
 import { useRouteViews } from '~/hooks/useRouteViews'
 import FavoritesView from '~/views/FavoritesView'
@@ -17,11 +15,15 @@ import { Icon28Like } from '~/components/icons/Icon28Like'
 import NotificationsView from '~/views/NotificationsView'
 import ProfileView from '~/views/ProfileView'
 import DetailView from '~/views/DetailView'
+import Epic from '~/components/Epic'
+import TabbarItem from '~/components/TabbarItem'
+import Tabbar from '~/components/Tabbar'
+import { buildRouteName } from '~/utils/buildRouteName'
 
-const TabbarStyled = styled(Tabbar)<TabbarProps & { isVisible: boolean }>`
+const TabbarStyled = styled(Tabbar)<{ isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: 0.2s;
-  border-top: 1px solid ${({theme}) => theme.colors.border};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `
 
 const Index: NextPage = () => {
@@ -31,7 +33,7 @@ const Index: NextPage = () => {
 
   const isVisibleTabbar = store.uiStore.visibleTabbar
 
-  const onSelectStory = (name: ValueOf<typeof ROUTE_NAMES>) => router.push(name)
+  const onSelectStory = (name: ValueOf<typeof ROUTE_NAMES>) => router.push(buildRouteName(name))
 
   useEffect(() => {
     store.citiesStore.loadList()
@@ -44,32 +46,31 @@ const Index: NextPage = () => {
         <TabbarStyled isVisible={isVisibleTabbar}>
           <TabbarItem
             selected={activeStory === STORY_NAMES.planner}
-            text='Планнер'
+            icon={<IconPlusCircleFill />}
             onClick={() => onSelectStory(ROUTE_NAMES.plannerRoot)}
           >
-            <IconPlusCircleFill />
+            Планнер
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.favorites}
-            text='Избранное'
+            icon={<Icon28Like />}
             onClick={() => onSelectStory(ROUTE_NAMES.favoritesRoot)}
           >
-            <Icon28Like />
+            Избранное
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.notifications}
-            text='Уведомления'
-            label={3}
+            icon={<Icon28Notification />}
             onClick={() => onSelectStory(ROUTE_NAMES.notifications)}
           >
-            <Icon28Notification />
+            Уведомления
           </TabbarItem>
           <TabbarItem
             selected={activeStory === STORY_NAMES.profile}
-            text='Профиль'
+            icon={<Icon28Notification />}
             onClick={() => onSelectStory(ROUTE_NAMES.profile)}
           >
-            <Icon28User />
+            Профиль
           </TabbarItem>
         </TabbarStyled>
       }

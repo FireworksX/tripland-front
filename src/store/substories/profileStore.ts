@@ -23,5 +23,5 @@ export const profileStoreModel = types
   })
 
 export const profileStoreInstance = profileStoreModel.create({
-  activeModal: 'createTraveler'
+  activeModal: null
 })
