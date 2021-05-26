@@ -7,7 +7,6 @@ import { Div } from '~/components/Div'
 import Separator from '~/components/Separator'
 import { IconPlacemark } from '~/components/icons/IconPlacemark'
 import Touchable from '~/components/Touchable'
-import { FixedLayout, SimpleCell } from '@vkontakte/vkui'
 import { Icon28CheckShieldOutline, Icon28BlockOutline } from '@vkontakte/icons'
 import Review from '~/components/Review'
 import HorizontalCards from '~/components/HorizontalCards'
@@ -17,6 +16,10 @@ import Image from '~/components/Image'
 import { IconCaretLeft } from '~/components/icons/IconCaretLeft'
 import { Icon28Like } from '~/components/icons/Icon28Like'
 import { useRouter } from '~/hooks/useRouter'
+import Cell from '~/components/Cell'
+import { IconClock } from '~/components/icons/IconClock'
+import { IconTranslate } from '~/components/icons/IconTranslate'
+import { IconPhone } from '~/components/icons/IconPhone'
 
 interface DetailPanelProps {
   id: string
@@ -108,29 +111,9 @@ const Description = styled.p`
   ${buildFont({ size: '14-20' })}
 `
 
-const Cells = styled.div`
-  padding: 15px 0;
-`
-
-const Cell = styled(SimpleCell)`
-  min-height: 40px;
-  .Icon {
-    color: ${({ theme }) => theme.colors.accentBlue};
-    margin-right: 7px;
-  }
-  .vkuiSimpleCell__children {
-    ${buildFont({ size: '14-20' })}
-  }
-  .vkuiSimpleCell__indicator {
-    padding: 7px 0;
-    ${({ theme }) => buildFont({ size: '14-20', color: theme.colors.secondary })}
-  }
-  .vkuiSimpleCell__after {
-    color: ${({ theme }) => theme.colors.secondary};
-  }
-  .vkuiSimpleCell__main {
-    padding: 7px 0;
-  }
+const Cells = styled(Div)`
+  padding-top: 15px;
+  padding-bottom: 15px;
 `
 
 const RatingGroup = styled.div`
@@ -145,6 +128,7 @@ const RatingLabel = styled.div`
 
 const RatingValues = styled.div`
   display: flex;
+  margin-bottom: 10px;
 `
 
 const RatingValue = styled.div`
@@ -152,22 +136,23 @@ const RatingValue = styled.div`
   font-weight: bold;
 `
 
+const RatingButton = styled(Touchable)`
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.colors.border};
+  border-radius: ${({ theme }) => theme.radius.main};
+  ${({ theme }) => buildFont({ size: '14-20', color: theme.colors.accentBlue, weight: 'semi' })}
+`
+
 const ReviewsGroup = styled(Div)`
   padding-top: 15px;
   padding-bottom: 15px;
 `
 
-const MoreReviews = styled(SimpleCell)`
-  padding: 0;
-  color: ${({ theme }) => theme.colors.accentBlue};
-
-  .vkuiSimpleCell__children {
-    ${buildFont({ size: '14-20', weight: 'semi' })}
-  }
-
-  .vkuiSimpleCell__after {
-    color: ${({ theme }) => theme.colors.accentBlue};
-  }
+const OtherReviews = styled.div`
+  ${({ theme }) => buildFont({ size: '14-20', weight: 'semi', color: theme.colors.accentBlue })}
 `
 
 const OtherCards = styled.div`
@@ -194,7 +179,7 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
   const { back } = useRouter()
 
   return (
-    <Root id={id} className={className}>
+    <Root id={id} className={className} withPadding={false}>
       <Header>
         <HeaderButton onClick={back}>
           <IconCaretLeft size={24} />
@@ -243,28 +228,34 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
         <Cell expandable indicator={5} before={<Icon28BlockOutline />}>
           Не включено
         </Cell>
-        <Cell expandable indicator='Русский'>
+        <Cell expandable indicator='Русский' before={<IconTranslate />}>
           Языки
         </Cell>
-        <Cell expandable indicator='График'>
+        <Cell expandable indicator='График' before={<IconClock />}>
           Часы работы
         </Cell>
-        <Cell indicator='+7 (495) 926-61-11'>Контакты</Cell>
-        <Separator padding />
+        <Cell indicator='+7 (495) 926-61-11' before={<IconPhone />}>
+          Контакты
+        </Cell>
       </Cells>
+      <Separator padding />
+
       <Div>
         <RatingGroup>
           <RatingLabel>Рейтинг</RatingLabel>
           <RatingValues>
             <RatingValue>4.9</RatingValue>
           </RatingValues>
+          <RatingButton>Написать отзыв</RatingButton>
         </RatingGroup>
         <Separator />
       </Div>
       <ReviewsGroup>
         <GroupHeader>Отзывы</GroupHeader>
         <Review />
-        <MoreReviews expandable>Посмотреть 98 отзывов</MoreReviews>
+        <Cell expandable>
+          <OtherReviews>Посмотреть 98 отзывов</OtherReviews>
+        </Cell>
         <Separator />
       </ReviewsGroup>
       <OtherCards>

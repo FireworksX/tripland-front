@@ -6,7 +6,8 @@ import { Div } from '~/components/Div'
 import bellPlaceholder from '~static/images/bellPlaceholder.png'
 import Image from '~/components/Image'
 import { Placeholder } from '@vkontakte/vkui'
-import NotificationCard from "~/components/NotificationCard";
+import NotificationCard from '~/components/NotificationCard'
+import { useStore } from '~/hooks/useStore'
 
 interface NotificationsPanelProps {
   id: string
@@ -23,16 +24,24 @@ const ContentRow = styled.div`
 `
 
 const NotificationsPanel: FC<NotificationsPanelProps> = ({ id, className }) => {
+  const {
+    notificationsStore: { list }
+  } = useStore()
+
   return (
     <Root id={id} className={className}>
       <PanelHeader>Уведомления</PanelHeader>
-      <Placeholder icon={<Image src={bellPlaceholder} />}>
-        Вы еще не получали уведомлений. Здесь будет храниться информация о ближайших поездках
-      </Placeholder>
+      {list.length === 0 && (
+        <Placeholder icon={<Image src={bellPlaceholder} />}>
+          Вы еще не получали уведомлений. Здесь будет храниться информация о ближайших поездках
+        </Placeholder>
+      )}
       <Div>
-        <ContentRow>
-          <NotificationCard />
-        </ContentRow>
+        {list.map(card => (
+          <ContentRow>
+            <NotificationCard title={card.title} text={card.text} checked={card.checked} />
+          </ContentRow>
+        ))}
       </Div>
     </Root>
   )

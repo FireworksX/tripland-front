@@ -5,13 +5,14 @@ import { Div } from '~/components/Div'
 import Touchable from '~/components/Touchable'
 import { IconCaretLeft } from '~/components/icons/IconCaretLeft'
 import RouteIterateCard from '~/components/RouteIterateCard'
-import { IconCar } from '~/components/icons/IconCar'
-import { IconCaretDown } from '~/components/icons/IconCaretDown'
 import RouteTimeLine from '~/components/RouteTimeLine'
 import { IconFunnelFill } from '~/components/icons/IconFunnelFill'
 import { useRouter } from '~/hooks/useRouter'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { ROUTE_NAMES } from '~router/constants'
+import { buildFont } from '~/utils/styledBuilder'
+import Map, { MapProps } from '~/components/Map'
+import RouteTransport from '~/components/RouteTransport'
 
 interface RouteDetailPanelProps {
   id: string
@@ -48,10 +49,10 @@ const HeaderButton = styled(Touchable)`
   color: ${({ theme }) => theme.colors.accent};
 `
 
-const Map = styled.div`
-  height: 145px;
-  background: #eee;
+const MapWrapper = styled(Map)<MapProps>`
   margin-bottom: 30px;
+  border-radius: ${({ theme }) => theme.radius.main};
+  overflow: hidden;
 `
 
 const Day = styled.div`
@@ -70,36 +71,6 @@ const DayHeader = styled.div`
   margin-bottom: 20px;
 `
 
-const DayDelimiter = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 20px 0;
-  position: relative;
-  font-size: 12px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.gray};
-
-  &:after,
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 27px;
-    width: 1px;
-    height: 18px;
-    background: ${({ theme }) => theme.colors.gray};
-  }
-
-  &:after {
-    bottom: 0;
-    top: initial;
-  }
-`
-
-const DelimiterIcon = styled.div`
-  margin-right: 5px;
-`
-
 const Footer = styled(Div)`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -108,11 +79,15 @@ const Footer = styled(Div)`
 `
 
 const FooterButton = styled(Touchable)<{ isWide?: boolean; isAccent?: boolean }>`
+  ${({ theme, isAccent }) =>
+    buildFont({
+      size: '12-16',
+      weight: 'medium',
+      color: isAccent ? theme.colors.textColorWhite : theme.colors.secondary
+    })}
   grid-column: ${({ isWide }) => isWide && '1 / 3'};
   background: ${({ isAccent, theme }) => (isAccent ? theme.colors.accent : theme.colors.border)};
   text-align: center;
-  font-weight: 500;
-  color: ${({ isAccent, theme }) => (isAccent ? theme.colors.textColorWhite : theme.colors.secondary)};
   padding: 20px 0;
   border-radius: ${({ theme }) => theme.radius.main};
 `
@@ -230,21 +205,19 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
       return (
         <RouteIterateCard
           name={item.name}
+          cover='https://phototass1.cdnvideo.ru/width/1020_b9261fa1/tass/m2/en/uploads/i/20200316/1257687.jpg'
           onClickOptions={onClickOptions}
           onClick={() => router.push(buildRouteName(ROUTE_NAMES.detail))}
         />
       )
     } else if (item.type === 'delimiter') {
       return (
-        <DayDelimiter>
-          <DelimiterIcon>
-            <IconCaretDown size={12} />
-          </DelimiterIcon>
-          <DelimiterIcon>
-            <IconCar size={20} />
-          </DelimiterIcon>
-          {item.value}
-        </DayDelimiter>
+        <RouteTransport
+          list={[
+            { type: 'auto', minutes: 13 },
+            { type: 'hiking', minutes: 20 }
+          ]}
+        />
       )
     }
   }
@@ -266,7 +239,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
         )}
       </Header>
       <Div>
-        <Map />
+        <MapWrapper height={145} disableDrag />
         {days.map(day => (
           <Day>
             <RouteTimeLine value={day.value} />

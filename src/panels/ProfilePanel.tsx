@@ -10,6 +10,8 @@ import HorizontalCards from '~/components/HorizontalCards.tsx'
 import Separator from '~/components/Separator'
 import SeeMoreCard from '~/components/SeeMoreCard'
 import { useStore } from '~/hooks/useStore'
+import { IconApple } from '~/components/icons/IconApple'
+import { IconVk } from '~/components/icons/IconVk'
 
 interface ProfilePanelProps {
   id: string
@@ -41,10 +43,12 @@ const fontColorsByMode = {
 
 const Button = styled(Touchable)<{ mode: 'apple' | 'vk' | 'other' | 'lib' | 'write' }>`
   padding: 10px 0;
-  text-align: center;
   background: ${({ mode }) => colorsByMode[mode]};
   border-radius: ${({ theme }) => theme.radius.main};
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${({ mode }) =>
     buildFont({
       size: '14-20',
@@ -55,6 +59,13 @@ const Button = styled(Touchable)<{ mode: 'apple' | 'vk' | 'other' | 'lib' | 'wri
   &:last-child {
     margin-bottom: 0;
   }
+`
+
+const EnterButtonIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
 `
 
 const Title = styled(Div)`
@@ -98,8 +109,18 @@ const ProfilePanel: FC<ProfilePanelProps> = ({ id, className }) => {
     <Root id={id} className={className}>
       <PanelHeader>Профиль</PanelHeader>
       <Enters>
-        <Button mode='apple'>Продолжить с Apple</Button>
-        <Button mode='vk'>Вконтакте</Button>
+        <Button mode='apple'>
+          <EnterButtonIcon>
+            <IconApple size={15} />
+          </EnterButtonIcon>
+          Продолжить с Apple
+        </Button>
+        <Button mode='vk'>
+          <EnterButtonIcon>
+            <IconVk size={15} />
+          </EnterButtonIcon>
+          Вконтакте
+        </Button>
         <Button mode='other'>Другие способы</Button>
       </Enters>
       <Separator padding />

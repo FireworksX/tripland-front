@@ -2,11 +2,13 @@ import React, { FC } from 'react'
 
 interface IconCaretDownProps {
   size?: number
+  className?: string
 }
 
-export const IconCaretDown: FC<IconCaretDownProps> = ({ size = 28 }) => {
+export const IconCaretDown: FC<IconCaretDownProps> = ({ className, size = 28 }) => {
   return (
     <svg
+      className={className}
       xmlns='http://www.w3.org/2000/svg'
       width={size}
       height={size}
@@ -17,9 +19,9 @@ export const IconCaretDown: FC<IconCaretDownProps> = ({ size = 28 }) => {
       <path
         d='M26 12L16 22L6 12'
         stroke='currentColor'
-        stroke-width='2'
-        stroke-linecap='round'
-        stroke-linejoin='round'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </svg>
   )

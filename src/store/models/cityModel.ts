@@ -1,5 +1,5 @@
 import { types } from '@mozaikjs/core'
-import {Instance} from "@mozaikjs/core/build/treeNode";
+import { Instance } from '@mozaikjs/core/build/treeNode'
 
 export interface cityModelProps {
   cover: string

@@ -50,10 +50,11 @@ const TimeIcon = styled.div`
   margin-right: 5px;
 `
 
-const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, className, onClickOptions, onClick }) => {
+const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, cover, className, onClickOptions, onClick }) => {
   return (
     <Root
       name={name}
+      cover={cover}
       className={className}
       badge={{
         value: 'от 1200 руб.',

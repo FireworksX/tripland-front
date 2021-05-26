@@ -30,7 +30,7 @@ export const routes = (): Route[] => [
         viewName: VIEW_NAMES.planner,
         storyName: STORY_NAMES.planner,
         panelName: PANEL_NAMES.plannerIndex,
-        path: '/planner',
+        path: 'planner',
         children: [
           {
             name: ROUTE_NAMES.plannerSelectGenres,
@@ -55,14 +55,14 @@ export const routes = (): Route[] => [
         viewName: VIEW_NAMES.route,
         storyName: STORY_NAMES.planner,
         panelName: PANEL_NAMES.routeDetail,
-        path: `/route/:${ROUTE_PARAMS.routeSlug}`
+        path: `route/:${ROUTE_PARAMS.routeSlug}`
       },
       {
         name: ROUTE_NAMES.favoritesRoot,
         viewName: VIEW_NAMES.favorites,
         storyName: STORY_NAMES.favorites,
         panelName: PANEL_NAMES.favoritesIndex,
-        path: `/favorites`,
+        path: `favorites`,
         forwardTo: buildRouteName(ROUTE_NAMES.favoritesRoot, ROUTE_NAMES.favoritesModes),
         defaultParams: {
           [ROUTE_PARAMS.favoritesMode]: 'routes'
@@ -82,14 +82,14 @@ export const routes = (): Route[] => [
         viewName: VIEW_NAMES.notifications,
         storyName: STORY_NAMES.notifications,
         panelName: PANEL_NAMES.notificationsIndex,
-        path: `/notifications`
+        path: `notifications`
       },
       {
         name: ROUTE_NAMES.profile,
         viewName: VIEW_NAMES.profile,
         storyName: STORY_NAMES.profile,
         panelName: PANEL_NAMES.profileIndex,
-        path: `/profile`
+        path: `profile`
       },
       {
         name: ROUTE_NAMES.detail,
@@ -97,7 +97,7 @@ export const routes = (): Route[] => [
         storyName: STORY_NAMES.planner,
         panelName: PANEL_NAMES.detailIndex,
         withoutTabbar: true,
-        path: `/detail`
+        path: `detail`
       }
     ]
   }

@@ -6,6 +6,7 @@ import { uiStoreInstance, uiStoreModel } from '~/store/substories/uiStore.ts'
 import { routerInstance } from '~router/configureRouter'
 import { routerStoreInstance, routerStoreModel } from '~/store/substories/routerStore'
 import { profileStoreInstance, profileStoreModel } from '~/store/substories/profileStore'
+import { notificationsStoreInstance, notificationsStoreModel } from '~/store/substories/notificationsStore'
 
 export interface rootStoreProps {
   profileStore: typeof profileStoreInstance
@@ -13,6 +14,7 @@ export interface rootStoreProps {
   citiesStore: typeof citiesStoreInstance
   uiStore: typeof uiStoreInstance
   routerStore: typeof routerStoreInstance
+  notificationsStore: typeof notificationsStoreInstance
 }
 
 const storeSnapshot = {
@@ -20,7 +22,8 @@ const storeSnapshot = {
   plannerStore: plannerStoreInstance,
   citiesStore: citiesStoreInstance,
   uiStore: uiStoreInstance,
-  routerStore: routerStoreInstance
+  routerStore: routerStoreInstance,
+  notificationsStore: notificationsStoreInstance
 }
 
 const storeEnv = {
@@ -34,7 +37,8 @@ export const rootStoreInstance = types
     plannerStore: plannerStoreModel,
     routerStore: routerStoreModel,
     citiesStore: citiesStoreModel,
-    uiStore: uiStoreModel
+    uiStore: uiStoreModel,
+    notificationsStore: notificationsStoreModel
   })
   // .plugins(loggerPlugin())
   .create(storeSnapshot, storeEnv)

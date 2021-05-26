@@ -4,6 +4,9 @@ import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGene
 import { buildFont } from '~/utils/styledBuilder'
 
 interface NotificationCardProps {
+  title: string
+  text: string
+  checked: boolean
   className?: string
 }
 
@@ -23,11 +26,11 @@ const Indicator = styled.div`
   border-radius: 50%;
 `
 
-const NotificationCard: FC<NotificationCardProps> = ({ className }) => {
+const NotificationCard: FC<NotificationCardProps> = ({ className, title, text, checked }) => {
   return (
-    <Root className={className} name='Приближается поездка'>
-      <Indicator />
-      <Description>Через 2 дня начинается Ваш маршрут “Москва — 24 апреля - 25 апреля”</Description>
+    <Root className={className} name={title}>
+      {!checked && <Indicator />}
+      <Description>{text}</Description>
     </Root>
   )
 }

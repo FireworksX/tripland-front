@@ -4,19 +4,20 @@ import styled from 'styled-components'
 export interface PanelProps {
   id: string
   className?: string
+  withPadding?: boolean
 }
 
-const Root = styled.div`
+const Root = styled.div<{ withPadding?: boolean }>`
   position: relative;
   width: 100%;
   height: 100%;
   min-height: calc(100vh - var(--safe-area-inset-bottom));
-  padding-bottom: var(--tabbar_height);
+  padding-bottom: ${({ withPadding }) => withPadding && 'var(--tabbar_height)'};
 `
 
-const Panel: FC<PanelProps> = ({ children, className, id }) => {
+const Panel: FC<PanelProps> = ({ children, withPadding = true, className, id }) => {
   return (
-    <Root id={id} className={className}>
+    <Root id={id} className={className} withPadding={withPadding}>
       {children}
     </Root>
   )
