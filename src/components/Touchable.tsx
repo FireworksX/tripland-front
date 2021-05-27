@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC, HTMLAttributes } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import styled from 'styled-components'
 
 export interface TouchableProps extends HTMLAttributes<HTMLDivElement> {
