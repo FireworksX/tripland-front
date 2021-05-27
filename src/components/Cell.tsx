@@ -28,7 +28,7 @@ const Before = styled.div`
 const Content = styled.div`
   padding: 10px 0;
   flex-grow: 1;
-  ${buildFont({ size: '14-20' })}
+  ${buildFont({ size: '14-20', weight: 'medium' })}
 `
 
 const Indicator = styled.div`
@@ -41,9 +41,9 @@ const Expand = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
 `
 
-const Cell: FC<CellProps> = ({ className, before, indicator, children }) => {
+const Cell: FC<CellProps> = ({ className, before, indicator, children, onClick }) => {
   return (
-    <Root className={className}>
+    <Root className={className} onClick={onClick}>
       {before && <Before>{before}</Before>}
       <Content>{children}</Content>
       {indicator && <Indicator>{indicator}</Indicator>}

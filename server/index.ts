@@ -29,7 +29,7 @@ app.prepare().then(() => {
     try {
       await new Promise(resolve => routerInstance.start(req.originalUrl, resolve))
 
-      await app.render(req, res, '/')
+      await app.render(req, res, req.originalUrl)
     } catch (e) {
       next(e)
     }

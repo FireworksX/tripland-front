@@ -1,27 +1,34 @@
 import React, { FC } from 'react'
-import styled from 'styled-components'
-import { ModalPage, ModalPageHeader, SimpleCell } from '@vkontakte/vkui'
 import { useStore } from '~/hooks/useStore'
 import { cityModelType } from '~/store/models/cityModel'
+import ModalPage from '~/components/ModalPage'
+import ModalPageHeader from '~/components/ModalPageHeader'
+import Cell from '~/components/Cell'
+import { Div } from '~/components/Div'
 
 interface CitiesListModalProps {
   id: string
   className?: string
-  onSelect: (city: cityModelType) => any
 }
 
-const Root = styled.div``
+const CitiesListModal: FC<CitiesListModalProps> = ({ className, id }) => {
+  const { citiesStore, plannerStore } = useStore()
 
-const CitiesListModal: FC<CitiesListModalProps> = ({ className, id, onSelect }) => {
-  const { citiesStore } = useStore()
+  const onSelectCity = (city: cityModelType) => {
+    plannerStore.setActiveModal(null)
+    plannerStore.selectCity(city)
+  }
+
   return (
-    <ModalPage id={id} className={className}>
+    <ModalPage id={id} className={className} snapPoints={[205]}>
       <ModalPageHeader>Города</ModalPageHeader>
-      {citiesStore.list.map(city => (
-        <SimpleCell expandable onClick={() => onSelect(city)}>
-          {city.name}
-        </SimpleCell>
-      ))}
+      <Div>
+        {citiesStore.list.map(city => (
+          <Cell expandable onClick={() => onSelectCity(city)}>
+            {city.name}
+          </Cell>
+        ))}
+      </Div>
     </ModalPage>
   )
 }

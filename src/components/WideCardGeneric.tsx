@@ -36,16 +36,20 @@ const Root = styled.div`
 `
 
 const Cover = styled(Image)<ImageProps>`
+  position: absolute;
+  left: 5px;
+  top: 5px;
   width: 80px;
   max-width: 80px;
-  align-self: stretch;
+  height: calc(100% - 10px);
   object-fit: cover;
   margin-right: 10px;
   border-radius: ${({ theme }) => theme.radius.main};
 `
 
-const Content = styled.div`
+const Content = styled.div<{ withCover?: boolean }>`
   padding: 10px;
+  ${({ withCover }) => withCover && 'margin-left: 80px;'}
 `
 
 const Name = styled.div`
@@ -90,7 +94,7 @@ const WideCardGeneric: FC<WideCardGenericProps> = ({
     <Touchable onClick={onClick}>
       <Root className={className}>
         {cover && <Cover src={cover} />}
-        <Content>
+        <Content withCover={!!cover}>
           <Name>{name}</Name>
           {children}
         </Content>

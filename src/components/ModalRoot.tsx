@@ -1,30 +1,31 @@
-import React, { FC, useState } from 'react'
-import Sheet from 'react-modal-sheet'
-import styled from 'styled-components'
+import React, { FC, ReactElement } from 'react'
 
 interface ModalRootProps {
+  activeModal?: string | null
   className?: string
+  onClose?: () => void
 }
 
-const Root = styled.div``
+const ModalRoot: FC<ModalRootProps> = ({ activeModal, children, onClose }) => {
+  const childrenList: ReactElement[] = React.Children.toArray(children) as ReactElement[]
+  const clonedChildren = childrenList.map((el: ReactElement) => {
+    if (typeof el.type === 'function') {
+      // @ts-ignore
+      el = el.type(el.props)
+    }
 
-const ModalRoot: FC<ModalRootProps> = ({ className }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  return (
-    <Root className={className}>
-      <button onClick={() => setIsOpen(true)}>open</button>
-      <Sheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <Sheet.Container>
-          <Sheet.Header />
-          <Sheet.Content>
-            <h1>test</h1>
-          </Sheet.Content>
-        </Sheet.Container>
+    return React.cloneElement(
+      el,
+      {
+        ...el.props,
+        isOpen: activeModal === el.props.id,
+        onClose
+      },
+      el.props.children
+    )
+  })
 
-        <Sheet.Backdrop />
-      </Sheet>
-    </Root>
-  )
+  return <>{clonedChildren}</>
 }
 
 export default ModalRoot

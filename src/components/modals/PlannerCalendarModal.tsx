@@ -1,9 +1,10 @@
 import React, { FC, useMemo } from 'react'
 import styled from 'styled-components'
-import { ModalPage, ModalPageHeader } from '@vkontakte/vkui'
 import { useStore } from '~/hooks/useStore'
 import DatePicker from '~/components/DatePicker'
 import { formatDate, phpFormat } from '~/utils/dateUtils'
+import ModalPage from '~/components/ModalPage'
+import ModalPageHeader from '~/components/ModalPageHeader'
 
 interface PlannerCalendarModalProps {
   id: string
@@ -41,7 +42,7 @@ const PlannerCalendarModal: FC<PlannerCalendarModalProps> = ({ className, id }) 
   }
 
   return (
-    <ModalPage id={id} className={className}>
+    <ModalPage id={id} className={className} snapPoints={[350]}>
       <ModalPageHeader>Выберите даты</ModalPageHeader>
       <DatePicker value={dates.length > 0 ? dates : null} minDate={minDate} onChange={onSelectDate} />
     </ModalPage>
