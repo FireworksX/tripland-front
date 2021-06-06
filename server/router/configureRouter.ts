@@ -1,7 +1,7 @@
 import browserPlugin from 'router5-plugin-browser'
 import createRouter from 'router5'
-import { routes } from './routes'
-import { appNavigationMiddleware } from './middleware/appNavigationMiddleware'
+import { routes } from '~router/routes'
+import { appNavigationMiddleware } from '~router/middleware/appNavigationMiddleware'
 
 export const configureRouter = () => {
   const defineRoutes = routes()

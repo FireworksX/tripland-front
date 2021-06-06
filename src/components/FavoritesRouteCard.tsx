@@ -3,8 +3,14 @@ import styled from 'styled-components'
 import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGeneric'
 import { IconClock } from '~/components/icons/IconClock'
 import { IconPlacemark } from '~/components/icons/IconPlacemark'
+import { DateInput } from '~/utils/dateUtils'
+import DateFormatter from '~/components/DateFormatter'
 
-interface FavoritesRouteCardProps extends WideCardGenericProps {}
+interface FavoritesRouteCardProps extends WideCardGenericProps {
+  places?: number
+  startDate?: DateInput
+  endDate?: DateInput
+}
 
 const Root = styled(WideCardGeneric)<WideCardGenericProps>``
 
@@ -25,25 +31,42 @@ const DetailIcon = styled.div`
   color: ${({ theme }) => theme.colors.accentBlue};
 `
 
-const FavoritesRouteCard: FC<FavoritesRouteCardProps> = ({ name, className, onClickOptions }) => {
+const DateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    margin: 0 3px;
+  }
+`
+
+const FavoritesRouteCard: FC<FavoritesRouteCardProps> = ({
+  name,
+  places,
+  startDate,
+  endDate,
+  cover,
+  className,
+  onClickOptions,
+  onClick
+}) => {
   return (
-    <Root
-      name={name}
-      className={className}
-      cover='https://phototass1.cdnvideo.ru/width/1020_b9261fa1/tass/m2/en/uploads/i/20200316/1257687.jpg'
-      onClickOptions={onClickOptions}
-    >
+    <Root name={name} className={className} cover={cover} onClickOptions={onClickOptions} onClick={onClick}>
       <DetailRow>
         <DetailIcon>
           <IconPlacemark size={18} />
         </DetailIcon>
-        6 остановок
+        {places} остановок
       </DetailRow>
       <DetailRow>
         <DetailIcon>
           <IconClock size={18} />
         </DetailIcon>
-        17:00 – 19:00
+        <DateWrapper>
+          <DateFormatter value={startDate} format='DD MMM' />
+          <span>–</span>
+          <DateFormatter value={endDate} format='DD MMM' />
+        </DateWrapper>
       </DetailRow>
     </Root>
   )

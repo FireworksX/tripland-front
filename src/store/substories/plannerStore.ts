@@ -2,10 +2,11 @@ import { types } from '@mozaikjs/core'
 import { buildRouteModel, buildRouteInstance } from '~/store/modules/builderRoute'
 import { cityModelType } from '~/store/models/cityModel'
 import { authorTripModel, authorTripModelType } from '~/store/models/authorTripModel'
-import carCover from '~static/images/carCover.png'
 import { excursionCardModel, excursionCardModelType } from '~/store/models/excursionCardModel'
 import { directionModel, directionModelType } from '~/store/models/directionModel'
 import { PANEL_NAMES } from '~router/constants'
+
+const carCover = ''
 
 const compilations = [
   {
@@ -98,7 +99,7 @@ const directions = [
 ]
 
 type ActiveModal = null | 'cities' | 'calendar'
-type ActivePanel = 'plannerIndex' | 'plannerGenres' | 'plannerSelectPeople' | 'plannerSelectGenres' | 'routeDetail'
+type ActivePanel = 'plannerIndex' | 'plannerSelectPeople' | 'plannerSelectGenres'
 
 export interface plannerStoreProps {
   activePanel: 'plannerIndex' | 'plannerSelectGenres'
@@ -123,12 +124,7 @@ export interface plannerStoreComputed {
 export const plannerStoreModel = types
   .model<plannerStoreProps, plannerStoreActions, plannerStoreComputed>('plannerStore', {
     activePanel: types.maybe(
-      types.enumeration(
-        PANEL_NAMES.plannerIndex,
-        PANEL_NAMES.plannerSelectGenres,
-        PANEL_NAMES.plannerSelectPeople,
-        PANEL_NAMES.routeDetail
-      )
+      types.enumeration(PANEL_NAMES.plannerIndex, PANEL_NAMES.plannerSelectGenres, PANEL_NAMES.plannerSelectPeople)
     ),
     activeModal: types.maybe(types.enumeration('cities', 'calendar')),
     buildRoute: buildRouteModel,

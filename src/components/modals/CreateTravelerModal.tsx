@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import { ModalPage, ModalPageHeader } from '@vkontakte/vkui'
 import { Div } from '~/components/Div'
 import Separator from '~/components/Separator'
 import { buildFont } from '~/utils/styledBuilder'
@@ -8,6 +7,8 @@ import Image, { ImageProps } from '~/components/Image'
 import cards from '~static/images/cards.png'
 import Input from '~/components/Input'
 import Touchable from '~/components/Touchable'
+import ModalPage from '~/components/ModalPage'
+import ModalPageHeader from '~/components/ModalPageHeader'
 
 interface CreateTravelerModalProps {
   id: string
@@ -51,7 +52,7 @@ const Submit = styled(Touchable)`
 
 const CreateTravelerModal: FC<CreateTravelerModalProps> = ({ id, className }) => {
   return (
-    <ModalPage id={id} className={className}>
+    <ModalPage id={id} className={className} snapPoints={[400]}>
       <ModalPageHeader>Новый путешественник</ModalPageHeader>
       <Info>
         <InfoCover src={cards} />

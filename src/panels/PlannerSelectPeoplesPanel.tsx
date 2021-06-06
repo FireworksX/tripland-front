@@ -5,6 +5,7 @@ import Panel from '~/components/Panel'
 import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { useRouter } from '~/hooks/useRouter'
+import { useStore } from '~/hooks/useStore'
 
 interface PlannerSelectPeoplesPanelProps {
   id: string
@@ -17,6 +18,10 @@ const Root = styled.div`
 const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) => {
   const { replace } = useRouter()
 
+  const onSubmit = () => {
+    replace(buildRouteName(ROUTE_NAMES.routeDetailRoot), { [ROUTE_PARAMS.routeSlug]: 'testRouteSlug' })
+  }
+
   return (
     <Panel id={id}>
       <Root>
@@ -24,9 +29,7 @@ const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) =
           title='Количество человек'
           description='Укажите количество человек, которое поедет с вами в путешествие'
           steps='2 из 2'
-          onSubmit={() =>
-            replace(buildRouteName(ROUTE_NAMES.routeDetailRoot), { [ROUTE_PARAMS.routeSlug]: 'testRouteSlug' })
-          }
+          onSubmit={onSubmit}
         />
       </Root>
     </Panel>

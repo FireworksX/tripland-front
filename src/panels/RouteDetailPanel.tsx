@@ -13,6 +13,10 @@ import { ROUTE_NAMES } from '~router/constants'
 import { buildFont } from '~/utils/styledBuilder'
 import Map, { MapProps } from '~/components/Map'
 import RouteTransport from '~/components/RouteTransport'
+import { useStore } from '~/hooks/useStore'
+import DateFormatter from '~/components/DateFormatter'
+import { getRandom } from '~/utils/random'
+import { getCover } from '~/utils/getCover'
 
 interface RouteDetailPanelProps {
   id: string
@@ -28,14 +32,7 @@ const Header = styled.div`
   grid-gap: 10px;
   margin-bottom: 10px;
   text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-
-  span {
-    font-size: 11px;
-    font-weight: 500;
-    color: ${({ theme }) => theme.colors.secondary};
-  }
+  ${buildFont({ size: '16-20', weight: 'semi' })}
 `
 
 const HeaderButton = styled(Touchable)`
@@ -47,6 +44,17 @@ const HeaderButton = styled(Touchable)`
   box-shadow: 0px 0px 10px rgba(181, 181, 181, 0.25);
   border-radius: ${({ theme }) => theme.radius.main};
   color: ${({ theme }) => theme.colors.accent};
+`
+
+const DateWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${({ theme }) => buildFont({ size: '11-16', weight: 'medium', color: theme.colors.secondary })};
+
+  span {
+    margin: 0 3px;
+  }
 `
 
 const MapWrapper = styled(Map)<MapProps>`
@@ -94,109 +102,44 @@ const FooterButton = styled(Touchable)<{ isWide?: boolean; isAccent?: boolean }>
 
 const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => {
   const router = useRouter()
+  const { routeDetailStore } = useStore()
 
   const days = [
     {
       title: '24 апреля',
       value: 100,
-      items: [
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        }
-      ]
+      items: new Array(getRandom(5, 20)).fill(null).map((_, index) =>
+        index % 2
+          ? {
+              type: 'delimiter',
+              value: '23 мин.'
+            }
+          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+      )
     },
     {
       title: '25 апреля',
       value: 35,
-      items: [
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        }
-      ]
+      items: new Array(getRandom(5, 20)).fill(null).map((_, index) =>
+        index % 2
+          ? {
+              type: 'delimiter',
+              value: '23 мин.'
+            }
+          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+      )
     },
     {
       title: '26 апреля',
       value: 0,
-      items: [
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Парк Коломенское'
-        },
-        {
-          type: 'delimiter',
-          value: '23 мин.'
-        },
-        {
-          type: 'card',
-          name: 'Останкинская телебашня'
-        }
-      ]
+      items: new Array(getRandom(5, 20)).fill(null).map((_, index) =>
+        index % 2
+          ? {
+              type: 'delimiter',
+              value: '23 мин.'
+            }
+          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+      )
     }
   ]
 
@@ -205,7 +148,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
       return (
         <RouteIterateCard
           name={item.name}
-          cover='https://phototass1.cdnvideo.ru/width/1020_b9261fa1/tass/m2/en/uploads/i/20200316/1257687.jpg'
+          cover={item.cover}
           onClickOptions={onClickOptions}
           onClick={() => router.push(buildRouteName(ROUTE_NAMES.detail))}
         />
@@ -229,8 +172,11 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
           <IconCaretLeft size={24} />
         </HeaderButton>
         <div>
-          <h1>Москва</h1>
-          <span>24 апреля — 25 апреля</span>
+          <h1>{routeDetailStore.title}</h1>
+          <DateWrapper>
+            <DateFormatter value={routeDetailStore.startDate} format='DD MMMM' />
+            <span>—</span> <DateFormatter value={routeDetailStore.endDate} format='DD MMMM' />
+          </DateWrapper>
         </div>
         {false && (
           <HeaderButton>

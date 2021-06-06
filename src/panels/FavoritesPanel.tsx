@@ -13,6 +13,7 @@ import Image from '~/components/Image'
 import { useRouter } from '~/hooks/useRouter'
 import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
+import { useStore } from '~/hooks/useStore'
 
 interface FavoritesPanelProps {
   id: string
@@ -56,6 +57,8 @@ const FavoritesPanel: FC<FavoritesPanelProps> = ({ id, className }) => {
     push
   } = useRouter()
 
+  const { favoritesStore } = useStore()
+
   const onChange = (mode: string) => {
     push(buildRouteName(ROUTE_NAMES.favoritesRoot, ROUTE_NAMES.favoritesModes), {
       [ROUTE_PARAMS.favoritesMode]: mode
@@ -88,18 +91,29 @@ const FavoritesPanel: FC<FavoritesPanelProps> = ({ id, className }) => {
       )}
       {mode === 'routes' && (
         <Div>
-          {new Array(10).fill(null).map(_ => (
+          {favoritesStore.routes.map(el => (
             <ContentRow>
-              <FavoritesRouteCard name='2 дня в Москве' />
+              <FavoritesRouteCard
+                name={el.name}
+                cover={el.cover}
+                places={el.places}
+                startDate={el.startDate}
+                endDate={el.endDate}
+                onClick={() => push(buildRouteName(ROUTE_NAMES.detail))}
+              />
             </ContentRow>
           ))}
         </Div>
       )}
       {mode === 'places' && (
         <Div>
-          {new Array(10).fill(null).map(_ => (
+          {favoritesStore.excursions.map(el => (
             <ContentRow>
-              <FavoritesPlaceCard name='Парк Коломенское' />
+              <FavoritesPlaceCard
+                name={el.name}
+                cover={el.cover}
+                onClick={() => push(buildRouteName(ROUTE_NAMES.detail))}
+              />
             </ContentRow>
           ))}
         </Div>

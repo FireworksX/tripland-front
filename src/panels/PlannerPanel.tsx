@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Div } from '~/components/Div'
 import PlannerBuilder from '~/components/PlannerBuilder'
@@ -9,14 +9,15 @@ import feature1 from '~static/images/feature1.png'
 import feature2 from '~static/images/feature2.png'
 import feature3 from '~static/images/feature3.png'
 import feature4 from '~static/images/feature4.png'
-import CitiesList from '~/components/CitiesList.tsx'
-import TopDirectionsList from '~/components/TopDirectionsList'
-import AuthorTripsList from '~/components/AuthorTripsList.tsx'
-import CityExcursionsList from '~/components/CityExcursionsList'
 import { useStore } from '~/hooks/useStore'
-import { ROUTE_NAMES } from '~router/constants'
+import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { useRouter } from '~/hooks/useRouter'
+import DirectionCard from '~/components/DirectionCard'
+import HorizontalCards from '~/components/HorizontalCards'
+import CityCard from '~/components/CityCard'
+import CoverCard from '~/components/CoverCard'
+import ExcursionCard from '~/components/ExcursionCard'
 
 interface PlannerPanel {
   id: string
@@ -132,7 +133,19 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
       {!selectedCity && (
         <Section>
           <Group title='Популярные направления' description='Каталог направлений для путешествий по России'>
-            <TopDirectionsList list={plannerStore.topDirectionsList} />
+            <HorizontalCards>
+              {plannerStore.topDirectionsList.map((el, index) => (
+                <DirectionCard
+                  key={index}
+                  {...el}
+                  onClick={() =>
+                    push(buildRouteName(ROUTE_NAMES.routeDetailRoot), {
+                      [ROUTE_PARAMS.routeSlug]: 'test'
+                    })
+                  }
+                />
+              ))}
+            </HorizontalCards>
           </Group>
         </Section>
       )}
@@ -142,21 +155,46 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
             title='Популярные города'
             description='Лучшие города России, которые мы советуем посетить. В каждой подборке собраны авторские маршруты'
           >
-            <CitiesList list={plannerStore.topCitiesList} />
+            <HorizontalCards width={140}>
+              {plannerStore.topCitiesList.map((city, index) => (
+                <CityCard
+                  key={index}
+                  cover={city.cover}
+                  name={city.name}
+                  onClick={() => plannerStore.selectCity(city)}
+                />
+              ))}
+            </HorizontalCards>
           </Group>
         </Section>
       )}
       {plannerStore.authorsTripsList.length > 0 && (
         <Section>
           <Group title='Авторские подборки' description='Собраны лучшие подборки для вашего путешествия'>
-            <AuthorTripsList list={plannerStore.authorsTripsList} />
+            <HorizontalCards width={200}>
+              {plannerStore.authorsTripsList.map((card, index) => (
+                <CoverCard
+                  key={index}
+                  {...card}
+                  onClick={() =>
+                    push(buildRouteName(ROUTE_NAMES.routeDetailRoot), {
+                      [ROUTE_PARAMS.routeSlug]: 'test'
+                    })
+                  }
+                />
+              ))}
+            </HorizontalCards>
           </Group>
         </Section>
       )}
       {plannerStore.excursionsList.length > 0 && (
         <Section>
           <Group title='Экскурсии с гидами по Москве' description='Каталог маршрутов для путешествий по Москве'>
-            <CityExcursionsList list={plannerStore.excursionsList} />
+            <HorizontalCards width={150}>
+              {plannerStore.excursionsList.map((card, index) => (
+                <ExcursionCard key={index} {...card} onClick={() => push(buildRouteName(ROUTE_NAMES.detail))} />
+              ))}
+            </HorizontalCards>
           </Group>
         </Section>
       )}

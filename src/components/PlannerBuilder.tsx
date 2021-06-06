@@ -7,6 +7,7 @@ import Touchable from '~/components/Touchable'
 import { IconPlus } from '~/components/icons/IconPlus'
 import { IconClose } from '~/components/icons/IconClose'
 import DateFormatter from '~/components/DateFormatter'
+import { buildFont } from '~/utils/styledBuilder'
 
 interface PlannerBuilder {
   onSubmit: () => any
@@ -81,20 +82,23 @@ const FilterButtonAfter = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
 `
 
-const SubmitButton = styled(Touchable)`
+const SubmitButton = styled(Touchable)<{ disabled: boolean }>`
   display: flex;
   align-items: center;
-  background: linear-gradient(91.43deg, #ffb545 0.82%, #ff9900 100%);
+  background: ${({ theme, disabled }) =>
+    disabled ? theme.colors.border : 'linear-gradient(91.43deg, #ffb545 0.82%, #ff9900 100%)'};
   border-radius: ${({ theme }) => theme.radius.main};
   justify-content: center;
   width: 100%;
   outline: none;
   border: none;
   height: 50px;
-  color: ${({ theme }) => theme.colors.textColorWhite};
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 21px;
+  ${({ theme, disabled }) =>
+    buildFont({
+      size: '14-20',
+      weight: 'semi',
+      color: disabled ? theme.colors.secondary : theme.colors.textColorWhite
+    })}
 `
 
 const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
@@ -102,6 +106,8 @@ const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
   const city = plannerStore.buildRoute.city?.name
   const dateFrom = plannerStore.buildRoute.dateFrom
   const dateTo = plannerStore.buildRoute.dateTo
+
+  const enabledSubmit = city && dateFrom && dateTo
 
   return (
     <Root>
@@ -160,7 +166,9 @@ const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
           )}
         </FilterButton>
       </Filter>
-      <SubmitButton onClick={onSubmit}>Построить маршрут</SubmitButton>
+      <SubmitButton disabled={!enabledSubmit} onClick={enabledSubmit ? onSubmit : () => undefined}>
+        Построить маршрут
+      </SubmitButton>
     </Root>
   )
 }

@@ -6,12 +6,7 @@
     "target": "es2017",
     "isolatedModules": false,
     "noEmit": false,
-    "baseUrl": ".",
-    "paths": {
-      "@mozaikjs/react": [
-        "@mozaikjs/react/build/index.umd.js"
-      ]
-    }
-    },
+    "allowJs": false
+  },
   "include": ["server/**/*.ts"]
 }

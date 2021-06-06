@@ -127,7 +127,15 @@ const ProfilePanel: FC<ProfilePanelProps> = ({ id, className }) => {
       <Users>
         <Title>Данные путешественников</Title>
         <HorizontalCards>
-          <TravelerCard />
+          {profileStore.travelers.map((traveler, index) => (
+            <TravelerCard
+              firstName={traveler.firstName}
+              lastName={traveler.lastName}
+              birthDay={traveler.birthDay}
+              index={index}
+              onClick={() => profileStore.setActiveModal('createTraveler')}
+            />
+          ))}
           <SeeMoreCard title='Добавить' onClick={() => profileStore.setActiveModal('createTraveler')} />
         </HorizontalCards>
       </Users>

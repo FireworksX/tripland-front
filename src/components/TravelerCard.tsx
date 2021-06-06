@@ -3,15 +3,31 @@ import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
 import { buildFont } from '~/utils/styledBuilder'
 import { IconMenPlaceholder } from '~/components/icons/IconMenPlaceholder'
+import { DateInput } from '~/utils/dateUtils'
+import DateFormatter from '~/components/DateFormatter'
+import Touchable, { TouchableProps } from '~/components/Touchable'
 
-interface TravelerCardProps {
+interface TravelerCardProps extends TouchableProps {
+  firstName?: string
+  lastName?: string
+  birthDay?: DateInput
   className?: string
+  index?: number
 }
 
-const Root = styled.div`
+const gradients = [
+  'linear-gradient(116.04deg,#ee7979 0%,#ff5757 99.96%)',
+  'linear-gradient(116.04deg, #7b79ee 0%, #579aff 99.96%)',
+  'linear-gradient(116.04deg,#79a8ee 0%,#5783ff 99.96%)'
+]
+
+const Root = styled(Touchable)<{ gradient: string }>`
   padding: 20px 10px;
   border-radius: ${({ theme }) => theme.radius.main};
-  background: linear-gradient(116.04deg, #7b79ee 0%, #579aff 99.96%);
+  background: ${({ gradient }) => gradient};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 const Avatar = styled.div`
@@ -30,15 +46,21 @@ const BirthDay = styled.div`
   ${({ theme }) => buildFont({ size: '10-12', color: theme.colors.textColorWhite })}
 `
 
-const TravelerCard: FC<TravelerCardProps> = ({ className }) => {
+const TravelerCard: FC<TravelerCardProps> = ({ className, index = 0, firstName, lastName, birthDay, onClick }) => {
   return (
-    <Root className={className}>
+    <Root className={className} gradient={gradients[index] || gradients[0]} onClick={onClick}>
       <Avatar>
         <IconMenPlaceholder />
         {/*<AvatarSource />*/}
       </Avatar>
-      <Name>ИМЯ ФАМИЛИЯ</Name>
-      <BirthDay>Год рождения</BirthDay>
+      <div>
+        <Name>
+          {firstName} {lastName}
+        </Name>
+        <BirthDay>
+          <DateFormatter value={birthDay} format='DD MMM YYYY' />
+        </BirthDay>
+      </div>
     </Root>
   )
 }

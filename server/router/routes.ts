@@ -1,6 +1,6 @@
 import { Route } from 'router5'
-import { PANEL_NAMES, ROUTE_NAMES, ROUTE_PARAMS, STORY_NAMES, VIEW_NAMES } from './constants'
-import { buildRouteName } from '../../src/utils/buildRouteName'
+import { PANEL_NAMES, ROUTE_NAMES, ROUTE_PARAMS, STORY_NAMES, VIEW_NAMES } from '~router/constants'
+import { buildRouteName } from '~/utils/buildRouteName'
 
 export type ValueOf<T> = T[keyof T]
 

@@ -9,21 +9,21 @@ import { theme } from '~/definitions'
 import { appWithTranslation } from '~server/i18n'
 import '~static/css/reset.scss'
 import '~static/css/global.scss'
-import 'swiper/swiper.scss';
-// import '~static/fonts/fonts.css'
+import 'swiper/swiper.scss'
 import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'
 import { ExtendAppInitialProps } from '~/definitions/App'
-import { rootStoreInstance } from '~/store/rootStore'
-import Head from 'next/head'
+import { createStore } from '~/store/createStore'
 
 class WebApp extends App<ExtendAppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext): Promise<ExtendAppInitialProps> {
     const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
-
+    // @ts-ignore
+    const store = ctx.req?.store
     return {
       originalUrl: ctx.req?.url || '',
-      pageProps
+      pageProps,
+      store
     }
   }
 
@@ -32,11 +32,13 @@ class WebApp extends App<ExtendAppInitialProps> {
   }
 
   render() {
-    const { pageProps } = this.props
+    const { pageProps, store } = this.props
+    console.log(store.routerStore.path, 'path')
+    const newStore = createStore(store)
 
     return (
       <ThemeProvider theme={theme}>
-        <StoreProvider store={rootStoreInstance}>
+        <StoreProvider store={newStore}>
           <RouterProvider router={routerInstance}>
             <Index {...pageProps} />
           </RouterProvider>

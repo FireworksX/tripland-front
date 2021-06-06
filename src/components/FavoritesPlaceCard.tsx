@@ -2,8 +2,6 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGeneric'
 import DisplayRating from '~/components/DisplayRating'
-import { IconClock } from '~/components/icons/IconClock'
-import { IconPlacemark } from '~/components/icons/IconPlacemark'
 
 interface FavoritesPlaceCardProps extends WideCardGenericProps {}
 
@@ -41,16 +39,18 @@ const Rating = styled.div`
   }
 `
 
-const FavoritesPlaceCard: FC<FavoritesPlaceCardProps> = ({ name, className, onClickOptions }) => {
+const FavoritesPlaceCard: FC<FavoritesPlaceCardProps> = ({ name, cover, className, onClickOptions, onClick }) => {
   return (
     <Root
       name={name}
       className={className}
+      cover={cover}
       badge={{
         value: 'от 1200 руб.',
         color: 'green'
       }}
       onClickOptions={onClickOptions}
+      onClick={onClick}
     >
       <Rating>
         <DisplayRating value={4.6} />

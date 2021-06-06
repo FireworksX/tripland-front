@@ -1,3 +1,4 @@
+import 'module-alias/register';
 import next from 'next'
 import express from 'express'
 import path from 'path'
@@ -5,7 +6,8 @@ import nextI18NextMiddleware from 'next-i18next/middleware'
 
 import nextI18next from './i18n'
 import devProxy from './proxy'
-import { routerInstance } from './router/configureRouter'
+import { routerInstance } from '~router/configureRouter'
+import { createStore } from '~/store/createStore'
 
 const port = parseInt(process.env.PORT || '3000', 10)
 const dev = process.env.NODE_ENV !== 'production'
@@ -25,9 +27,11 @@ app.prepare().then(() => {
     })
   }
 
-  server.all('*', async (req: any, res, next) => {
+  server.get('/*', async (req: any, res, next) => {
     try {
       await new Promise(resolve => routerInstance.start(req.originalUrl, resolve))
+      const store = createStore()
+      req.store = store
 
       await app.render(req, res, req.originalUrl)
     } catch (e) {
