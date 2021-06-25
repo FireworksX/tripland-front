@@ -13,6 +13,7 @@ const Root = styled.div<{ withPadding?: boolean }>`
   height: 100%;
   min-height: calc(100vh - var(--safe-area-inset-bottom));
   padding-bottom: ${({ withPadding }) => withPadding && 'var(--tabbar_height)'};
+  background: var(--background_content);
 `
 
 const Panel: FC<PanelProps> = ({ children, withPadding = true, className, id }) => {

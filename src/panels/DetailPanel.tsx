@@ -180,7 +180,7 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
   const { back } = useRouter()
   const { detailPageStore } = useStore()
 
-  console.log(detailPageStore.gallery)
+  console.log(detailPageStore)
 
   return (
     <Root id={id} className={className} withPadding={false}>
@@ -238,7 +238,6 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
           Контакты
         </Cell>
       </Cells>
-      <Separator padding />
 
       <Div>
         <RatingGroup>
@@ -248,18 +247,21 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
           </RatingValues>
           <RatingButton>Написать отзыв</RatingButton>
         </RatingGroup>
-        <Separator />
       </Div>
-      <ReviewsGroup>
-        <GroupHeader>Отзывы</GroupHeader>
-        {detailPageStore.reviews.map((review, index) => (
-          <Review key={index} />
-        ))}
-        <Cell expandable>
-          <OtherReviews>Посмотреть {detailPageStore.reviews.length} отзывов</OtherReviews>
-        </Cell>
-        <Separator />
-      </ReviewsGroup>
+
+      {detailPageStore.rating?.length > 0 && (
+        <ReviewsGroup>
+          <GroupHeader>Отзывы</GroupHeader>
+          {detailPageStore.reviews.map((review, index) => (
+            <Review key={index} />
+          ))}
+          <Cell expandable>
+            <OtherReviews>Посмотреть {detailPageStore.reviews.length} отзывов</OtherReviews>
+          </Cell>
+          <Separator />
+        </ReviewsGroup>
+      )}
+
       <OtherCards>
         <Div>
           <GroupHeader>Места рядом</GroupHeader>

@@ -46,7 +46,7 @@ const Cell: FC<CellProps> = ({ className, before, indicator, children, onClick }
     <Root className={className} onClick={onClick}>
       {before && <Before>{before}</Before>}
       <Content>{children}</Content>
-      {indicator && <Indicator>{indicator}</Indicator>}
+      {!!indicator && <Indicator>{indicator}</Indicator>}
       <Expand>
         <IconCaretRight size={18} />
       </Expand>

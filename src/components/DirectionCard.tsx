@@ -29,7 +29,6 @@ const Cover = styled(Image)<ImageProps>`
   height: 100%;
   object-fit: cover;
   border-radius: ${({ theme }) => theme.radius.main};
-  z-index: -1;
 `
 
 const Information = styled.div`
@@ -37,6 +36,7 @@ const Information = styled.div`
   border-radius: ${({ theme }) => theme.radius.second};
   padding: 8px 10px;
   width: 100%;
+  position: relative;
 `
 
 const InformationName = styled.span`

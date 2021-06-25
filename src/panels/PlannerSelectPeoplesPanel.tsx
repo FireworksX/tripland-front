@@ -5,14 +5,13 @@ import Panel from '~/components/Panel'
 import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { useRouter } from '~/hooks/useRouter'
-import { useStore } from '~/hooks/useStore'
 
 interface PlannerSelectPeoplesPanelProps {
   id: string
 }
 
 const Root = styled.div`
-  height: 100vh;
+  height: calc(100vh - var(--tabbar_height));
 `
 
 const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) => {

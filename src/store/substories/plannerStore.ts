@@ -7,6 +7,7 @@ import { directionModel, directionModelType } from '~/store/models/directionMode
 import { PANEL_NAMES } from '~router/constants'
 import { getRandom, getRandomFromArray } from '~/utils/random'
 import { getCover } from '~/utils/getCover'
+import { getExcursionName } from '~/utils/getName'
 
 const carCover = ''
 
@@ -35,7 +36,7 @@ const compilations = [
 
 const excursions = new Array(10).fill(null).map(() => ({
   cover: getCover(),
-  name: 'test',
+  name: getExcursionName(),
   price: getRandomFromArray([500, 700, 750, 1000, 1500, 3200])
 }))
 

@@ -17,6 +17,7 @@ const Root = styled.div`
   border-radius: ${({ theme }) => theme.radius.main};
   padding: ${({ theme }) => theme.paddings.main};
   box-shadow: 0px 0px 50px rgba(188, 188, 188, 0.25);
+  position: relative;
 `
 
 const Filter = styled.div`

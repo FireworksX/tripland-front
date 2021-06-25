@@ -11,7 +11,7 @@ interface PlannerSelectGenresPanelProps {
 }
 
 const Root = styled.div`
-  height: 100vh;
+  height: calc(100vh - var(--tabbar_height));
 `
 
 const PlannerSelectGenresPanel: FC<PlannerSelectGenresPanelProps> = ({ id }) => {

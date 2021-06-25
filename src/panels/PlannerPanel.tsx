@@ -35,7 +35,6 @@ const HeaderGradient = styled.div`
   left: 0;
   right: 0;
   height: 270px;
-  z-index: -1;
   background: linear-gradient(116.04deg, #7b79ee 0%, #579aff 99.96%);
 `
 
@@ -44,6 +43,7 @@ const HeaderTitle = styled.h1`
   ${buildFont({ size: '26-30', weight: 'bold' })}
   text-align: center;
   margin-bottom: 40px;
+  position: relative;
 `
 
 const Section = styled.div`
