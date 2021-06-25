@@ -14,12 +14,14 @@ import Index from '~pages/index.tsx'
 import { routerInstance } from '~router/configureRouter'
 import { ExtendAppInitialProps } from '~/definitions/App'
 import { createStore } from '~/store/createStore'
+import { rootStore } from '~/store/rootStore'
 
 class WebApp extends App<ExtendAppInitialProps> {
   static async getInitialProps({ Component, ctx }: AppContext): Promise<ExtendAppInitialProps> {
     const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
     // @ts-ignore
-    const store = ctx.req?.store
+    const store: rootStore = ctx.req?.store
+
     return {
       originalUrl: ctx.req?.url || '',
       pageProps,
@@ -27,18 +29,28 @@ class WebApp extends App<ExtendAppInitialProps> {
     }
   }
 
+  constructor(props: App['props'] & ExtendAppInitialProps) {
+    super(props)
+    this.state = {
+      store: createStore()
+    }
+  }
+
   componentDidMount() {
+    const newStore = createStore()
     routerInstance.start(this.props.originalUrl)
+
+    this.setState({
+      store: newStore
+    })
   }
 
   render() {
-    const { pageProps, store } = this.props
-    console.log(store.routerStore.path, 'path')
-    const newStore = createStore(store)
+    const { pageProps } = this.props
 
     return (
       <ThemeProvider theme={theme}>
-        <StoreProvider store={newStore}>
+        <StoreProvider store={this.state.store}>
           <RouterProvider router={routerInstance}>
             <Index {...pageProps} />
           </RouterProvider>

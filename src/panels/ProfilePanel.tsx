@@ -129,6 +129,7 @@ const ProfilePanel: FC<ProfilePanelProps> = ({ id, className }) => {
         <HorizontalCards>
           {profileStore.travelers.map((traveler, index) => (
             <TravelerCard
+              key={index}
               firstName={traveler.firstName}
               lastName={traveler.lastName}
               birthDay={traveler.birthDay}

@@ -18,6 +18,7 @@ import HorizontalCards from '~/components/HorizontalCards'
 import CityCard from '~/components/CityCard'
 import CoverCard from '~/components/CoverCard'
 import ExcursionCard from '~/components/ExcursionCard'
+import { buildFont } from '~/utils/styledBuilder'
 
 interface PlannerPanel {
   id: string
@@ -40,9 +41,7 @@ const HeaderGradient = styled.div`
 
 const HeaderTitle = styled.h1`
   color: ${({ theme }) => theme.colors.textColorWhite};
-  font-size: 20px;
-  line-height: 24px;
-  font-weight: bold;
+  ${buildFont({ size: '26-30', weight: 'bold' })}
   text-align: center;
   margin-bottom: 40px;
 `
@@ -112,6 +111,7 @@ const features = [
 
 export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
   const { push } = useRouter()
+
   const {
     citiesStore: { selectedCity },
     plannerStore
@@ -175,6 +175,7 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
               {plannerStore.authorsTripsList.map((card, index) => (
                 <CoverCard
                   key={index}
+                  index={index}
                   {...card}
                   onClick={() =>
                     push(buildRouteName(ROUTE_NAMES.routeDetailRoot), {

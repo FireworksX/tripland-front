@@ -17,10 +17,9 @@ const cities = [
     name: 'Екатеринбург'
   },
   {
-    cover:
-      'https://34travel.me/media/posts/5d6fdd38d1f50-kazan-pan940.jpg',
+    cover: 'https://34travel.me/media/posts/5d6fdd38d1f50-kazan-pan940.jpg',
     name: 'Казань'
-  },
+  }
 ]
 
 interface citiesStoreProps {
@@ -39,7 +38,7 @@ export const citiesStoreModel = types
     list: types.array(cityModel)
   })
   .actions({
-    selectCity({dispatch}, city: cityModelType | undefined | null) {
+    selectCity({ dispatch }, city: cityModelType | undefined | null) {
       dispatch({ selectedCity: city })
     },
     loadList({ dispatch }) {

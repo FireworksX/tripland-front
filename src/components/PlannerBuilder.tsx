@@ -4,7 +4,6 @@ import { IconPlacemark } from '~/components/icons/IconPlacemark'
 import { IconCalendar } from '~/components/icons/IconCalendar'
 import { useStore } from '~/hooks/useStore'
 import Touchable from '~/components/Touchable'
-import { IconPlus } from '~/components/icons/IconPlus'
 import { IconClose } from '~/components/icons/IconClose'
 import DateFormatter from '~/components/DateFormatter'
 import { buildFont } from '~/utils/styledBuilder'
@@ -166,7 +165,7 @@ const PlannerBuilder: FC<PlannerBuilder> = ({ onSubmit }) => {
           )}
         </FilterButton>
       </Filter>
-      <SubmitButton disabled={!enabledSubmit} onClick={enabledSubmit ? onSubmit : () => undefined}>
+      <SubmitButton disabled={false} onClick={onSubmit}>
         Построить маршрут
       </SubmitButton>
     </Root>

@@ -15,6 +15,7 @@ declare module 'styled-components' {
       textColor: string
       textColorWhite: string
       red: string
+      icon: string
     }
     paddings: {
       main: string

@@ -8,8 +8,9 @@ import { routerStoreInstance, routerStoreModel } from '~/store/substories/router
 import { profileStoreInstance, profileStoreModel } from '~/store/substories/profileStore'
 import { notificationsStoreInstance, notificationsStoreModel } from '~/store/substories/notificationsStore'
 import { favoritesStoreInstance, favoritesStoreModel } from '~/store/substories/favoritesStore'
-import {routeDetailStoreInstance, routeDetailStoreModel} from '~/store/substories/routeDetailStore'
-import {Instance} from "@mozaikjs/core/build/treeNode";
+import { routeDetailStoreInstance, routeDetailStoreModel } from '~/store/substories/routeDetailStore'
+import { Instance } from '@mozaikjs/core/build/treeNode'
+import { detailPageStoreInstance, detailPageStoreModel } from '~/store/substories/detailPageStore'
 
 export interface rootStoreProps {
   profileStore: typeof profileStoreInstance
@@ -20,6 +21,7 @@ export interface rootStoreProps {
   notificationsStore: typeof notificationsStoreInstance
   favoritesStore: typeof favoritesStoreInstance
   routeDetailStore: typeof routeDetailStoreInstance
+  detailPageStore: typeof detailPageStoreInstance
 }
 
 export const rootStoreSnapshot = {
@@ -30,7 +32,8 @@ export const rootStoreSnapshot = {
   routerStore: routerStoreInstance,
   notificationsStore: notificationsStoreInstance,
   favoritesStore: favoritesStoreInstance,
-  routeDetailStore: routeDetailStoreInstance
+  routeDetailStore: routeDetailStoreInstance,
+  detailPageStore: detailPageStoreInstance
 }
 
 export const rootStoreEnv = {
@@ -47,7 +50,8 @@ export const rootStoreModel = types
     uiStore: uiStoreModel,
     notificationsStore: notificationsStoreModel,
     favoritesStore: favoritesStoreModel,
-    routeDetailStore: routeDetailStoreModel
+    routeDetailStore: routeDetailStoreModel,
+    detailPageStore: detailPageStoreModel
   })
 
 export type rootStore = Instance<rootStoreProps>

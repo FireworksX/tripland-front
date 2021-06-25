@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import 'module-alias/register'
 import next from 'next'
 import express from 'express'
 import path from 'path'

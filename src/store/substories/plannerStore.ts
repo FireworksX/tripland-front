@@ -5,50 +5,39 @@ import { authorTripModel, authorTripModelType } from '~/store/models/authorTripM
 import { excursionCardModel, excursionCardModelType } from '~/store/models/excursionCardModel'
 import { directionModel, directionModelType } from '~/store/models/directionModel'
 import { PANEL_NAMES } from '~router/constants'
+import { getRandom, getRandomFromArray } from '~/utils/random'
+import { getCover } from '~/utils/getCover'
 
 const carCover = ''
 
 const compilations = [
   {
-    name: 'На машине',
+    name: 'Антон Птушкин',
     badge: '31 место',
     cover: carCover
   },
   {
-    name: 'Романтическое свидание',
-    badge: '31 место',
+    name: 'Маршрут от Моргена',
+    badge: '12 мест',
     cover: carCover
   },
   {
-    name: 'На машине',
-    badge: '31 место',
+    name: 'Подборка Басты',
+    badge: '27 мест',
     cover: carCover
   },
   {
-    name: 'На машине',
-    badge: '31 место',
-    cover: carCover
-  },
-  {
-    name: 'На машине',
-    badge: '31 место',
+    name: 'Илон Маск',
+    badge: '21 место',
     cover: carCover
   }
 ]
 
-const excursions = [
-  {
-    cover: 'https://i.natgeofe.com/n/97a34ab9-1ba9-47c3-a9b2-f839f37d3aad/nationalgeographic_2652038.jpg?w=636&h=424',
-    name: 'Обзорная автобусная экскурсия по Москве ',
-    price: 1200
-  },
-  {
-    cover:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/280px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg',
-    name: 'Сокровища Кремля: Оружейная палата и Алмазный фонд',
-    price: 900
-  }
-]
+const excursions = new Array(10).fill(null).map(() => ({
+  cover: getCover(),
+  name: 'test',
+  price: getRandomFromArray([500, 700, 750, 1000, 1500, 3200])
+}))
 
 const directions = [
   {

@@ -20,6 +20,7 @@ import Cell from '~/components/Cell'
 import { IconClock } from '~/components/icons/IconClock'
 import { IconTranslate } from '~/components/icons/IconTranslate'
 import { IconPhone } from '~/components/icons/IconPhone'
+import { useStore } from '~/hooks/useStore'
 
 interface DetailPanelProps {
   id: string
@@ -177,6 +178,9 @@ const Submit = styled(Touchable)`
 
 const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
   const { back } = useRouter()
+  const { detailPageStore } = useStore()
+
+  console.log(detailPageStore.gallery)
 
   return (
     <Root id={id} className={className} withPadding={false}>
@@ -189,13 +193,13 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
         </HeaderButton>
       </Header>
       <Gallery>
-        <Slide src='https://sun9-28.userapi.com/impg/PjmO-ii1690Ka9wsiTFwHNc70tigQEoSQ_Ht7w/ox6vVUsE6Bc.jpg?size=1024x778&quality=96&sign=1ce254557c1c38531563296b212f750a&type=album' />
-        <Slide src='https://sun9-72.userapi.com/impg/xTsvxFweO90HuC061dqdL8qEblntQi33hobK5w/gApQBmLiLZQ.jpg?size=1024x768&quality=96&sign=da5be9dcfb77dffda0526dc51389e012&type=album' />
-        <Slide src='https://sun9-17.userapi.com/impg/sJEX5YVyRVS1v0IKsvfIHgaDuyLV8pJH6ksxZA/sct2N97dGhg.jpg?size=1024x768&quality=96&sign=c3e6085164e3532b9d9cf855a2f49a19&type=album' />
+        {detailPageStore.gallery.map(slide => (
+          <Slide key={slide} src={slide} />
+        ))}
       </Gallery>
       <Div>
-        <Title>Останкинская телебашня</Title>
-        <Rating value={4.5} countReviews={10} />
+        <Title>{detailPageStore.title}</Title>
+        {detailPageStore.rating && <Rating value={detailPageStore.rating} countReviews={10} />}
         <Separator />
       </Div>
       <Div>
@@ -204,7 +208,7 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
             <AddressIcon size={26} />
           </AddressMap>
           <div>
-            <AddressName>ул. Академика Королёва, 15, корп. 1</AddressName>
+            <AddressName>{detailPageStore.address.title}</AddressName>
             <AddressButton>Открыть на карте</AddressButton>
           </div>
         </Address>
@@ -213,19 +217,15 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
       <Div>
         <DescriptionGroup>
           <GroupHeader>Описание</GroupHeader>
-          <Description>
-            Останкинская телебашня — не просто визитная карточка столицы, это памятник грандиозности советской эпохи и
-            одновременно взгляд в будущее российского телевидения. С самой своей постройки телебашня в Останкино стала
-            одним из символов
-          </Description>
+          <Description>{detailPageStore.description}</Description>
         </DescriptionGroup>
         <Separator />
       </Div>
       <Cells>
-        <Cell expandable indicator={3} before={<Icon28CheckShieldOutline />}>
+        <Cell expandable indicator={detailPageStore.includes.length} before={<Icon28CheckShieldOutline />}>
           Включено
         </Cell>
-        <Cell expandable indicator={5} before={<Icon28BlockOutline />}>
+        <Cell expandable indicator={detailPageStore.excludes.length} before={<Icon28BlockOutline />}>
           Не включено
         </Cell>
         <Cell expandable indicator='Русский' before={<IconTranslate />}>
@@ -234,7 +234,7 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
         <Cell expandable indicator='График' before={<IconClock />}>
           Часы работы
         </Cell>
-        <Cell indicator='+7 (495) 926-61-11' before={<IconPhone />}>
+        <Cell indicator={detailPageStore.phone} before={<IconPhone />}>
           Контакты
         </Cell>
       </Cells>
@@ -244,7 +244,7 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
         <RatingGroup>
           <RatingLabel>Рейтинг</RatingLabel>
           <RatingValues>
-            <RatingValue>4.9</RatingValue>
+            <RatingValue>{detailPageStore.rating}</RatingValue>
           </RatingValues>
           <RatingButton>Написать отзыв</RatingButton>
         </RatingGroup>
@@ -252,9 +252,11 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
       </Div>
       <ReviewsGroup>
         <GroupHeader>Отзывы</GroupHeader>
-        <Review />
+        {detailPageStore.reviews.map((review, index) => (
+          <Review key={index} />
+        ))}
         <Cell expandable>
-          <OtherReviews>Посмотреть 98 отзывов</OtherReviews>
+          <OtherReviews>Посмотреть {detailPageStore.reviews.length} отзывов</OtherReviews>
         </Cell>
         <Separator />
       </ReviewsGroup>

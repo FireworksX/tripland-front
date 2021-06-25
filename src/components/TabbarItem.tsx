@@ -19,7 +19,7 @@ const Root = styled(Touchable)<{ selected?: boolean } & TouchableProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${({ theme, selected }) => (selected ? theme.colors.accent : theme.colors.secondary)};
+  color: ${({ theme, selected }) => (selected ? theme.colors.accent : theme.colors.icon)};
   text-decoration: none;
   font-size: 10px;
   line-height: 12px;

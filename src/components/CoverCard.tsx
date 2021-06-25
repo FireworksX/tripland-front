@@ -2,14 +2,23 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import Image, { ImageProps } from '~/components/Image'
 import Touchable, { TouchableProps } from '~/components/Touchable'
+import { buildFont } from '~/utils/styledBuilder'
 
 interface CoverCardProps extends TouchableProps {
   name: string
   cover: string
   badge?: string
+  index?: number
 }
 
-const Root = styled(Touchable)`
+const gradients = [
+  'linear-gradient(116.04deg,#ee7979 0%,#ff5757 99.96%)',
+  'linear-gradient(116.04deg, #7b79ee 0%, #579aff 99.96%)',
+  'linear-gradient(116.04deg,#4caf50 0%,#4caf50 99.96%)',
+  'linear-gradient(116.04deg,#f32195 0%,#7603f4 99.96%)'
+]
+
+const Root = styled(Touchable)<{ gradient: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +28,7 @@ const Root = styled(Touchable)`
   overflow: hidden;
   border-radius: ${({ theme }) => theme.radius.main};
   padding: ${({ theme }) => theme.paddings.main};
+  background: ${({ gradient }) => gradient};
 `
 
 const Cover = styled(Image)<ImageProps>`
@@ -32,9 +42,7 @@ const Cover = styled(Image)<ImageProps>`
 `
 
 const Name = styled.div`
-  color: ${({ theme }) => theme.colors.textColor};
-  font-size: 14px;
-  font-weight: 600;
+  ${({ theme }) => buildFont({ size: '14-20', weight: 'bold', color: theme.colors.textColorWhite })}
   margin-bottom: 10px;
   position: relative;
 `
@@ -50,10 +58,10 @@ const Badge = styled.span`
   position: relative;
 `
 
-const CoverCard: FC<CoverCardProps> = ({ cover, name, badge, onClick }) => {
+const CoverCard: FC<CoverCardProps> = ({ cover, name, badge, index = 0, onClick }) => {
   return (
-    <Root onClick={onClick}>
-      <Cover src={cover} />
+    <Root gradient={gradients[index] || gradients[0]} onClick={onClick}>
+      {cover && <Cover src={cover} />}
       <Name>{name}</Name>
       <Badge>{badge}</Badge>
     </Root>

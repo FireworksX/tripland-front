@@ -15,11 +15,17 @@ const Root = styled.div`
   font-weight: 700;
 `
 
+const Value = styled.div`
+  margin-left: 3px;
+`
+
 const DisplayRating: FC<DisplayRatingProps> = ({ value, className }) => {
   return (
     <Root className={className}>
       <IconStar size={10} />
-      {value}
+      <Value>
+        {value}
+      </Value>
     </Root>
   )
 }
