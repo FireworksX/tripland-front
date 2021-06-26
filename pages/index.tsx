@@ -19,11 +19,24 @@ import Epic from '~/components/Epic'
 import TabbarItem from '~/components/TabbarItem'
 import Tabbar from '~/components/Tabbar'
 import { buildRouteName } from '~/utils/buildRouteName'
+import { isBrowser } from '~/utils/isBrowser'
+import { buildFont } from '~/utils/styledBuilder'
 
 const TabbarStyled = styled(Tabbar)<{ isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
   transition: 0.2s;
   border-top: 1px solid ${({ theme }) => theme.colors.border};
+`
+
+const EmptyTab = styled.div`
+  ${buildFont({ size: '32-38', weight: 'bold' })}
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
 `
 
 const Index: NextPage = () => {
@@ -38,6 +51,10 @@ const Index: NextPage = () => {
   useEffect(() => {
     store.citiesStore.loadList()
   }, [])
+
+  if (isBrowser && window.innerWidth > 768) {
+    return <EmptyTab>Извените, но в данные момент интерфейс предназначен только для мобильных устройств.</EmptyTab>
+  }
 
   return (
     <Epic
