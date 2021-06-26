@@ -47,10 +47,12 @@ class WebApp extends App<ExtendAppInitialProps> {
 
   render() {
     const { pageProps } = this.props
+    // @ts-ignore
+    const { store } = this.state
 
     return (
       <ThemeProvider theme={theme}>
-        <StoreProvider store={this.state.store}>
+        <StoreProvider store={store}>
           <RouterProvider router={routerInstance}>
             <Index {...pageProps} />
           </RouterProvider>
