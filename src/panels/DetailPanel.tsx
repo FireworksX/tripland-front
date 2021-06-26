@@ -21,6 +21,9 @@ import { IconClock } from '~/components/icons/IconClock'
 import { IconTranslate } from '~/components/icons/IconTranslate'
 import { IconPhone } from '~/components/icons/IconPhone'
 import { useStore } from '~/hooks/useStore'
+import { getPlaceName } from '~/utils/getName'
+import { getCover } from '~/utils/getCover'
+import { getRandom, getRandomFromArray } from '~/utils/random'
 
 interface DetailPanelProps {
   id: string
@@ -180,8 +183,6 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
   const { back } = useRouter()
   const { detailPageStore } = useStore()
 
-  console.log(detailPageStore)
-
   return (
     <Root id={id} className={className} withPadding={false}>
       <Header>
@@ -249,10 +250,10 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
         </RatingGroup>
       </Div>
 
-      {detailPageStore.rating?.length > 0 && (
+      {detailPageStore.reviews?.length > 0 && (
         <ReviewsGroup>
           <GroupHeader>Отзывы</GroupHeader>
-          {detailPageStore.reviews.map((review, index) => (
+          {detailPageStore.reviews.slice(0, 1).map((review, index) => (
             <Review key={index} />
           ))}
           <Cell expandable>
@@ -267,10 +268,14 @@ const DetailPanel: FC<DetailPanelProps> = ({ id, className }) => {
           <GroupHeader>Места рядом</GroupHeader>
         </Div>
         <HorizontalCards>
-          <DirectionCard name='Парк Горького' />
-          <DirectionCard name='Парк Горького' />
-          <DirectionCard name='Парк Горького' />
-          <DirectionCard name='Парк Горького' />
+          {new Array(10).fill(null).map(() => (
+            <DirectionCard
+              name={getPlaceName()}
+              cover={getCover()}
+              duration={getRandom(1, 7)}
+              rating={getRandom(3, 5)}
+            />
+          ))}
         </HorizontalCards>
       </OtherCards>
       <SubmitWrapper>

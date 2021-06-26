@@ -19,14 +19,14 @@ export const routeDetailStoreModel = types
     endDate: dateValidator
   })
   .actions({
-    fetchRoute({ dispatch }, slug) {
+    fetchRoute({ dispatch, env }, slug) {
       return new Promise(resolve => {
         setTimeout(() => {
           dispatch({
-            title: ''
+            title: env.citiesStore?.selectedCity?.name
           })
           resolve(true)
-        }, 2000)
+        }, 1000)
       })
     }
   })

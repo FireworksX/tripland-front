@@ -65,7 +65,7 @@ const RouteTransport: FC<RouteTransportProps> = ({ className, list }) => {
 
   return (
     <Root className={className}>
-      {parsedList.slice(0, isOpen ? 10 : 1).map(({ minutes }, index) => (
+      {parsedList.slice(0, isOpen ? 10 : 1).map(({ minutes, type }, index) => (
         <Row animated={false} onClick={toggleIsOpen}>
           <CaretIcon hidden={index !== 0} size={12} isOpen={isOpen} />
           <TransportIcon>

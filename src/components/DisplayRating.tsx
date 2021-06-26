@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { IconStar } from '~/components/icons/IconStar'
+import { buildFont } from '~/utils/styledBuilder'
 
 interface DisplayRatingProps {
   value: number
@@ -17,15 +18,14 @@ const Root = styled.div`
 
 const Value = styled.div`
   margin-left: 3px;
+  ${buildFont({ size: '12-16', weight: 'medium' })}
 `
 
 const DisplayRating: FC<DisplayRatingProps> = ({ value, className }) => {
   return (
     <Root className={className}>
       <IconStar size={10} />
-      <Value>
-        {value}
-      </Value>
+      <Value>{value}</Value>
     </Root>
   )
 }

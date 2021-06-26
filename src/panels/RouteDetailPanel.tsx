@@ -17,6 +17,7 @@ import { useStore } from '~/hooks/useStore'
 import DateFormatter from '~/components/DateFormatter'
 import { getRandom } from '~/utils/random'
 import { getCover } from '~/utils/getCover'
+import {getPlaceName} from "~/utils/getName";
 
 interface RouteDetailPanelProps {
   id: string
@@ -114,7 +115,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
               type: 'delimiter',
               value: '23 мин.'
             }
-          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+          : { type: 'card', name: getPlaceName(), cover: getCover() }
       )
     },
     {
@@ -126,7 +127,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
               type: 'delimiter',
               value: '23 мин.'
             }
-          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+          : { type: 'card', name: getPlaceName(), cover: getCover() }
       )
     },
     {
@@ -138,7 +139,7 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
               type: 'delimiter',
               value: '23 мин.'
             }
-          : { type: 'card', name: 'Парк Коломенское', cover: getCover() }
+          : { type: 'card', name: getPlaceName(), cover: getCover() }
       )
     }
   ]
@@ -149,7 +150,8 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
         <RouteIterateCard
           name={item.name}
           cover={item.cover}
-          onClickOptions={onClickOptions}
+          price={getRandom(0, 3) !== 2 ? 0 : getRandom(700, 3000)}
+          // onClickOptions={onClickOptions}
           onClick={() => router.push(buildRouteName(ROUTE_NAMES.detail))}
         />
       )
@@ -157,8 +159,8 @@ const RouteDetailPanel: FC<RouteDetailPanelProps> = ({ id, onClickOptions }) => 
       return (
         <RouteTransport
           list={[
-            { type: 'auto', minutes: 13 },
-            { type: 'hiking', minutes: 20 }
+            { type: 'auto', minutes: getRandom(7, 23) },
+            { type: 'hiking', minutes: getRandom(5, 40) }
           ]}
         />
       )

@@ -5,6 +5,7 @@ import Panel from '~/components/Panel'
 import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { useRouter } from '~/hooks/useRouter'
+import { useStore } from '~/hooks/useStore'
 
 interface PlannerSelectPeoplesPanelProps {
   id: string
@@ -15,9 +16,11 @@ const Root = styled.div`
 `
 
 const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) => {
+  const { routeDetailStore } = useStore()
   const { replace } = useRouter()
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    await routeDetailStore.fetchRoute('')
     replace(buildRouteName(ROUTE_NAMES.routeDetailRoot), { [ROUTE_PARAMS.routeSlug]: 'testRouteSlug' })
   }
 

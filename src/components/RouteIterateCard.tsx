@@ -3,8 +3,11 @@ import styled from 'styled-components'
 import WideCardGeneric, { WideCardGenericProps } from '~/components/WideCardGeneric'
 import DisplayRating from '~/components/DisplayRating'
 import { IconClock } from '~/components/icons/IconClock'
+import {buildFont} from "~/utils/styledBuilder";
 
-interface RouteIterateCardProps extends WideCardGenericProps {}
+interface RouteIterateCardProps extends WideCardGenericProps {
+  price?: number
+}
 
 const Root = styled(WideCardGeneric)<WideCardGenericProps>``
 
@@ -12,28 +15,27 @@ const Rating = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+`
 
-  div {
-    position: relative;
-    padding-right: 20px;
-    font-size: 12px;
-    font-weight: 500;
+const RatingAmount = styled.div`
+  position: relative;
+  padding-left: 20px;
+  ${buildFont({ size: '12-16', weight: 'medium' })}
 
+  &:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    background: ${({ theme }) => theme.colors.border};
+  }
+
+  &:last-child {
+    color: ${({ theme }) => theme.colors.secondary};
     &:after {
-      content: '';
-      width: 5px;
-      height: 5px;
-      position: absolute;
-      right: 7px;
-      top: 5px;
-      background: ${({ theme }) => theme.colors.border};
-    }
-
-    &:last-child {
-      color: ${({ theme }) => theme.colors.secondary};
-      &:after {
-        display: none;
-      }
+      display: none;
     }
   }
 `
@@ -50,22 +52,22 @@ const TimeIcon = styled.div`
   margin-right: 5px;
 `
 
-const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, cover, className, onClickOptions, onClick }) => {
+const RouteIterateCard: FC<RouteIterateCardProps> = ({ name, price, cover, className, onClickOptions, onClick }) => {
   return (
     <Root
       name={name}
       cover={cover}
       className={className}
       badge={{
-        value: 'от 1200 руб.',
-        color: 'red'
+        value: !!price ? `от ${price} руб.` : 'Бесплатно',
+        color: !!price ? 'red' : 'green'
       }}
       onClickOptions={onClickOptions}
       onClick={onClick}
     >
       <Rating>
         <DisplayRating value={4.6} />
-        <div>98 отзывов</div>
+        <RatingAmount>98 отзывов</RatingAmount>
       </Rating>
       <Time>
         <TimeIcon>
