@@ -136,7 +136,7 @@ export const PlannerPanel: FC<PlannerPanel> = ({ id }) => {
             <HorizontalCards>
               {plannerStore.topDirectionsList.map((el, index) => (
                 <DirectionCard
-                  key={index}
+                  key={`${index}_${el.name}`}
                   {...el}
                   onClick={() =>
                     push(buildRouteName(ROUTE_NAMES.routeDetailRoot), {
