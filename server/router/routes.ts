@@ -23,14 +23,21 @@ export const routes = (): Route[] => [
   {
     name: ROUTE_NAMES.rootRoute,
     path: '/',
-    forwardTo: buildRouteName(ROUTE_NAMES.plannerRoot),
+    forwardTo: buildRouteName(ROUTE_NAMES.homeRoute),
     children: [
+      {
+        name: ROUTE_NAMES.homeRoute,
+        viewName: VIEW_NAMES.home,
+        panelName: PANEL_NAMES.homeIndex,
+        path: `/`
+      },
       {
         name: ROUTE_NAMES.plannerRoot,
         viewName: VIEW_NAMES.planner,
         storyName: STORY_NAMES.planner,
         panelName: PANEL_NAMES.plannerIndex,
         path: 'planner',
+        forwardTo: buildRouteName(ROUTE_NAMES.homeRoute),
         children: [
           {
             name: ROUTE_NAMES.plannerSelectGenres,

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { View } from '@vkontakte/vkui'
 import { PANEL_NAMES } from '~router/constants'
 import DetailPanel from "~/panels/DetailPanel";
+import View from "~/components/View";
 
 interface DetailViewProps {
   id: string

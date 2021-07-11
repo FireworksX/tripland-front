@@ -8,6 +8,7 @@ import { PANEL_NAMES } from '~router/constants'
 import { getRandom, getRandomFromArray } from '~/utils/random'
 import { getCover } from '~/utils/getCover'
 import { getExcursionName } from '~/utils/getName'
+import { levelButtonModelModel, levelButtonModelModelType } from '~/store/models/levelButtonModel'
 
 const carCover = ''
 
@@ -88,6 +89,8 @@ const directions = [
   }
 ]
 
+const categories = ['Культура', 'Романтика', 'Shopping', 'Пляжи', 'Экстрим']
+
 type ActiveModal = null | 'cities' | 'calendar'
 type ActivePanel = 'plannerIndex' | 'plannerSelectPeople' | 'plannerSelectGenres'
 
@@ -97,6 +100,8 @@ export interface plannerStoreProps {
   authorsTripsList: authorTripModelType[]
   excursionsList: excursionCardModelType[]
   topDirectionsList: directionModelType[]
+  categoriesList: levelButtonModelModelType[]
+  countPeople: levelButtonModelModelType
   activeModal?: ActiveModal
 }
 
@@ -105,6 +110,7 @@ export interface plannerStoreActions {
   resetCity(): void
   setActiveModal(modal: ActiveModal): void
   setActivePanel(panel: ActivePanel): void
+  resetCategories(): void
 }
 
 export interface plannerStoreComputed {
@@ -120,7 +126,9 @@ export const plannerStoreModel = types
     buildRoute: buildRouteModel,
     topDirectionsList: types.array(directionModel),
     authorsTripsList: types.array(authorTripModel),
-    excursionsList: types.array(excursionCardModel)
+    excursionsList: types.array(excursionCardModel),
+    categoriesList: types.array(levelButtonModelModel),
+    countPeople: levelButtonModelModel
   })
   .computed({
     topCitiesList({ env }) {
@@ -150,6 +158,10 @@ export const plannerStoreModel = types
 
     setActivePanel({ dispatch }, panel) {
       dispatch({ activePanel: panel })
+    },
+
+    resetCategories({ state }) {
+      state().categoriesList.forEach(cat => cat.onClick(0))
     }
   })
 
@@ -159,5 +171,7 @@ export const plannerStoreInstance = plannerStoreModel.create({
   buildRoute: buildRouteInstance,
   authorsTripsList: [],
   topDirectionsList: directions.map(el => directionModel.create(el)),
-  excursionsList: []
+  excursionsList: [],
+  countPeople: levelButtonModelModel.create({ label: 'Сколько вас будет', value: 0, maxDeep: 4 }),
+  categoriesList: categories.map(name => levelButtonModelModel.create({ label: name, value: 0, maxDeep: 4 }))
 })

@@ -21,6 +21,7 @@ import Tabbar from '~/components/Tabbar'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { isBrowser } from '~/utils/isBrowser'
 import { buildFont } from '~/utils/styledBuilder'
+import HomeOne from '~/views/HomeOne'
 
 const TabbarStyled = styled(Tabbar)<{ isVisible: boolean }>`
   transform: translateY(${({ isVisible }) => (isVisible ? '0' : '100%')});
@@ -44,7 +45,7 @@ const Index: NextPage = () => {
   const store = useStore()
   const router = useRouter()
 
-  const isVisibleTabbar = store.uiStore.visibleTabbar
+  const isVisibleTabbar = false //store.uiStore.visibleTabbar
 
   const onSelectStory = (name: ValueOf<typeof ROUTE_NAMES>) => router.push(buildRouteName(name))
 
@@ -98,6 +99,7 @@ const Index: NextPage = () => {
       <NotificationsView id={VIEW_NAMES.notifications} />
       <ProfileView id={VIEW_NAMES.profile} />
       <DetailView id={VIEW_NAMES.detail} />
+      <HomeOne id={VIEW_NAMES.home} />
     </Epic>
   )
 }

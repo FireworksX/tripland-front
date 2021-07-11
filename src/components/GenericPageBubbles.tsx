@@ -78,6 +78,7 @@ const GenericPageBubbles: FC<GenericPageBubblesProps> = ({
   title,
   description,
   steps,
+  children,
   onReset,
   onSkip,
   onSubmit
@@ -86,6 +87,7 @@ const GenericPageBubbles: FC<GenericPageBubblesProps> = ({
     <Root className={className}>
       <Title>{title}</Title>
       <Description>{description}</Description>
+      {children}
       <Footer>
         <FooterSteps>{steps}</FooterSteps>
         <FooterWrapper>

@@ -10,3 +10,5 @@ export const dateValidator: Type = {
         : [`Type [${typeof value}] of value [${value}] does not Date type.`]
   })
 }
+
+

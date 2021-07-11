@@ -2,6 +2,7 @@ import { createConstants } from '../../src/utils/createConstants'
 
 const ROUTE_NAMES = createConstants(
   'rootRoute',
+  'homeRoute',
   'plannerRoot',
   'plannerSelectGenres',
   'plannerSelectPeople',
@@ -14,8 +15,9 @@ const ROUTE_NAMES = createConstants(
 )
 
 const STORY_NAMES = createConstants('planner', 'favorites', 'notifications', 'profile')
-const VIEW_NAMES = createConstants('planner', 'route', 'favorites', 'profile', 'notifications', 'detail')
+const VIEW_NAMES = createConstants('home', 'planner', 'route', 'favorites', 'profile', 'notifications', 'detail')
 const PANEL_NAMES = createConstants(
+  'homeIndex',
   'plannerIndex',
   'plannerSelectGenres',
   'plannerSelectPeople',

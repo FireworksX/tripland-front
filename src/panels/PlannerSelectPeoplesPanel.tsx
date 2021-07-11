@@ -6,6 +6,7 @@ import { ROUTE_NAMES, ROUTE_PARAMS } from '~router/constants'
 import { buildRouteName } from '~/utils/buildRouteName'
 import { useRouter } from '~/hooks/useRouter'
 import { useStore } from '~/hooks/useStore'
+import ButtonLevel from '~/components/ButtonLevel'
 
 interface PlannerSelectPeoplesPanelProps {
   id: string
@@ -16,7 +17,7 @@ const Root = styled.div`
 `
 
 const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) => {
-  const { routeDetailStore } = useStore()
+  const { routeDetailStore, plannerStore } = useStore()
   const { replace } = useRouter()
 
   const onSubmit = async () => {
@@ -32,7 +33,14 @@ const PlannerSelectPeoplesPanel: FC<PlannerSelectPeoplesPanelProps> = ({ id }) =
           description='Укажите количество человек, которое поедет с вами в путешествие'
           steps='2 из 2'
           onSubmit={onSubmit}
-        />
+        >
+          <ButtonLevel
+            value={plannerStore.countPeople.value}
+            labels={plannerStore.countPeople.labels}
+            maxDeep={plannerStore.countPeople.maxDeep}
+            onClick={plannerStore.countPeople.onClick}
+          />
+        </GenericPageBubbles>
       </Root>
     </Panel>
   )
